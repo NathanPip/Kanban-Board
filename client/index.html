@@ -19,21 +19,26 @@
           <h2 class="list__title todo___container__title">To Do</h2>
           <ul class="list todo__list">
               <li class="list__item todo__item">
-                  <h3 class="list__item__title todo__item__title">Fix bugs</h3>
                   <p class="list__item__desc todo__item__desc">Fix all these bugs crawlin about</p>
-                  <button class="list__item__btn todo__item__btn">M</button>
+                  <button class="list__item__btn list__item__edit todo__edit">E</button>
+                  <button class="list__item__btn list__item__delete todo__delete">D</button>
               </li>
           </ul>
+          <button class="list__new__task__button todo__list__new__task">New Task</button>
         </div>
         <div class="list__container in__progress__container">
           <h2 class="list__title in__progress__container__title">In Progress</h2>
-          <ul class="list in__progress__list"></ul>
+          <ul class="list in__progress__list">
+          </ul>
+          <button class="list__new__task__button todo__list__new__task">New Task</button>
         </div>
         <div class="list__container completed__container">
           <h2 class="list__title completed__container___title">Completed</h2>
           <ul class="list completed__list"></ul>
+          <button class="list__new__task__button todo__list__new__task">New Task</button>
         </div>
       </main>
     </div>
+    <script type="module" src="./src/index.js"></script>
   </body>
 </html>

@@ -15,6 +15,10 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
+p {
+    margin: 0;
+}
+
 button {
     background: transparent;
     font-size: 1.25em;
@@ -56,6 +60,9 @@ button:hover {
     min-height: 400px;
     width: 350px;  
     border-radius: .5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .list__title {
@@ -70,8 +77,43 @@ button:hover {
 
 .list__item {
     display: grid;
+    background: rgba(55, 150, 200, .5);
+    padding: .35em;
+    border-radius: .5em;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: .75em;
+    grid-template-areas: "title title title" "desc desc desc" "edit delete .";
+    align-items: center;
 }
 
-.list__item__button {
-    display: inline;
+.list__item__title {
+    grid-area: title;
+    margin-bottom: .75em;
+}
+
+.list__item__desc {
+    grid-area: desc;
+    margin-bottom: .25em;
+}
+
+.list__item__btn {
+    font-size: 1em;
+    background: #010101;
+    margin-right: .5em;
+}
+
+.list__item__edit {
+    grid-area: edit;
+}
+
+.list__item__delete {
+    grid-area: delete;
+}
+
+.list__new__task__button {
+    margin: 0 auto;
+    display: inline-block;
+    width: 90%;
+    background: rgba(1,1,1, .2)
 }
