@@ -72,6 +72,8 @@ button:hover {
 
 .list {
     list-style: none;
+    min-width: 90%;
+    max-width: 90%;
     padding: 0 .35em;
 }
 
@@ -80,10 +82,10 @@ button:hover {
     background: rgba(55, 150, 200, .5);
     padding: .35em;
     border-radius: .5em;
-    width: 90%;
+    max-width: 100%;
     margin: 0 auto;
     margin-bottom: .75em;
-    grid-template-areas: "title title title" "desc desc desc" "edit delete .";
+    grid-template-areas: "title title title" "desc desc desc" ". . delete";
     align-items: center;
 }
 
@@ -93,14 +95,24 @@ button:hover {
 }
 
 .list__item__desc {
+    word-wrap: break-word;
+    max-width: 275px;
+    min-width: 100%;
+    padding: .25em;
     grid-area: desc;
+    margin: 0 auto;
     margin-bottom: .25em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    border-radius: .25em;
 }
 
 .list__item__btn {
     font-size: 1em;
+    width: 2em;
     background: #010101;
-    margin-right: .5em;
+    margin-left: auto;
 }
 
 .list__item__edit {
