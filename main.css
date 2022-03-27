@@ -72,9 +72,10 @@ button:hover {
 
 .list {
     list-style: none;
+    min-height: 2em;
     min-width: 90%;
     max-width: 90%;
-    padding: 0 .35em;
+    padding: .5em .35em;
 }
 
 .list__item {
@@ -87,6 +88,11 @@ button:hover {
     margin-bottom: .75em;
     grid-template-areas: "title title title" "desc desc desc" ". . delete";
     align-items: center;
+    cursor: grab;
+}
+
+.list__item.dragging {
+    opacity: .5;
 }
 
 .list__item__title {
@@ -106,6 +112,7 @@ button:hover {
     border-style: solid;
     border-color: black;
     border-radius: .25em;
+    cursor: text;
 }
 
 .list__item__btn {

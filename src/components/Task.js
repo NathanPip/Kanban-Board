@@ -1,6 +1,6 @@
 export default class Task {
   constructor(desc, board) {
-    this.desc = desc;
+    this.desc = desc || 'enter task';
     this.board = board;
     this.taskID = Date.now() * Math.random();
   }
@@ -37,6 +37,8 @@ export default class Task {
     // editBtn.classList.add('list__item__btn', 'list__item__edit', `${this.board}__edit`)
     deleteBtn.classList.add('list__item__btn', 'list__item__delete', `${this.board}__delete`)
     task.dataset.taskID = this.taskID;
+    task.draggable = "true";
+    taskDesc.placeholder = "enter task";
     taskDesc.innerText = this.desc;
     taskDesc.contentEditable = true;
     // editBtn.innerText = 'E';

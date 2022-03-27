@@ -12,10 +12,9 @@ let tasks = getTasks();
 
 //add a new task and update local storage
 const addNewTask = board => {
-  let newTask = new Task("enter task", board);
+  let newTask = new Task("", board);
   tasks.push(newTask);
   updateTaskStorage(tasks);
-  console.log(taskElements);
   return newTask;
 };
 
@@ -23,11 +22,8 @@ const addNewTask = board => {
 const removeTask = id => {
   console.log(tasks);
   tasks = tasks.filter(task => {
-    console.log("taskID: " + task.getTaskID);
-    console.log("localTaskID: " + id);
     return task.getTaskID.toString() !== id;
   });
-  console.log(tasks);
   updateTaskStorage(tasks);
 };
 
@@ -36,7 +32,6 @@ const editTaskEvent = e => {
   const taskDesc = e.target.parentNode.innerText;
   const taskID = e.target.parentNode.parentNode.dataset.taskID;
   const taskObject = tasks.filter(task => task.getTaskID.toString() === taskID);
-  console.log(taskObject[0]);
   const taskObjectIndex = tasks.indexOf(taskObject[0]);
   console.log(taskObjectIndex);
   taskObject[0].setDesc = taskDesc;
@@ -46,9 +41,7 @@ const editTaskEvent = e => {
 
 //event functions for board events
 const taskBoardEvents = e => {
-  e.stopPropagation();
   let element = e.target;
-  console.log(e.target.dataset);
   //calls addNewTask and adds new task element to dom
   if (element.dataset.newTaskBtn) {
     let currentBoard = element.parentNode.dataset.board;
@@ -62,20 +55,66 @@ const taskBoardEvents = e => {
   if (element.dataset.deleteBtn) {
     let task = element.parentNode;
     let taskID = task.dataset.taskID;
-    console.log(element);
     removeTask(taskID);
     task.remove();
   }
 };
 
+// all drag event handlers
+const taskDragEvents = {
+  dragStart: e => {
+    e.target.classList.add("dragging");
+  },
+  dragEnd: e => {
+    e.target.classList.remove("dragging");
+  },
+  dragOver: (e, list) => {
+    e.preventDefault();
+    const listItem = document.querySelector(".dragging");
+    const nextListItem = getListItemAfterDrag(list, e.clientY);
+    if (!nextListItem) {
+      list.appendChild(listItem);
+    } else {
+      list.insertBefore(listItem, nextListItem);
+    }
+  }
+};
+
+const getListItemAfterDrag = (container, mouseY) => {
+  const listItems = [
+    ...container.querySelectorAll(".list__item:not(.dragging)")
+  ];
+
+  return listItems.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const boxOffset = mouseY - (box.top + box.height / 2);
+      if (boxOffset < 0 && boxOffset > closest.offset) {
+        return { offset: boxOffset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element;
+};
+
 //adds event listeners to elements on dom
 //called whenever dom is updated with new elements that have events
 const updateEventListeners = () => {
+  const { dragStart, dragEnd, dragOver } = taskDragEvents;
   for (let i = 0; i < TaskBoards.length; i++) {
     TaskBoards[i].addEventListener("click", taskBoardEvents);
   }
+
+  for (let i = 0; i < TaskLists.length; i++) {
+    TaskLists[i].addEventListener("dragover", e => dragOver(e, TaskLists[i]));
+  }
+
   for (let i = 0; i < taskElements.length; i++) {
     taskElements[i].addEventListener("DOMCharacterDataModified", editTaskEvent);
+    taskElements[i].addEventListener("dragstart", dragStart);
+    taskElements[i].addEventListener("dragend", dragEnd);
   }
 };
 
