@@ -28,7 +28,7 @@ const removeTask = id => {
 };
 
 //updates data whenever content of task changes
-const editTaskEvent = e => {
+const editTaskDescEvent = e => {
   const taskDesc = e.target.parentNode.innerText;
   const taskID = e.target.parentNode.parentNode.dataset.taskID;
   const taskObject = tasks.filter(task => task.getTaskID.toString() === taskID);
@@ -39,8 +39,17 @@ const editTaskEvent = e => {
   updateTaskStorage(tasks);
 };
 
+const updateTaskBoard = (board, task) => {
+  let taskID = task.dataset.taskID;
+  let taskObject = tasks.filter(task => task.getTaskID.toString() === taskID);
+  let taskObjectIndex = tasks.indexOf(taskObject[0]);
+  taskObject[0].setBoard = board;
+  tasks[taskObjectIndex] = taskObject[0];
+  updateTaskStorage(tasks);
+};
+
 //event functions for board events
-const taskBoardEvents = e => {
+const taskBoardClickEvents = e => {
   let element = e.target;
   //calls addNewTask and adds new task element to dom
   if (element.dataset.newTaskBtn) {
@@ -73,7 +82,10 @@ const taskDragEvents = {
     const listItem = document.querySelector(".dragging");
     const nextListItem = getListItemAfterDrag(list, e.clientY);
     if (!nextListItem) {
+      const board = list.parentNode.dataset.board;
+      console.log(board);
       list.appendChild(listItem);
+      updateTaskBoard(board, listItem)
     } else {
       list.insertBefore(listItem, nextListItem);
     }
@@ -104,7 +116,7 @@ const getListItemAfterDrag = (container, mouseY) => {
 const updateEventListeners = () => {
   const { dragStart, dragEnd, dragOver } = taskDragEvents;
   for (let i = 0; i < TaskBoards.length; i++) {
-    TaskBoards[i].addEventListener("click", taskBoardEvents);
+    TaskBoards[i].addEventListener("click", taskBoardClickEvents);
   }
 
   for (let i = 0; i < TaskLists.length; i++) {
@@ -112,7 +124,7 @@ const updateEventListeners = () => {
   }
 
   for (let i = 0; i < taskElements.length; i++) {
-    taskElements[i].addEventListener("DOMCharacterDataModified", editTaskEvent);
+    taskElements[i].addEventListener("DOMCharacterDataModified", editTaskDescEvent);
     taskElements[i].addEventListener("dragstart", dragStart);
     taskElements[i].addEventListener("dragend", dragEnd);
   }
