@@ -1,0 +1,58 @@
+@use "../utils/" as *;
+
+.list__item {
+  margin: 0 auto;
+  margin-bottom: 0.75em;
+  border-radius: 0.5em;
+  padding: 0.35em;
+  max-width: 100%;
+  display: grid;
+  grid-template-areas: "title title title" "desc desc desc" ". . delete";
+  align-items: center;
+  cursor: grab;
+  background: $task-color;
+  &.dragging {
+    opacity: 0.5;
+  }
+
+  &__title {
+    margin-bottom: 0.75em;
+    grid-area: title;
+  }
+
+  &__desc {
+    margin: 0 auto;
+    margin-bottom: 0.25em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(#000, 0.2);
+    border-radius: 0.25em;
+    padding: 0.25em;
+    max-width: 275px;
+    min-width: 100%;
+    grid-area: desc;
+    word-wrap: break-word;
+    cursor: text;
+    &:focus {
+      border-color: rgba(#000, 0.4);
+      outline: none;
+    }
+    &:empty:not(:focus)::before {
+      content: "enter task";
+    }
+  }
+
+  &__btn {
+    margin-left: auto;
+    width: 2em;
+    font-size: 1em;
+  }
+
+  &__edit {
+    grid-area: edit;
+  }
+
+  &__delete {
+    grid-area: delete;
+  }
+}

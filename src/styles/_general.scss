@@ -1,0 +1,50 @@
+@use "./utils/" as *;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.15;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: .1em;
+    color: $main-text-color;
+    background: $bg-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: 400;
+}
+
+p {
+    margin: 0;
+}
+
+button {
+    border: none;
+    padding: .25em .45em;
+    font-size: 1.25em;
+    background: transparent;
+    color: $main-text-color;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 95%;
+}
+
+.main__container {
+    margin: 0 auto;
+    max-width: 1500px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}

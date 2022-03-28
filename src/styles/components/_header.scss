@@ -1,0 +1,13 @@
+@use "../utils/" as *;
+
+.header__container {
+    margin: 1em auto;
+    width: 100%;
+    max-width: 1600px;
+    .project__title {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        font-size: 2.5em;
+    }
+}

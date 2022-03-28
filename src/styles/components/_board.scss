@@ -1,0 +1,36 @@
+@use "../utils/" as *;
+
+.list__container {
+  border-radius: 0.5em;
+  padding-bottom: 3em;
+  padding-top: 0.5em;
+  height: fit-content;
+  min-height: 375px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: $board-color;
+  .list__title {
+    margin: 0.75em 0;
+    text-align: center;
+  }
+  .list {
+    padding: 0.5em 0.35em;
+    min-height: 2em;
+    min-width: 90%;
+    max-width: 90%;
+    list-style: none;
+  }
+  .list__new__task__button {
+    margin: 0 auto;
+    margin-top: auto;
+    border-radius: 0.5em;
+    width: 90%;
+    display: inline-block;
+    background: rgba(1, 1, 1, 0.2);
+    &:hover {
+      background: rgba(1, 1, 1, 0.3);
+    }
+  }
+}

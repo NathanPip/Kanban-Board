@@ -1,6 +1,6 @@
 export default class Task {
   constructor(desc, board) {
-    this.desc = desc || 'enter task';
+    this.desc = desc;
     this.board = board;
     this.taskID = Date.now() * Math.random();
   }
