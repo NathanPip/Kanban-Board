@@ -1,12 +1,20 @@
 @use "../utils/" as *;
 .projects__container {
   margin-top: 1em;
-  padding: 0.5em 0.75em;
-  border-radius: 0.5em;
   position: absolute;
   top: 0;
+  display: flex;
+  align-items: flex-start;
   width: fit-content;
-  background: $board-color;
+  &__list__container {
+    padding: 0.5em 0.75em;
+    border-radius: 0.5em;
+    background: $board-color;
+  }
+  &__add__new__button {
+    padding-top: .75em;
+    margin-left: .75em;
+  }
   &__button {
     padding-left: 0;
   }
@@ -33,5 +41,61 @@
         }
       }
     }
+  }
+}
+
+.projects__modal {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+  background: rgba($bg-color, 0.2);
+  .projects__modal__body {
+    margin-top: 3em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 1em 3em;
+    background: $board-color;
+    .projects__modal__close__button {
+      margin-left: auto;
+      margin-right: -1em;
+      margin-bottom: 2em;
+    }
+    .projects__modal__title {
+      margin-bottom: 1em;
+      font-size: 1.75em;
+    }
+    .projects__modal__title__input {
+      margin-bottom: 3.75em;
+      font-size: 1em;
+      padding: 0.2em 0.5em;
+      background: $bg-color;
+      border: none;
+      border-radius: 1em;
+      &:focus {
+        outline: none;
+      }
+    }
+    .projects__theme__color__btn__group {
+      font-size: 0.75em;
+    }
+    .project__type__button__group {
+      font-size: 0.75em;
+      margin-bottom: 3em;
+    }
+    .project__add__new__button {
+      margin-bottom: 1em;
+      border-radius: 0.5em;
+      background: $add-new-task-color;
+    }
+  }
+  &.hide {
+    display: none;
   }
 }
