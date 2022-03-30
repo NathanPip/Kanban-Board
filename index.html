@@ -11,32 +11,58 @@
   <body>
     <div class="wrapper">
       <header class="header__container">
-        <button class="projects__list__button">projects</button>
-        <ul class="projects__list"></ul>
-        <h1 class="project__title">Title</h1>
+        <div class="projects__container">
+          <button class="projects__container__button">projects</button>
+          <ul class="projects__container__list hide">
+            <li class="projects__container__list__item"><button>Project</button></li>
+            <li class="projects__container__list__item"><button>Project</button></li>
+            <li class="projects__container__list__item"><button>Project</button></li>
+            <li class="projects__container__list__item"><button>Project</button></li>
+          </ul>
+        </div>
+        <h1 class="project__title" contenteditable>Title</h1>
       </header>
       <main class="main__container">
         <div class="list__container todo__container" data-board="todo">
           <h2 class="list__title todo___container__title">To Do</h2>
-          <ul class="list todo__list">
-              <!-- <li class="list__item todo__item">
-                  <p class="list__item__desc todo__item__desc">Fix all these bugs crawlin about</p>
-                  <button class="list__item__btn list__item__edit todo__edit">E</button>
-                  <button class="list__item__btn list__item__delete todo__delete">D</button>
-              </li> -->
-          </ul>
-          <button class="list__new__task__button todo__list__new__task" data-new-task-btn="true">New Task</button>
+          <ul class="list todo__list" data-board="todo"></ul>
+          <button
+            class="list__new__task__button todo__list__new__task"
+            data-new-task-btn="true"
+            data-board="todo"
+          >
+            New Task
+          </button>
         </div>
-        <div class="list__container in__progress__container" data-board="in__progress">
-          <h2 class="list__title in__progress__container__title">In Progress</h2>
-          <ul class="list in__progress__list">
-          </ul>
-          <button class="list__new__task__button todo__list__new__task" data-new-task-btn="true">New Task</button>
+        <div
+          class="list__container in__progress__container"
+          data-board="in__progress"
+        >
+          <h2 class="list__title in__progress__container__title">
+            In Progress
+          </h2>
+          <ul class="list in__progress__list" data-board="in__progress"></ul>
+          <button
+            class="list__new__task__button todo__list__new__task"
+            data-new-task-btn="true"
+            data-board="in__progress"
+          >
+            New Task
+          </button>
         </div>
-        <div class="list__container completed__container" data-board="completed">
+        <div
+          class="list__container completed__container"
+          data-board="completed"
+        >
           <h2 class="list__title completed__container___title">Completed</h2>
-          <ul class="list completed__list"></ul>
-          <button class="list__new__task__button todo__list__new__task" data-new-task-btn="true">New Task</button>
+          <ul class="list completed__list" data-board="completed"></ul>
+          <button
+            class="list__new__task__button todo__list__new__task"
+            data-new-task-btn="true"
+            data-board="completed"
+          >
+            New Task
+          </button>
         </div>
       </main>
     </div>
