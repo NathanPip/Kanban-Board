@@ -1,8 +1,11 @@
+import {v4 as uuidv4} from 'uuid';
+
 export default class Task {
-  constructor(desc, board) {
+  constructor(desc, board, projectID, id) {
     this.desc = desc;
     this.board = board;
-    this.taskID = Date.now() * Math.random();
+    this.projectID = projectID;
+    this.taskID = id || uuidv4();
   }
 
   get getBoard() {
@@ -25,6 +28,10 @@ export default class Task {
     return this.taskID;
   }
 
+  get getProjectID() {
+    return this.projectID;
+  }
+
   renderTask() {
     const task = document.createElement("li");
     const taskDesc = document.createElement("p");
@@ -34,6 +41,7 @@ export default class Task {
     deleteBtn.classList.add('list__item__btn', 'list__item__delete', `${this.board}__delete`)
     task.dataset.taskID = this.taskID;
     task.draggable = "true";
+    task.dataset.board = this.board;
     taskDesc.placeholder = "enter task";
     taskDesc.innerText = this.desc;
     taskDesc.contentEditable = true;
