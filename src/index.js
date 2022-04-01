@@ -8,13 +8,16 @@ import {
 } from "./utils/storage.js";
 
 //dom elements
-let TaskBoards = document.querySelectorAll(".list__container");
+const rootElement = document.querySelector(".wrapper");
 let TaskLists = document.querySelectorAll(".list");
 let ProjectTitle = document.querySelector(".project__title");
-let ProjectsButton = document.querySelector(".projects__container__button");
 let ProjectsList = document.querySelector(".projects__container__list");
-let ProjectElements;
+let AddProjectButton = document.querySelector(
+  ".projects__container__add__new__button"
+);
+let ProjectModal = document.querySelector(".projects__modal");
 let TaskElements;
+let ProjectElements;
 //board ids
 const boards = ["todo", "in__progress", "completed"];
 let projects = getProjects();
@@ -25,26 +28,30 @@ let tasks = getTasks();
 let projectMenuTimer;
 
 //add a new task and update local storage
-const addNewTask = board => {
+const addNewTask = (board, list) => {
   let newTask = new Task("", board, currentProject.getID);
   tasks.push(newTask);
   updateTaskStorage(tasks);
-  return newTask;
+  list.appendChild(newTask.renderTask());
+  updateTaskElements();
 };
 
 //remove task element from board and updates data
-const removeTask = id => {
+const removeTask = task => {
+  let id = task.dataset.taskID;
   tasks = tasks.filter(task => {
     return task.getTaskID.toString() !== id;
   });
+  task.remove();
   updateTaskStorage(tasks);
+  updateTaskElements();
 };
 
-const getTaskObjectIndex = (id) => {
+const getTaskObjectIndex = id => {
   let taskObject = tasks.filter(task => task.getTaskID.toString() === id);
   taskObject = taskObject[0];
   return tasks.indexOf(taskObject);
-}
+};
 
 const updateTaskBoard = (board, task) => {
   const taskID = task.dataset.taskID;
@@ -55,54 +62,71 @@ const updateTaskBoard = (board, task) => {
 
 //updates data whenever content of task changes
 const editTaskDescEvent = e => {
-  const taskDesc = e.target.parentNode.innerText;
-  const taskID = e.target.parentNode.parentNode.dataset.taskID;
+  const taskDesc = e.parentNode.innerText;
+  const taskID = e.parentNode.parentNode.dataset.taskID;
   const index = getTaskObjectIndex(taskID);
   tasks[index].setDesc = taskDesc;
   updateTaskStorage(tasks);
 };
 
+function delegateEvent(parent, event, childClassSelector, callback) {
+  let currentTarget;
+  const listener = e => {
+    if (!e.target.classList.contains(childClassSelector)) {
+      currentTarget = e.target.closest(childClassSelector);
+    } else {
+      currentTarget = e.target;
+    }
+    if (!currentTarget) {
+      return;
+    }
+    const newEvent = {};
+    for (const i in e) {
+      newEvent[i] = e[i];
+    }
+    newEvent.innerEvent = e;
+    newEvent.currentTarget = currentTarget;
+    callback(currentTarget, newEvent);
+  };
+  parent.addEventListener(event, listener, false);
+  return () => {
+    parent.removeEventListener(event, listener, false);
+  };
+}
+
 //event functions for board events
-const taskBoardClickEvents = e => {
-  let element = e.target;
-  let currentBoard = element.dataset.board;
-  //calls addNewTask and adds new task element to dom
-  if (element.dataset.newTaskBtn) {
+
+const taskBoardEvents = {
+  newTaskClick: function(e) {
+    let currentBoard = e.dataset.board;
     let currentList = TaskLists[boards.indexOf(currentBoard)];
-    let newTask = addNewTask(currentBoard);
-    currentList.appendChild(newTask.renderTask());
-    updateEventListeners();
-  }
-  //deletes task from dom and calls removeTask
-  if (element.dataset.deleteBtn) {
-    let task = element.parentNode;
-    let taskID = task.dataset.taskID;
-    removeTask(taskID);
-    task.remove();
+    addNewTask(currentBoard, currentList);
   }
 };
 
 // all drag event handlers
-const taskDragEvents = {
-  dragStart: e => {
-    e.target.classList.add("dragging");
+const taskEvents = {
+  dragStart: function(e) {
+    e.classList.add("dragging");
   },
-  dragEnd: e => {
-    e.target.classList.remove("dragging");
+  dragEnd: function(e) {
+    e.classList.remove("dragging");
   },
-  dragOver: (e, list) => {
-    e.preventDefault();
+  dragOver: function(element, event) {
     const listItem = document.querySelector(".dragging");
-    const nextListItem = getListItemAfterDrag(list, e.clientY);
-    const board = list.parentNode.dataset.board;
+    const nextListItem = getListItemAfterDrag(element, event.clientY);
+    const board = element.parentNode.dataset.board;
     if (!nextListItem) {
-      console.log(board);
-      list.appendChild(listItem);
+      element.appendChild(listItem);
       updateTaskBoard(board, listItem);
     } else {
-      list.insertBefore(listItem, nextListItem);
+      element.insertBefore(listItem, nextListItem);
       updateTaskBoard(board, listItem);
     }
+  },
+  removeTask: function(e) {
+    let task = e.parentNode;
+    removeTask(task);
   }
 };
 
@@ -126,22 +150,21 @@ const getListItemAfterDrag = (container, mouseY) => {
 };
 
 const projectsEvents = {
-  showProjectsButtonClick: e => {
+  showProjectsButtonClick: function(e) {
     ProjectsList.classList.toggle("hide");
   },
-  projectFocusOut: e => {
+  projectFocusOut: function(e) {
     projectMenuTimer = setTimeout(() => ProjectsList.classList.add("hide"), 0);
   },
-  projectFocusIn: e => {
+  projectFocusIn: function(e) {
     clearTimeout(projectMenuTimer);
   },
-  projectClickEvent: e => {
-    console.log(e.target);
+  projectClickEvent: function(e) {
     currentProject = projects.filter(
-      project => project.getID === e.target.dataset.projectId
+      project => project.getID === e.dataset.projectId
     )[0];
     updateCurrentProject(currentProject);
-    console.log(currentProject);
+    ProjectTitle.innerText = currentProject.getName;
     renderTasks();
     updateEventListeners();
   }
@@ -149,35 +172,9 @@ const projectsEvents = {
 
 //adds event listeners to elements on dom
 //called whenever dom is updated with new elements that have events
-const updateEventListeners = () => {
-  const { dragStart, dragEnd, dragOver } = taskDragEvents;
-  const { projectClickEvent } = projectsEvents;
+
+const updateTaskElements = () => {
   TaskElements = document.querySelectorAll(".list__item");
-  ProjectElements = document.querySelectorAll(
-    ".projects__container__list__item"
-  );
-  ProjectTitle.innerText = currentProject.getName;
-  for (let i = 0; i < TaskBoards.length; i++) {
-    TaskBoards[i].addEventListener("click", taskBoardClickEvents);
-  }
-
-  for (let i = 0; i < TaskLists.length; i++) {
-    TaskLists[i].addEventListener("dragover", e => dragOver(e, TaskLists[i]));
-  }
-
-  for (let i = 0; i < TaskElements.length; i++) {
-    TaskElements[i].addEventListener(
-      "DOMCharacterDataModified",
-      editTaskDescEvent
-    );
-    TaskElements[i].addEventListener("dragstart", dragStart);
-    TaskElements[i].addEventListener("dragend", dragEnd);
-  }
-
-  for (let i = 0; i < ProjectElements.length; i++) {
-    ProjectElements[i].addEventListener("click", projectClickEvent);
-  }
-
 };
 
 const clearTasks = () => {
@@ -207,11 +204,14 @@ const renderProjects = () => {
 
 //inital function calls on page load
 const init = () => {
+  const { newTaskClick } = taskBoardEvents;
+  const { projectClickEvent } = projectsEvents;
   const {
     projectFocusIn,
     projectFocusOut,
     showProjectsButtonClick
   } = projectsEvents;
+  const { dragStart, dragEnd, removeTask, dragOver } = taskEvents;
   renderTasks();
   renderProjects();
   TaskElements = document.querySelectorAll(".list__item");
@@ -219,15 +219,55 @@ const init = () => {
     ".projects__container__list__item"
   );
   ProjectTitle.innerText = currentProject.getName;
-  ProjectsButton.addEventListener("click", showProjectsButtonClick);
-  ProjectsButton.addEventListener("focusin", projectFocusIn);
-  ProjectsButton.addEventListener("focusout", projectFocusOut);
-  ProjectsList.addEventListener("focusin", projectFocusIn);
-  ProjectsList.addEventListener("focusout", projectFocusOut);
-  // ProjectTitle.addEventListener("DOMCharacterDataModified", () =>
-  //   localStorage.setItem("projectTitle", ProjectTitle.innerText)
-  // );
-  updateEventListeners();
+
+  delegateEvent(
+    rootElement,
+    "focusin",
+    ".projects__container__button",
+    projectFocusIn
+  );
+  delegateEvent(
+    rootElement,
+    "focusout",
+    ".projects__container__button",
+    projectFocusOut
+  );
+  delegateEvent(
+    rootElement,
+    "focusin",
+    ".projects__container__list",
+    projectFocusIn
+  );
+  delegateEvent(
+    rootElement,
+    "focusout",
+    ".projects__container__list",
+    projectFocusOut
+  );
+  delegateEvent(rootElement, "click", ".list__new__task__button", newTaskClick);
+  delegateEvent(rootElement, "click", ".list__item__delete", removeTask);
+  delegateEvent(
+    rootElement,
+    "click",
+    ".projects__container__button",
+    showProjectsButtonClick
+  );
+  delegateEvent(
+    rootElement,
+    "click",
+    ".projects__container__list__item",
+    projectClickEvent
+  );
+
+  delegateEvent(rootElement, "dragover", ".list", dragOver);
+  delegateEvent(rootElement, "dragstart", ".list__item", dragStart);
+  delegateEvent(rootElement, "dragend", ".list__item", dragEnd);
+  delegateEvent(
+    rootElement,
+    "DOMCharacterDataModified",
+    ".list__item__desc",
+    editTaskDescEvent
+  );
 };
 
 init();
