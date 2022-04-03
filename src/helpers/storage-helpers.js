@@ -3,7 +3,7 @@ import Task from "../components/Task.js";
 //receives local storage and parses json data
 //if no item with key exists, create item with key and inital value
 //if no initial value set value to empty string
-export const getLocalStorage = (key, initial) => {
+const getLocalStorage = (key, initial) => {
   let item = localStorage.getItem(key);
   if (item) {
     item = JSON.parse(item);
@@ -20,7 +20,7 @@ export const getLocalStorage = (key, initial) => {
 
 //parses array of Task objects to simplified object to be stored in local storage
 //updates local storage with new array
-export const updateTaskStorage = tasks => {
+const updateTaskStorage = tasks => {
   let storedTasks = [];
   for (let task of tasks) {
     storedTasks.push({
@@ -33,19 +33,24 @@ export const updateTaskStorage = tasks => {
   localStorage.setItem("tasks", JSON.stringify(storedTasks));
 };
 
-export const updateCurrentProject = proj => {
-  localStorage.setItem('currentProject', JSON.stringify(proj));
+const updateCurrentProject = proj => {
+  localStorage.setItem("currentProject", JSON.stringify(proj));
   return proj;
-}
+};
 
 //gets tasks from local storage and creates and returns an array of Task objects from local storage data
-export const getTasks = () => {
+const getTasks = () => {
   const taskList = getLocalStorage("tasks");
   const tasks = [];
   if (taskList.length) {
     for (let task in taskList) {
       tasks.push(
-        new Task(taskList[task].desc, taskList[task].board, taskList[task].projectID, taskList[task].id)
+        new Task(
+          taskList[task].desc,
+          taskList[task].board,
+          taskList[task].projectID,
+          taskList[task].id
+        )
       );
     }
     return tasks;
@@ -53,7 +58,7 @@ export const getTasks = () => {
   return tasks;
 };
 
-export const getProjects = () => {
+const getProjects = () => {
   const projectList = getLocalStorage("projects");
   const projects = [];
   if (projectList.length) {
@@ -67,9 +72,18 @@ export const getProjects = () => {
   return projects;
 };
 
-export const getCurrentProject = () => {
+const getCurrentProject = () => {
   const currentProjectStorage = getLocalStorage("currentProject");
-  if(currentProjectStorage.name)
+  if (currentProjectStorage.name)
     return new Project(currentProjectStorage.name, currentProjectStorage.id);
   return null;
+};
+
+export {
+  getLocalStorage,
+  updateTaskStorage,
+  getTasks,
+  getProjects,
+  getCurrentProject,
+  updateCurrentProject
 };

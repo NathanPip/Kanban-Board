@@ -1,0 +1,1 @@
+export {updateTaskElements, clearTasks, renderTasks} from './task-dom-handler';
