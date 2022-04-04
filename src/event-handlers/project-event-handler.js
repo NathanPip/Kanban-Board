@@ -1,7 +1,10 @@
-import { renderTasks } from "../dom-handlers";
+import { addProject } from "../data-handlers";
+import { renderProjects, renderTasks } from "../dom-handlers";
 import {
   currentProject,
   projectMenuTimer,
+  ProjectModalElement,
+  ProjectModalInput,
   projects,
   ProjectsListElement,
   ProjectTitleElement,
@@ -33,16 +36,26 @@ function projectClickEvent(e) {
   renderTasks();
 }
 
-const renderProjects = () => {
-  for (let project in projects) {
-    ProjectsListElement.appendChild(projects[project].renderProjectButton());
-  }
-};
+function toggleProjectModalClickEvent(e) {
+  ProjectModalElement.classList.toggle('hide');
+}
+
+function addProjectClickEvent(e) {
+  const projName = ProjectModalInput.value;
+  addProject(projName);
+  setCurrentProject(projects[projects.length-1]);
+  updateCurrentProject(currentProject);
+  ProjectModalElement.classList.toggle('hide');
+  renderProjects();
+  renderTasks();
+}
+
 
 export {
   showProjectsButtonClick,
   projectFocusIn,
   projectFocusOut,
   projectClickEvent,
-  renderProjects
+  toggleProjectModalClickEvent,
+  addProjectClickEvent
 };

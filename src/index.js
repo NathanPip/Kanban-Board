@@ -1,16 +1,17 @@
-import { renderTasks } from "./dom-handlers";
+import { renderTasks, renderProjects } from "./dom-handlers";
 import {
   projectClickEvent,
   projectFocusIn,
   projectFocusOut,
-  renderProjects,
   showProjectsButtonClick,
   deleteTask,
   dragEnd,
   dragOver,
   dragStart,
   editTaskDescEvent,
-  newTaskClick
+  newTaskClick,
+  toggleProjectModalClickEvent,
+  addProjectClickEvent
 } from "./event-handlers";
 
 import {
@@ -30,7 +31,8 @@ const init = () => {
   setProjectElements(
     document.querySelectorAll(".projects__container__list__item")
   );
-  ProjectTitleElement.innerText = currentProject.getName;
+  if(currentProject)
+    ProjectTitleElement.innerText = currentProject.getName;
 
   delegateEvent(
     rootElement,
@@ -70,7 +72,24 @@ const init = () => {
     ".projects__container__list__item",
     projectClickEvent
   );
-
+  delegateEvent(
+    rootElement,
+    "click",
+    ".projects__container__add__new__button",
+    toggleProjectModalClickEvent
+  );
+  delegateEvent(
+    rootElement,
+    "click",
+    ".projects__modal__close__button",
+    toggleProjectModalClickEvent
+  );
+  delegateEvent(
+    rootElement,
+    "click",
+    ".project__add__new__button",
+    addProjectClickEvent
+  );
   delegateEvent(rootElement, "dragover", ".list", dragOver);
   delegateEvent(rootElement, "dragstart", ".list__item", dragStart);
   delegateEvent(rootElement, "dragend", ".list__item", dragEnd);

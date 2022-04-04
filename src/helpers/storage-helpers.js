@@ -1,5 +1,4 @@
-import Project from "../components/Project.js";
-import Task from "../components/Task.js";
+import {Project, Task} from "../components";
 //receives local storage and parses json data
 //if no item with key exists, create item with key and inital value
 //if no initial value set value to empty string
@@ -32,6 +31,14 @@ const updateTaskStorage = tasks => {
   }
   localStorage.setItem("tasks", JSON.stringify(storedTasks));
 };
+
+const updateProjectStorage = projects => {
+  let storedProjects = []
+  for (let proj of projects) {
+    storedProjects.push({name: proj.getName, id: proj.getID})
+  }
+  localStorage.setItem("projects", JSON.stringify(storedProjects));
+}
 
 const updateCurrentProject = proj => {
   localStorage.setItem("currentProject", JSON.stringify(proj));
@@ -85,5 +92,6 @@ export {
   getTasks,
   getProjects,
   getCurrentProject,
-  updateCurrentProject
+  updateCurrentProject,
+  updateProjectStorage
 };

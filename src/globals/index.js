@@ -5,6 +5,8 @@ export {
   ProjectsListElement,
   AddProjectButtonElement,
   ProjectModalElement,
+  ProjectModalInput,
+  ProjectModalTitle,
   TaskElements,
   ProjectElements,
   setTaskElements,

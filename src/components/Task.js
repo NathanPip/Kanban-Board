@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-export default class Task {
+export class Task {
   constructor(desc, board, projectID, id) {
     this.desc = desc;
     this.board = board;

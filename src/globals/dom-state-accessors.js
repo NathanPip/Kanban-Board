@@ -7,6 +7,8 @@ let AddProjectButtonElement = document.querySelector(
   ".projects__container__add__new__button"
 );
 const ProjectModalElement = document.querySelector(".projects__modal");
+const ProjectModalInput = document.querySelector('.projects__modal__title__input');
+const ProjectModalTitle = document.querySelector('.projects__modal__title');
 let TaskElements;
 let ProjectElements;
 
@@ -24,6 +26,8 @@ export {
   ProjectsListElement,
   AddProjectButtonElement,
   ProjectModalElement,
+  ProjectModalInput,
+  ProjectModalTitle,
   TaskElements,
   ProjectElements,
   setTaskElements,

@@ -1,4 +1,4 @@
-import Task from "../components/Task";
+import {Task} from "../components";
 import { updateTaskElements } from "../dom-handlers";
 import { currentProject, setTasks, tasks } from "../globals";
 import { updateTaskStorage } from "../helpers";

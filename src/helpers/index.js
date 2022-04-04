@@ -5,5 +5,6 @@ export {
   getTasks,
   getProjects,
   getCurrentProject,
-  updateCurrentProject
+  updateCurrentProject,
+  updateProjectStorage
 } from "./storage-helpers";

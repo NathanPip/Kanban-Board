@@ -3,7 +3,8 @@ export {
   projectFocusIn,
   projectFocusOut,
   projectClickEvent,
-  renderProjects
+  toggleProjectModalClickEvent,
+  addProjectClickEvent
 } from "./project-event-handler";
 export {
   newTaskClick,
