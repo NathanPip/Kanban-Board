@@ -1,5 +1,6 @@
-import { currentProject } from "./data-state";
+import { currentProject, projects } from "./data-state";
 import {
+  mainContainerElement,
   ProjectTitleElement,
   rootElement,
   setProjectElements,
@@ -32,7 +33,10 @@ const init = () => {
   setProjectElements(
     document.querySelectorAll(".projects__container__list__item")
   );
-  if (currentProject) ProjectTitleElement.innerText = currentProject.getName;
+  if (currentProject) {
+    ProjectTitleElement.innerText = currentProject.getName;
+    mainContainerElement.classList.remove('hide');
+  }
 
   delegateEvent(
     rootElement,

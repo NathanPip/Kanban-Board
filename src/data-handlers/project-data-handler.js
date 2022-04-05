@@ -1,5 +1,5 @@
 import {Project} from '../components'
-import {projects} from '../data-state';
+import {projects, setCurrentProject} from '../data-state';
 import { updateCurrentProjectStorage, updateProjectStorage } from '../helpers';
 
 

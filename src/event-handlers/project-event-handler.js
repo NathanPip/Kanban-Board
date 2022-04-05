@@ -1,4 +1,5 @@
 import {
+  mainContainerElement,
   ProjectModalElement,
   ProjectModalInput,
   ProjectsListElement
@@ -49,6 +50,7 @@ function addProjectClickEvent() {
     updateCurrentProject(newProj);
     renderProjects();
     renderTasks();
+    mainContainerElement.classList.remove('hide');
     ProjectModalElement.classList.toggle("hide");
     return;
   }

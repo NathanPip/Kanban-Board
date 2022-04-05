@@ -14,4 +14,4 @@ export {
   setTaskElements
 } from "./task-dom-state";
 
-export { rootElement } from "./global-dom-state";
+export { rootElement, mainContainerElement } from "./global-dom-state";
