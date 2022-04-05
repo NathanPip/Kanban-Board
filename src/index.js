@@ -1,4 +1,4 @@
-import { currentProject, projects } from "./data-state";
+import { currentProject } from "./data-state";
 import {
   mainContainerElement,
   ProjectTitleElement,
