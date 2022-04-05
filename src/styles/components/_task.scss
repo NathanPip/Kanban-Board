@@ -7,7 +7,7 @@
   padding: 0.35em;
   max-width: 100%;
   display: grid;
-  grid-template-areas: "title title title" "desc desc desc" ". . delete";
+  grid-template-areas: "title title title" "desc desc desc" ". edit delete";
   align-items: center;
   cursor: grab;
   background: $task-color;
@@ -32,13 +32,16 @@
     min-width: 100%;
     grid-area: desc;
     word-wrap: break-word;
-    cursor: text;
+    cursor: grab;
     &:focus {
       border-color: rgba(#000, 0.4);
       outline: none;
     }
     &:empty:not(:focus)::before {
       content: "enter task";
+    }
+    &[contenteditable="true"] {
+      cursor: text
     }
   }
 

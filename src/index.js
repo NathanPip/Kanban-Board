@@ -20,7 +20,9 @@ import {
   editTaskDescEvent,
   newTaskClick,
   toggleProjectModalClickEvent,
-  addProjectClickEvent
+  addProjectClickEvent,
+  editBtnClickEvent,
+  exitTaskEditingEvent
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -64,6 +66,7 @@ const init = () => {
   );
   delegateEvent(rootElement, "click", ".list__new__task__button", newTaskClick);
   delegateEvent(rootElement, "click", ".list__item__delete", deleteTask);
+  delegateEvent(rootElement, 'click', 'list__item__edit', editBtnClickEvent)
   delegateEvent(
     rootElement,
     "click",

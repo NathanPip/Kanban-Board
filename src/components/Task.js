@@ -36,6 +36,7 @@ export class Task {
     const task = document.createElement("li");
     const taskDesc = document.createElement("p");
     const deleteBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
     task.classList.add("list__item", `${this.board}__item`);
     taskDesc.classList.add("list__item__desc", `${this.board}__item__desc`);
     deleteBtn.classList.add(
@@ -43,15 +44,20 @@ export class Task {
       "list__item__delete",
       `${this.board}__delete`
     );
+    editBtn.classList.add(
+      "list__item__btn",
+      "list__item__edit",
+      `${this.board}__edit`
+    );
     task.dataset.taskID = this.taskID;
     task.draggable = "true";
     task.dataset.board = this.board;
     taskDesc.placeholder = "enter task";
     taskDesc.innerText = this.desc;
-    taskDesc.contentEditable = true;
     deleteBtn.innerText = "D";
-    deleteBtn.dataset.deleteBtn = "true";
+    editBtn.innerText = 'E';
     task.appendChild(taskDesc);
+    task.appendChild(editBtn);
     task.appendChild(deleteBtn);
     return task;
   }

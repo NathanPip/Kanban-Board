@@ -1,9 +1,14 @@
 import { getTasks } from "../helpers";
 
 let tasks = getTasks();
+let taskEditTimer;
 
 const setTasks = newTasks => {
   tasks = newTasks;
 };
 
-export { tasks, setTasks };
+const setTaskEditTimer = timer => {
+  taskEditTimer = timer;
+};
+
+export { tasks, setTasks, taskEditTimer, setTaskEditTimer };

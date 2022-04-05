@@ -1,6 +1,6 @@
 import { boards } from "../data-state";
 import { TaskListsElements } from "../dom-state";
-import { insertTask, updateTaskElements } from "../dom-handlers";
+import { exitTaskEditing, insertTask, renderTaskEditing, updateTaskElements } from "../dom-handlers";
 import {
   addNewTask,
   removeTask,
@@ -38,6 +38,15 @@ function deleteTask(element) {
   updateTaskElements();
 }
 
+function editBtnClickEvent(element) {
+  const task = element.parentNode;
+  renderTaskEditing(task);
+}
+
+function exitTaskEditingEvent(element) {
+  exitTaskEditing(element);
+}
+
 function editTaskDescEvent(element) {
   const taskDesc = element.innerText;
   const taskID = element.parentNode.dataset.taskID;
@@ -50,5 +59,7 @@ export {
   dragEnd,
   dragOver,
   deleteTask,
-  editTaskDescEvent
+  editTaskDescEvent,
+  editBtnClickEvent,
+  exitTaskEditingEvent
 };

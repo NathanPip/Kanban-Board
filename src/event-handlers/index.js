@@ -12,5 +12,9 @@ export {
   dragEnd,
   dragOver,
   deleteTask,
-  editTaskDescEvent
+  editTaskDescEvent,
+  editBtnClickEvent,
+  exitTaskEditingEvent
 } from "./task-event-handler";
+
+export { clickedOutside } from './general-event-handler';
