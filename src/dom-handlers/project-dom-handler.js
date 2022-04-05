@@ -1,4 +1,6 @@
-import { projects, ProjectsListElement } from "../globals";
+import { projects } from "../data-state";
+import { ProjectsListElement, ProjectTitleElement } from "../dom-state";
+
 
 const clearProjects = () => {
   while (ProjectsListElement.firstChild) {
@@ -13,4 +15,8 @@ const renderProjects = () => {
   }
 };
 
-export { renderProjects, clearProjects };
+const renderNewCurrentProject = (newProj) => {
+  ProjectTitleElement.innerText = newProj.getName;
+}
+
+export { renderProjects, clearProjects, renderNewCurrentProject};

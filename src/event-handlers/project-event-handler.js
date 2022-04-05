@@ -1,55 +1,54 @@
-import { addProject } from "../data-handlers";
-import { renderProjects, renderTasks } from "../dom-handlers";
 import {
-  currentProject,
-  projectMenuTimer,
   ProjectModalElement,
   ProjectModalInput,
-  projects,
-  ProjectsListElement,
-  ProjectTitleElement,
-  setCurrentProject,
-  setProjectMenuTimer
-} from "../globals";
-import { updateCurrentProject } from "../helpers";
+  ProjectsListElement
+} from "../dom-state";
+import { projectMenuTimer, projects, setProjectMenuTimer } from "../data-state";
 
-function showProjectsButtonClick(e) {
+import { addProject, updateCurrentProject } from "../data-handlers";
+import {
+  renderNewCurrentProject,
+  renderProjects,
+  renderTasks
+} from "../dom-handlers";
+
+function showProjectsButtonClick() {
   ProjectsListElement.classList.toggle("hide");
 }
 
-function projectFocusOut(e) {
+function projectFocusOut() {
   let timeout = setTimeout(() => ProjectsListElement.classList.add("hide"), 0);
   setProjectMenuTimer(timeout);
 }
 
-function projectFocusIn(e) {
+function projectFocusIn() {
   clearTimeout(projectMenuTimer);
 }
 
-function projectClickEvent(e) {
+function projectClickEvent(element) {
   const newCurrent = projects.filter(
-    project => project.getID === e.dataset.projectId
+    project => project.getID === element.dataset.projectId
   )[0];
-  setCurrentProject(newCurrent);
-  updateCurrentProject(currentProject);
-  ProjectTitleElement.innerText = currentProject.getName;
+  renderNewCurrentProject(newCurrent);
+  updateCurrentProject(newProj);
   renderTasks();
 }
 
-function toggleProjectModalClickEvent(e) {
-  ProjectModalElement.classList.toggle('hide');
+function toggleProjectModalClickEvent() {
+  ProjectModalElement.classList.toggle("hide");
 }
 
-function addProjectClickEvent(e) {
+function addProjectClickEvent() {
   const projName = ProjectModalInput.value;
-  addProject(projName);
-  setCurrentProject(projects[projects.length-1]);
-  updateCurrentProject(currentProject);
-  ProjectModalElement.classList.toggle('hide');
-  renderProjects();
-  renderTasks();
+  if (projName.length) {
+    const newProj = addProject(projName);
+    renderNewCurrentProject(newProj);
+    updateCurrentProject(newProj);
+    renderProjects();
+    renderTasks();
+    ProjectModalElement.classList.toggle("hide");
+  }
 }
-
 
 export {
   showProjectsButtonClick,

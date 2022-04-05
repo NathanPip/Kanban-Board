@@ -6,4 +6,4 @@ export {
   updateTaskDesc,
 } from "./task-data-handler";
 
-export {addProject} from './project-data-handler';
+export {addProject, updateCurrentProject} from './project-data-handler';

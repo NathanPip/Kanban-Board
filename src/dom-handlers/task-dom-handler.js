@@ -1,10 +1,6 @@
-import {
-  boards,
-  currentProject,
-  TaskListsElements,
-  tasks,
-  setTaskElements
-} from "../globals";
+import { TaskListsElements, setTaskElements } from "../dom-state";
+import { boards, currentProject, tasks } from "../data-state";
+import { getListItemAfterDrag } from "../helpers";
 
 const updateTaskElements = () => {
   setTaskElements(document.querySelectorAll(".list__item"));
@@ -28,4 +24,13 @@ const renderTasks = () => {
   }
 };
 
-export { updateTaskElements, clearTasks, renderTasks };
+const insertTask = (element, listItem) => {
+  const nextListItem = getListItemAfterDrag(element, event.clientY);
+  if (!nextListItem) {
+    element.appendChild(listItem);
+  } else {
+    element.insertBefore(listItem, nextListItem);
+  }
+};
+
+export { updateTaskElements, clearTasks, renderTasks, insertTask };

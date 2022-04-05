@@ -1,6 +1,5 @@
 import {Task} from "../components";
-import { updateTaskElements } from "../dom-handlers";
-import { currentProject, setTasks, tasks } from "../globals";
+import { currentProject, setTasks, tasks } from "../data-state";
 import { updateTaskStorage } from "../helpers";
 
 const addNewTask = (board, list) => {
@@ -8,7 +7,6 @@ const addNewTask = (board, list) => {
   tasks.push(newTask);
   updateTaskStorage(tasks);
   list.appendChild(newTask.renderTask());
-  updateTaskElements();
 };
 
 //remove task element from board and updates data

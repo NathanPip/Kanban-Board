@@ -40,7 +40,7 @@ const updateProjectStorage = projects => {
   localStorage.setItem("projects", JSON.stringify(storedProjects));
 }
 
-const updateCurrentProject = proj => {
+const updateCurrentProjectStorage = proj => {
   localStorage.setItem("currentProject", JSON.stringify(proj));
   return proj;
 };
@@ -92,6 +92,6 @@ export {
   getTasks,
   getProjects,
   getCurrentProject,
-  updateCurrentProject,
+  updateCurrentProjectStorage,
   updateProjectStorage
 };

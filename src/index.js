@@ -1,3 +1,11 @@
+import { currentProject } from "./data-state";
+import {
+  ProjectTitleElement,
+  rootElement,
+  setProjectElements,
+  setTaskElements
+} from "./dom-state";
+
 import { renderTasks, renderProjects } from "./dom-handlers";
 import {
   projectClickEvent,
@@ -14,13 +22,6 @@ import {
   addProjectClickEvent
 } from "./event-handlers";
 
-import {
-  currentProject,
-  ProjectTitleElement,
-  rootElement,
-  setProjectElements,
-  setTaskElements
-} from "./globals";
 import { delegateEvent } from "./helpers";
 
 //inital function calls on page load
@@ -31,8 +32,7 @@ const init = () => {
   setProjectElements(
     document.querySelectorAll(".projects__container__list__item")
   );
-  if(currentProject)
-    ProjectTitleElement.innerText = currentProject.getName;
+  if (currentProject) ProjectTitleElement.innerText = currentProject.getName;
 
   delegateEvent(
     rootElement,
