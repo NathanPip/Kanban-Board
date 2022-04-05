@@ -7,7 +7,9 @@ import { projectMenuTimer, projects, setProjectMenuTimer } from "../data-state";
 
 import { addProject, updateCurrentProject } from "../data-handlers";
 import {
+  clearProjectAlert,
   renderNewCurrentProject,
+  renderProjectAlert,
   renderProjects,
   renderTasks
 } from "../dom-handlers";
@@ -36,6 +38,7 @@ function projectClickEvent(element) {
 
 function toggleProjectModalClickEvent() {
   ProjectModalElement.classList.toggle("hide");
+  clearProjectAlert();
 }
 
 function addProjectClickEvent() {
@@ -47,7 +50,9 @@ function addProjectClickEvent() {
     renderProjects();
     renderTasks();
     ProjectModalElement.classList.toggle("hide");
+    return;
   }
+  renderProjectAlert("must enter a project name");
 }
 
 export {

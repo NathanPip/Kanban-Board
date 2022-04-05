@@ -1,2 +1,2 @@
 export {updateTaskElements, clearTasks, renderTasks, insertTask} from './task-dom-handler';
-export {renderProjects, renderNewCurrentProject} from './project-dom-handler';
+export {renderProjects, renderNewCurrentProject, renderProjectAlert, clearProjectAlert} from './project-dom-handler';

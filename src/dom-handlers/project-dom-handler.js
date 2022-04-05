@@ -1,5 +1,6 @@
 import { projects } from "../data-state";
-import { ProjectsListElement, ProjectTitleElement } from "../dom-state";
+import { ProjectModalInput, ProjectsListElement, ProjectTitleElement } from "../dom-state";
+import { insertAfter } from "../helpers";
 
 
 const clearProjects = () => {
@@ -19,4 +20,17 @@ const renderNewCurrentProject = (newProj) => {
   ProjectTitleElement.innerText = newProj.getName;
 }
 
-export { renderProjects, clearProjects, renderNewCurrentProject};
+const renderProjectAlert = (message) => {
+  const alert = document.createElement('p');
+  alert.classList.add('projects__modal__alert');
+  alert.innerText = message;
+  insertAfter(alert, ProjectModalInput);
+}
+
+const clearProjectAlert = () => {
+  const alert = document.querySelector('.projects__modal__alert');
+  if(alert)
+    alert.remove();
+}
+
+export { renderProjects, clearProjects, renderNewCurrentProject, renderProjectAlert, clearProjectAlert};

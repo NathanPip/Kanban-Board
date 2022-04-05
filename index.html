@@ -13,9 +13,9 @@
       <header class="header__container">
         <div class="projects__modal hide">
           <div class="projects__modal__body">
-            <button class="projects__modal__close__button" data-close-button='true'>X</button>
+            <button class="projects__modal__close__button" >X</button>
             <h3 class="projects__modal__title" data-title='true'>Enter Project Name</h3>
-            <input type="text" class="projects__modal__title__input" data-input='true' />
+            <input type="text" class="projects__modal__title__input"  />
             <!-- <div class="projects__theme__color__btn__group">
               <button class="projects__light__theme">l</button>
               <button class="projects__dark__theme">d</button>
@@ -24,7 +24,7 @@
               <button class="project__kanban">kanban</button>
               <button class="project__scrum">scrum</button>
             </div> -->
-            <button class="project__add__new__button" data-add-project='true'>Add Project</button>
+            <button class="project__add__new__button" >Add Project</button>
           </div>
         </div>
         <div class="projects__container">
@@ -39,7 +39,7 @@
           </div>
           <button class="projects__container__add__new__button">add project</button>
         </div>
-        <h1 class="project__title" contenteditable>Title</h1>
+        <h1 class="project__title" >Title</h1>
       </header>
       <main class="main__container">
         <div class="list__container todo__container" data-board="todo">
@@ -47,7 +47,6 @@
           <ul class="list todo__list" data-board="todo"></ul>
           <button
             class="list__new__task__button todo__list__new__task"
-            data-new-task-btn="true"
             data-board="todo"
           >
             New Task
@@ -63,7 +62,6 @@
           <ul class="list in__progress__list" data-board="in__progress"></ul>
           <button
             class="list__new__task__button todo__list__new__task"
-            data-new-task-btn="true"
             data-board="in__progress"
           >
             New Task
@@ -77,7 +75,6 @@
           <ul class="list completed__list" data-board="completed"></ul>
           <button
             class="list__new__task__button todo__list__new__task"
-            data-new-task-btn="true"
             data-board="completed"
           >
             New Task
