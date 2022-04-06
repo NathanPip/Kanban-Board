@@ -1,6 +1,11 @@
 import { boards } from "../data-state";
 import { TaskListsElements } from "../dom-state";
-import { exitTaskEditing, insertTask, renderTaskEditing, updateTaskElements } from "../dom-handlers";
+import {
+  exitTaskEditing,
+  insertTask,
+  renderTaskEditing,
+  updateTaskElements
+} from "../dom-handlers";
 import {
   addNewTask,
   removeTask,
@@ -16,7 +21,7 @@ function newTaskClick(element) {
 }
 
 function dragStart(element) {
-  element.classList.add("dragging");
+    element.classList.add("dragging");
 }
 
 function dragEnd(element) {
@@ -41,10 +46,12 @@ function deleteTask(element) {
 function editBtnClickEvent(element) {
   const task = element.parentNode;
   renderTaskEditing(task);
+  task.firstChild.focus();
 }
 
 function exitTaskEditingEvent(element) {
-  exitTaskEditing(element);
+  const task = element.parentNode;
+  exitTaskEditing(task);
 }
 
 function editTaskDescEvent(element) {

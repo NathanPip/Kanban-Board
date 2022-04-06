@@ -7,7 +7,7 @@
   padding: 0.35em;
   max-width: 100%;
   display: grid;
-  grid-template-areas: "title title title" "desc desc desc" ". edit delete";
+  grid-template-areas: "desc desc" ". btn";
   align-items: center;
   cursor: grab;
   background: $task-color;
@@ -47,15 +47,17 @@
 
   &__btn {
     margin-left: auto;
+    margin-right: 1em;
     width: 2em;
     font-size: 1em;
+    grid-area: btn;
   }
 
-  &__edit {
-    grid-area: edit;
-  }
+  // &__edit {
+  //   grid-area: btn;
+  // }
 
-  &__delete {
-    grid-area: delete;
-  }
+  // &__delete {
+  //   grid-area: btn;
+  // }
 }

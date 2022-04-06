@@ -42,7 +42,8 @@ export class Task {
     deleteBtn.classList.add(
       "list__item__btn",
       "list__item__delete",
-      `${this.board}__delete`
+      `${this.board}__delete`,
+      'hide'
     );
     editBtn.classList.add(
       "list__item__btn",
@@ -54,7 +55,7 @@ export class Task {
     task.dataset.board = this.board;
     taskDesc.placeholder = "enter task";
     taskDesc.innerText = this.desc;
-    deleteBtn.innerText = "D";
+    deleteBtn.innerText = "Done";
     editBtn.innerText = 'E';
     task.appendChild(taskDesc);
     task.appendChild(editBtn);

@@ -38,19 +38,25 @@ const exitTaskEditing = (task) => {
   const editBtn = task.querySelector('.list__item__edit');
   const deleteBtn = task.querySelector('.list__item__delete');
   const taskInput = task.querySelector('.list__item__desc');
+  task.setAttribute('draggable', true);
   taskInput.contentEditable = false;
-  deleteBtn.classList.remove('hide')
-  editBtn.classList.remove('hide')
+  deleteBtn.classList.add('hide');
+  editBtn.classList.remove('hide');
 }
 
 const renderTaskEditing = (task) => {
   const editBtn = task.querySelector('.list__item__edit');
   const deleteBtn = task.querySelector('.list__item__delete');
   const taskInput = task.querySelector('.list__item__desc');
+  const taskInputText = taskInput.innerText;
   taskInput.contentEditable = true;
-  deleteBtn.classList.add('hide')
-  editBtn.classList.add('hide')
-  document.addEventListener('click', (e) => clickedOutside(e, task, exitTaskEditing))
+  deleteBtn.classList.remove('hide');
+  editBtn.classList.add('hide');
+  document.addEventListener('click', (e) => clickedOutside(e, task, exitTaskEditing));
+  task.setAttribute('draggable', false);
+  taskInput.click();
+  taskInput.innerText = '';
+  taskInput.innerText = taskInputText;
 }
 
 export { updateTaskElements, clearTasks, renderTasks, insertTask, renderTaskEditing, exitTaskEditing };

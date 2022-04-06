@@ -65,7 +65,7 @@ const init = () => {
     projectFocusOut
   );
   delegateEvent(rootElement, "click", ".list__new__task__button", newTaskClick);
-  delegateEvent(rootElement, "click", ".list__item__delete", deleteTask);
+  delegateEvent(rootElement, "click", ".list__item__delete", exitTaskEditingEvent);
   delegateEvent(rootElement, 'click', 'list__item__edit', editBtnClickEvent)
   delegateEvent(
     rootElement,
