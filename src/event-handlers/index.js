@@ -17,4 +17,8 @@ export {
   exitTaskEditingEvent
 } from "./task-event-handler";
 
-export { clickedOutside } from './general-event-handler';
+export {
+  clickedOutside,
+  dragOverTrash,
+  dragLeaveTrash
+} from "./general-event-handler";

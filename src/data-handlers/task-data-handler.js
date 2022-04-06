@@ -2,6 +2,17 @@ import {Task} from "../components";
 import { currentProject, setTasks, tasks } from "../data-state";
 import { updateTaskStorage } from "../helpers";
 
+
+const getTaskObjectIndex = id => {
+  let taskObject = tasks.filter(task => task.getTaskID.toString() === id);
+  taskObject = taskObject[0];
+  return tasks.indexOf(taskObject);
+};
+
+const getTaskObjectFromElement = element => {
+  return tasks.filter(task => task.getTaskID.toString() === element.dataset.taskID)[0];
+}
+
 const addNewTask = (board, list) => {
   let newTask = new Task("", board, currentProject.getID);
   tasks.push(newTask);
@@ -21,11 +32,17 @@ const removeTask = task => {
   updateTaskStorage(tasks);
 };
 
-const getTaskObjectIndex = id => {
-  let taskObject = tasks.filter(task => task.getTaskID.toString() === id);
-  taskObject = taskObject[0];
-  return tasks.indexOf(taskObject);
-};
+const setTaskRemove = (task) => {
+  const taskID = task.dataset.taskID;
+  const index = getTaskObjectIndex(taskID);
+  tasks[index].setRemoveStandby = true;
+}
+
+const unsetTaskRemove = (task) => {
+  const taskID = task.dataset.taskID;
+  const index = getTaskObjectIndex(taskID);
+  tasks[index].setRemoveStandby = false;
+}
 
 const updateTaskBoard = (board, task) => {
   const taskID = task.dataset.taskID;
@@ -45,5 +62,8 @@ export {
   removeTask,
   getTaskObjectIndex,
   updateTaskBoard,
-  updateTaskDesc
+  updateTaskDesc,
+  setTaskRemove,
+  unsetTaskRemove,
+  getTaskObjectFromElement
 };

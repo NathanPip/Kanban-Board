@@ -6,6 +6,7 @@ export class Task {
     this.board = board;
     this.projectID = projectID;
     this.taskID = id || uuidv4();
+    this.removeStandby = false;
   }
 
   get getBoard() {
@@ -22,6 +23,14 @@ export class Task {
 
   set setDesc(newDesc) {
     this.desc = newDesc;
+  }
+
+  get getRemoveStandby() {
+    return this.removeStandby;
+  }
+
+  set setRemoveStandby(newState) {
+    this.removeStandby = newState;
   }
 
   get getTaskID() {
@@ -56,7 +65,7 @@ export class Task {
     taskDesc.placeholder = "enter task";
     taskDesc.innerText = this.desc;
     deleteBtn.innerText = "Done";
-    editBtn.innerText = 'E';
+    editBtn.innerText = 'Edit';
     task.appendChild(taskDesc);
     task.appendChild(editBtn);
     task.appendChild(deleteBtn);

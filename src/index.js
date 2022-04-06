@@ -13,7 +13,6 @@ import {
   projectFocusIn,
   projectFocusOut,
   showProjectsButtonClick,
-  deleteTask,
   dragEnd,
   dragOver,
   dragStart,
@@ -22,7 +21,9 @@ import {
   toggleProjectModalClickEvent,
   addProjectClickEvent,
   editBtnClickEvent,
-  exitTaskEditingEvent
+  exitTaskEditingEvent,
+  dragOverTrash,
+  dragLeaveTrash
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -98,6 +99,9 @@ const init = () => {
     addProjectClickEvent
   );
   delegateEvent(rootElement, "dragover", ".list", dragOver);
+  delegateEvent(rootElement, "dragover", ".task__trash", dragOverTrash);
+  delegateEvent(rootElement, "dragleave", ".task__trash", dragLeaveTrash);
+  
   delegateEvent(rootElement, "dragstart", ".list__item", dragStart);
   delegateEvent(rootElement, "dragend", ".list__item", dragEnd);
   delegateEvent(

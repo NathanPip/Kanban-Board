@@ -1,5 +1,5 @@
 import { boards } from "../data-state";
-import { TaskListsElements } from "../dom-state";
+import { TaskListsElements, trashElement } from "../dom-state";
 import {
   exitTaskEditing,
   insertTask,
@@ -8,6 +8,7 @@ import {
 } from "../dom-handlers";
 import {
   addNewTask,
+  getTaskObjectFromElement,
   removeTask,
   updateTaskBoard,
   updateTaskDesc
@@ -22,10 +23,20 @@ function newTaskClick(element) {
 
 function dragStart(element) {
     element.classList.add("dragging");
+    trashElement.classList.remove('hide');
 }
 
 function dragEnd(element) {
-  element.classList.remove("dragging");
+  trashElement.classList.add('hide');
+  if(element.classList.contains('dragging')) {
+    const taskObject = getTaskObjectFromElement(element);
+    if(taskObject.getRemoveStandby) {
+      removeTask(element)
+      updateTaskElements();
+      return
+    }
+    element.classList.remove("dragging");
+  }
 }
 
 function dragOver(element) {

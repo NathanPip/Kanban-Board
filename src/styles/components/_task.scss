@@ -10,9 +10,12 @@
   grid-template-areas: "desc desc" ". btn";
   align-items: center;
   cursor: grab;
-  background: $task-color;
+  background-color: $task-color;
   &.dragging {
     opacity: 0.5;
+  }
+  &.remove__ready {
+    background-color: $task-remove-color;
   }
 
   &__title {
