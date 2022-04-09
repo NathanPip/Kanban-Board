@@ -1,7 +1,6 @@
 import {
+  headerElement,
   mainContainerElement,
-  ProjectModalElement,
-  ProjectModalInput,
   ProjectsListElement
 } from "../dom-state";
 import { projectMenuTimer, projects, setProjectMenuTimer } from "../data-state";
@@ -9,11 +8,13 @@ import { projectMenuTimer, projects, setProjectMenuTimer } from "../data-state";
 import { addProject, updateCurrentProject } from "../data-handlers";
 import {
   clearProjectAlert,
+  renderAddProjectModal,
   renderNewCurrentProject,
   renderProjectAlert,
   renderProjects,
   renderTasks
 } from "../dom-handlers";
+import { insertAfter } from "../helpers";
 
 function showProjectsButtonClick() {
   ProjectsListElement.classList.toggle("hide");
@@ -33,28 +34,39 @@ function projectClickEvent(element) {
     project => project.getID === element.dataset.projectId
   )[0];
   renderNewCurrentProject(newCurrent);
-  updateCurrentProject(newProj);
+  updateCurrentProject(newCurrent);
   renderTasks();
 }
 
 function toggleProjectModalClickEvent() {
-  ProjectModalElement.classList.toggle("hide");
-  clearProjectAlert();
+  let modal = document.querySelector(".projects__modal");
+  if (!modal) {
+    modal = renderAddProjectModal();
+    headerElement.appendChild(modal);
+    clearProjectAlert();
+  } else {
+    modal.remove();
+  }
 }
 
 function addProjectClickEvent() {
-  const projName = ProjectModalInput.value;
+  const modal = document.querySelector(".projects__modal");
+  const ProjectModalTitleInput = document.querySelector(
+    ".projects__modal__title__input"
+  );
+  const projName = ProjectModalTitleInput.value;
   if (projName.length) {
     const newProj = addProject(projName);
     renderNewCurrentProject(newProj);
     updateCurrentProject(newProj);
     renderProjects();
     renderTasks();
-    mainContainerElement.classList.remove('hide');
-    ProjectModalElement.classList.toggle("hide");
+    mainContainerElement.classList.remove("hide");
+    modal.remove();
     return;
   }
-  renderProjectAlert("must enter a project name");
+  const alert = renderProjectAlert("must enter a project name");
+  insertAfter(alert, ProjectModalTitleInput);
 }
 
 export {

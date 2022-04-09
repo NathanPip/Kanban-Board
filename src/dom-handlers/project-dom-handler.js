@@ -1,6 +1,5 @@
 import { projects } from "../data-state";
-import { ProjectModalInput, ProjectsListElement, ProjectTitleElement } from "../dom-state";
-import { insertAfter } from "../helpers";
+import { ProjectsListElement, ProjectTitleElement } from "../dom-state";
 
 
 const clearProjects = () => {
@@ -24,7 +23,7 @@ const renderProjectAlert = (message) => {
   const alert = document.createElement('p');
   alert.classList.add('projects__modal__alert');
   alert.innerText = message;
-  insertAfter(alert, ProjectModalInput);
+  return alert
 }
 
 const clearProjectAlert = () => {

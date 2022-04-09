@@ -8,4 +8,4 @@ export {
   updateCurrentProjectStorage,
   updateProjectStorage
 } from "./storage-helpers";
-export { insertAfter } from "./dom-helpers";
+export { insertAfter, createElement, appendChildren } from "./dom-helpers";
