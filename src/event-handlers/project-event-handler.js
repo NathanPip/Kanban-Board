@@ -12,6 +12,7 @@ import {
   renderNewCurrentProject,
   renderProjectAlert,
   renderProjects,
+  renderProjectSettingsModal,
   renderTasks
 } from "../dom-handlers";
 import { insertAfter } from "../helpers";
@@ -38,12 +39,16 @@ function projectClickEvent(element) {
   renderTasks();
 }
 
-function toggleProjectModalClickEvent() {
+function toggleProjectModalClickEvent(element) {
   let modal = document.querySelector(".projects__modal");
   if (!modal) {
-    modal = renderAddProjectModal();
-    headerElement.appendChild(modal);
-    clearProjectAlert();
+    if (element.classList.contains("projects__container__add__new__button")) {
+      renderAddProjectModal();
+      clearProjectAlert();
+    } else if (element.classList.contains('projects__container__settings__button')) {
+      renderProjectSettingsModal();
+      clearProjectAlert();
+    }
   } else {
     modal.remove();
   }

@@ -12,4 +12,4 @@ export {
   renderProjectAlert,
   clearProjectAlert
 } from "./project-dom-handler";
-export { renderAddProjectModal } from "./modal-dom-handler";
+export { renderAddProjectModal, renderProjectSettingsModal } from "./modal-dom-handler";

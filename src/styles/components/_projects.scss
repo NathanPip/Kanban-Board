@@ -1,6 +1,7 @@
 @use "../utils/" as *;
 .projects__container {
   margin-top: 1em;
+  width: 100vw;
   position: absolute;
   top: 0;
   display: flex;
@@ -14,6 +15,9 @@
   &__add__new__button {
     padding-top: .75em;
     margin-left: .75em;
+  }
+  &__settings__button {
+    padding-top: .75em;
   }
   &__button {
     padding-left: 0;
@@ -47,12 +51,12 @@
 .projects__modal {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  // align-items: center;
   background: rgba($bg-color, 0.2);
   .projects__modal__body {
     margin-top: 3em;
@@ -69,6 +73,7 @@
     }
     .projects__modal__title {
       margin-bottom: 1em;
+      margin-inline: auto;
       font-size: 1.75em;
     }
     .projects__modal__title__input {
@@ -97,6 +102,10 @@
     .project__type__button__group {
       font-size: 0.75em;
       margin-bottom: 3em;
+    }
+    .project__delete__button {
+      color: $project-remove-color;
+      margin-top: auto;
     }
     .project__add__new__button {
       margin-top: 3.75em;
