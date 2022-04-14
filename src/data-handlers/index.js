@@ -5,8 +5,7 @@ export {
   updateTaskBoard,
   updateTaskDesc,
   setTaskRemove,
-  unsetTaskRemove,
-  getTaskObjectFromElement
+  unsetTaskRemove
 } from "./task-data-handler";
 
 export {

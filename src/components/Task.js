@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { appendChildren, createElement } from "../helpers";
 
 export class Task {
   constructor(desc, board, projectID, id) {
@@ -42,33 +43,31 @@ export class Task {
   }
 
   renderTask() {
-    const task = document.createElement("li");
-    const taskDesc = document.createElement("p");
-    const deleteBtn = document.createElement("button");
-    const editBtn = document.createElement("button");
-    task.classList.add("list__item", `${this.board}__item`);
-    taskDesc.classList.add("list__item__desc", `${this.board}__item__desc`);
-    deleteBtn.classList.add(
+    const task = createElement("li", ["list__item", `${this.board}__item`], {
+      draggable: "true"
+    });
+    const taskDesc = createElement(
+      "p",
+      ["list__item__desc", `${this.board}__item__desc`],
+      { placeholder: "enter task" }
+    );
+    const deleteBtn = createElement("button", [
       "list__item__btn",
       "list__item__delete",
       `${this.board}__delete`,
-      'hide'
-    );
-    editBtn.classList.add(
+      "hide"
+    ]);
+    const editBtn = createElement("button", [
       "list__item__btn",
       "list__item__edit",
       `${this.board}__edit`
-    );
+    ]);
     task.dataset.taskID = this.taskID;
-    task.draggable = "true";
     task.dataset.board = this.board;
-    taskDesc.placeholder = "enter task";
     taskDesc.innerText = this.desc;
     deleteBtn.innerText = "Done";
-    editBtn.innerText = 'Edit';
-    task.appendChild(taskDesc);
-    task.appendChild(editBtn);
-    task.appendChild(deleteBtn);
+    editBtn.innerText = "Edit";
+    appendChildren(task, [taskDesc, editBtn, deleteBtn]);
     return task;
   }
 }

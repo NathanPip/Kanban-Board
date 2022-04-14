@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { createElement } from "../helpers";
 
 export class Project {
   constructor(name, id) {
@@ -19,9 +20,8 @@ export class Project {
   }
 
   renderProjectButton() {
-    const listItem = document.createElement("li");
-    const button = document.createElement("button");
-    listItem.classList.add("projects__container__list__item");
+    const listItem = createElement("li", "projects__container__list__item");
+    const button = createElement("button");
     listItem.dataset.projectId = this.id;
     button.dataset.projectId = this.id;
     button.innerText = this.name;

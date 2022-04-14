@@ -8,11 +8,11 @@ import {
 } from "../dom-handlers";
 import {
   addNewTask,
-  getTaskObjectFromElement,
   removeTask,
   updateTaskBoard,
   updateTaskDesc
 } from "../data-handlers";
+import { getTaskObjectFromElement } from "../helpers";
 
 function newTaskClick(element) {
   let currentBoard = element.dataset.board;

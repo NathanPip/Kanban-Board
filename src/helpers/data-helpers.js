@@ -1,4 +1,4 @@
-import { projects } from "../data-state";
+import { projects, tasks } from "../data-state";
 
 const getProjectIndex = projID => {
   for (let proj of projects) {
@@ -9,4 +9,14 @@ const getProjectIndex = projID => {
   console.error("project not found");
 };
 
-export { getProjectIndex };
+const getTaskObjectIndex = id => {
+  let taskObject = tasks.filter(task => task.getTaskID.toString() === id);
+  taskObject = taskObject[0];
+  return tasks.indexOf(taskObject);
+};
+
+const getTaskObjectFromElement = element => {
+  return tasks.filter(task => task.getTaskID.toString() === element.dataset.taskID)[0];
+}
+
+export { getProjectIndex, getTaskObjectFromElement, getTaskObjectIndex };

@@ -1,5 +1,4 @@
 import {
-  headerElement,
   mainContainerElement,
   ProjectsListElement
 } from "../dom-state";
