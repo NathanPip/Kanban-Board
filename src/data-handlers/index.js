@@ -9,4 +9,10 @@ export {
   getTaskObjectFromElement
 } from "./task-data-handler";
 
-export {addProject, updateCurrentProject} from './project-data-handler';
+export {
+  addProject,
+  updateCurrentProject,
+  updateExistingCurrentProject,
+  deleteProject,
+  deleteCurrentProject
+} from "./project-data-handler";

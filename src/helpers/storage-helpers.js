@@ -10,9 +10,9 @@ const getLocalStorage = (key, initial) => {
   }
   if (!initial) {
     localStorage.setItem(key, JSON.stringify([]));
-    return [];
+    return null;
   }
-  item = [initial];
+  item = initial;
   localStorage.setItem(key, JSON.stringify(item));
   return item;
 };
@@ -47,7 +47,7 @@ const updateCurrentProjectStorage = proj => {
 
 //gets tasks from local storage and creates and returns an array of Task objects from local storage data
 const getTasks = () => {
-  const taskList = getLocalStorage("tasks");
+  const taskList = getLocalStorage("tasks", []);
   const tasks = [];
   if (taskList.length) {
     for (let task in taskList) {
@@ -66,7 +66,7 @@ const getTasks = () => {
 };
 
 const getProjects = () => {
-  const projectList = getLocalStorage("projects");
+  const projectList = getLocalStorage("projects", []);
   const projects = [];
   if (projectList.length) {
     for (let project in projectList) {
@@ -80,8 +80,8 @@ const getProjects = () => {
 };
 
 const getCurrentProject = () => {
-  const currentProjectStorage = getLocalStorage("currentProject");
-  if (currentProjectStorage.name)
+  const currentProjectStorage = getLocalStorage("currentProject", null);
+  if (currentProjectStorage)
     return new Project(currentProjectStorage.name, currentProjectStorage.id);
   return null;
 };

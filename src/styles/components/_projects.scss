@@ -71,12 +71,12 @@
       margin-right: -1em;
       margin-bottom: 2em;
     }
-    .projects__modal__title {
+    .projects__modal__head__text {
       margin-bottom: 1em;
       margin-inline: auto;
       font-size: 1.75em;
     }
-    .projects__modal__title__input {
+    .projects__modal__main__input {
       font-size: 1em;
       padding: 0.2em 0.5em;
       background: $bg-color;
@@ -105,9 +105,9 @@
     }
     .project__delete__button {
       color: $project-remove-color;
-      margin-top: auto;
+      margin-top: 1em;
     }
-    .project__add__new__button {
+    .projects__main__button {
       margin-top: 3.75em;
       margin-bottom: 1em;
       border-radius: 0.5em;

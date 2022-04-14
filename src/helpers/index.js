@@ -9,3 +9,4 @@ export {
   updateProjectStorage
 } from "./storage-helpers";
 export { insertAfter, createElement, appendChildren } from "./dom-helpers";
+export { getProjectIndex } from "./data-helpers";

@@ -7,6 +7,7 @@ export {
   exitTaskEditing
 } from "./task-dom-handler";
 export {
+  setInitialState,
   renderProjects,
   renderNewCurrentProject,
   renderProjectAlert,

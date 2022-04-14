@@ -7,7 +7,7 @@ import {
   setTaskElements
 } from "./dom-state";
 
-import { renderTasks, renderProjects } from "./dom-handlers";
+import { renderTasks, renderProjects, setInitialState } from "./dom-handlers";
 import {
   projectClickEvent,
   projectFocusIn,
@@ -23,7 +23,9 @@ import {
   editBtnClickEvent,
   exitTaskEditingEvent,
   dragOverTrash,
-  dragLeaveTrash
+  dragLeaveTrash,
+  updateCurrentProjectClickEvent,
+  deleteCurrentProjectClickEvent
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -36,10 +38,7 @@ const init = () => {
   setProjectElements(
     document.querySelectorAll(".projects__container__list__item")
   );
-  if (currentProject) {
-    ProjectTitleElement.innerText = currentProject.getName;
-    mainContainerElement.classList.remove('hide');
-  }
+  setInitialState();
 
   delegateEvent(
     rootElement,
@@ -103,6 +102,18 @@ const init = () => {
     "click",
     ".project__add__new__button",
     addProjectClickEvent
+  );
+  delegateEvent(
+    rootElement,
+    "click",
+    ".project__settings__done__button",
+    updateCurrentProjectClickEvent
+  );
+  delegateEvent(
+    rootElement,
+    "click",
+    ".project__delete__button",
+    deleteCurrentProjectClickEvent
   );
   delegateEvent(rootElement, "dragover", ".list", dragOver);
   delegateEvent(rootElement, "dragover", ".task__trash", dragOverTrash);

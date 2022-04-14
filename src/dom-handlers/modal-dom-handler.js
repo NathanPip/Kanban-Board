@@ -9,15 +9,18 @@ const renderAddProjectModal = () => {
     "button",
     "projects__modal__close__button"
   );
-  const modalTitle = createElement("h3", "projects__modal__title");
-  const modalTitleInput = createElement(
-    "input",
+  const modalTitle = createElement("h3", [
+    "projects__modal__head__text",
+    "projects__modal__title"
+  ]);
+  const modalTitleInput = createElement("input", [
+    "projects__modal__main__input",
     "projects__modal__title__input"
-  );
-  const modalAddProjectBtn = createElement(
-    "button",
+  ]);
+  const modalAddProjectBtn = createElement("button", [
+    "projects__main__button",
     "project__add__new__button"
-  );
+  ]);
   modal.appendChild(modalBody);
   appendChildren(modalBody, [
     modalCloseBtn,
@@ -41,19 +44,23 @@ const renderProjectSettingsModal = () => {
     "button",
     "projects__modal__close__button"
   );
-  const modalTitle = createElement("h3", "projects__modal__title");
+  const modalTitle = createElement("h3", [
+    "projects__modal__head__text",
+    "projects__modal__title"
+  ]);
   const modalTitleInput = createElement(
     "input",
-    "projects__modal__title__input"
+    ["projects__modal__main__input", "projects__modal__title__input"],
+    { type: "text", placeholder: "change project name" }
   );
-  const modalFinishChangesBtn = createElement(
-    "button",
-    "project__add__new__button"
-  );
+  const modalFinishChangesBtn = createElement("button", [
+    "projects__main__button",
+    "project__settings__done__button"
+  ]);
   const modalDeleteProjectBtn = createElement(
     "button",
     "project__delete__button"
-  )
+  );
   modal.appendChild(modalBody);
   appendChildren(modalBody, [
     modalCloseBtn,
@@ -65,12 +72,10 @@ const renderProjectSettingsModal = () => {
 
   modalCloseBtn.innerText = "X";
   modalTitle.innerText = currentProject.name;
-  modalDeleteProjectBtn.innerText = 'Delete Project';
+  modalDeleteProjectBtn.innerText = "Delete Project";
   modalFinishChangesBtn.innerText = "Done";
 
-  modalTitleInput.type = "text";
   headerElement.appendChild(modal);
-}
-
+};
 
 export { renderAddProjectModal, renderProjectSettingsModal };

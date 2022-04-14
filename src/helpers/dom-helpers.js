@@ -4,10 +4,19 @@ function insertAfter(newElement, existingElement) {
     existingElement.nextSibling
   );
 }
-const createElement = (type, ...classNames) => {
+const createElement = (type, classNames, attributes) => {
   const element = document.createElement(type);
-  for (let c of classNames) {
-    element.classList.add(c);
+  if(typeof classNames === "string") {
+    element.classList.add(classNames)
+  } else if (typeof classNames === "object") {
+    for (let c of classNames) {
+      element.classList.add(c);
+    }
+  }
+  if(attributes) {
+    for(let a in attributes) {
+      element.setAttribute(a, attributes[a])
+    }
   }
   return element;
 };

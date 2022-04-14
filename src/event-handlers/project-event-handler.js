@@ -3,9 +3,19 @@ import {
   mainContainerElement,
   ProjectsListElement
 } from "../dom-state";
-import { projectMenuTimer, projects, setProjectMenuTimer } from "../data-state";
+import {
+  currentProject,
+  projectMenuTimer,
+  projects,
+  setProjectMenuTimer
+} from "../data-state";
 
-import { addProject, updateCurrentProject } from "../data-handlers";
+import {
+  addProject,
+  deleteCurrentProject,
+  updateCurrentProject,
+  updateExistingCurrentProject
+} from "../data-handlers";
 import {
   clearProjectAlert,
   renderAddProjectModal,
@@ -13,9 +23,10 @@ import {
   renderProjectAlert,
   renderProjects,
   renderProjectSettingsModal,
-  renderTasks
+  renderTasks,
+  setInitialState
 } from "../dom-handlers";
-import { insertAfter } from "../helpers";
+import { getProjectIndex, insertAfter } from "../helpers";
 
 function showProjectsButtonClick() {
   ProjectsListElement.classList.toggle("hide");
@@ -31,9 +42,8 @@ function projectFocusIn() {
 }
 
 function projectClickEvent(element) {
-  const newCurrent = projects.filter(
-    project => project.getID === element.dataset.projectId
-  )[0];
+  const index = getProjectIndex(element.dataset.projectId);
+  const newCurrent = projects[index];
   renderNewCurrentProject(newCurrent);
   updateCurrentProject(newCurrent);
   renderTasks();
@@ -45,7 +55,10 @@ function toggleProjectModalClickEvent(element) {
     if (element.classList.contains("projects__container__add__new__button")) {
       renderAddProjectModal();
       clearProjectAlert();
-    } else if (element.classList.contains('projects__container__settings__button')) {
+    } else if (
+      element.classList.contains("projects__container__settings__button") &&
+      currentProject
+    ) {
       renderProjectSettingsModal();
       clearProjectAlert();
     }
@@ -54,8 +67,28 @@ function toggleProjectModalClickEvent(element) {
   }
 }
 
+function updateCurrentProjectClickEvent() {
+  const projectTitle = document.querySelector(".projects__modal__title");
+  const ProjectModalTitleInput = document.querySelector(
+    ".projects__modal__title__input"
+  );
+  const projName = ProjectModalTitleInput.value;
+  if (projName.length && projName != projectTitle) {
+    updateExistingCurrentProject(projName);
+    renderNewCurrentProject(currentProject);
+    renderProjects();
+    toggleProjectModalClickEvent();
+  }
+}
+
+function deleteCurrentProjectClickEvent() {
+  deleteCurrentProject();
+  currentProject ? renderNewCurrentProject(currentProject) : setInitialState();
+  renderProjects();
+  toggleProjectModalClickEvent();
+}
+
 function addProjectClickEvent() {
-  const modal = document.querySelector(".projects__modal");
   const ProjectModalTitleInput = document.querySelector(
     ".projects__modal__title__input"
   );
@@ -66,8 +99,8 @@ function addProjectClickEvent() {
     updateCurrentProject(newProj);
     renderProjects();
     renderTasks();
+    toggleProjectModalClickEvent();
     mainContainerElement.classList.remove("hide");
-    modal.remove();
     return;
   }
   const alert = renderProjectAlert("must enter a project name");
@@ -80,5 +113,7 @@ export {
   projectFocusOut,
   projectClickEvent,
   toggleProjectModalClickEvent,
-  addProjectClickEvent
+  addProjectClickEvent,
+  updateCurrentProjectClickEvent,
+  deleteCurrentProjectClickEvent
 };

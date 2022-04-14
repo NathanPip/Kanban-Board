@@ -4,7 +4,9 @@ export {
   projectFocusOut,
   projectClickEvent,
   toggleProjectModalClickEvent,
-  addProjectClickEvent
+  addProjectClickEvent,
+  updateCurrentProjectClickEvent,
+  deleteCurrentProjectClickEvent
 } from "./project-event-handler";
 export {
   newTaskClick,
