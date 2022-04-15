@@ -1,4 +1,4 @@
-import { boards } from "../data-state";
+import { boards, tasks } from "../data-state";
 import { TaskListsElements, trashElement } from "../dom-state";
 import {
   exitTaskEditing,
@@ -10,31 +10,35 @@ import {
   addNewTask,
   removeTask,
   updateTaskBoard,
-  updateTaskDesc
+  updateTaskDesc,
+  updateTaskOrder
 } from "../data-handlers";
-import { getTaskObjectFromElement } from "../helpers";
+import { getTaskObjectFromElement, updateTaskStorage } from "../helpers";
 
 function newTaskClick(element) {
   let currentBoard = element.dataset.board;
   let currentList = TaskListsElements[boards.indexOf(currentBoard)];
   addNewTask(currentBoard, currentList);
   updateTaskElements();
+  updateTaskOrder();
 }
 
 function dragStart(element) {
-    element.classList.add("dragging");
-    trashElement.classList.remove('hide');
+  element.classList.add("dragging");
+  trashElement.classList.remove("hide");
 }
 
 function dragEnd(element) {
-  trashElement.classList.add('hide');
-  if(element.classList.contains('dragging')) {
+  trashElement.classList.add("hide");
+  if (element.classList.contains("dragging")) {
     const taskObject = getTaskObjectFromElement(element);
-    if(taskObject.getRemoveStandby) {
-      removeTask(element)
+    if (taskObject.getRemoveStandby) {
+      removeTask(element);
       updateTaskElements();
-      return
+      return;
     }
+    updateTaskOrder();
+    updateTaskStorage(tasks);
     element.classList.remove("dragging");
   }
 }
@@ -52,6 +56,7 @@ function deleteTask(element) {
   let task = element.parentNode;
   removeTask(task);
   updateTaskElements();
+  updateTaskOrder();
 }
 
 function editBtnClickEvent(element) {

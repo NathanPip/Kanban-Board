@@ -1,5 +1,5 @@
 import {Task} from "../components";
-import { currentProject, setTasks, tasks } from "../data-state";
+import { boards, currentProject, setTasks, tasks } from "../data-state";
 import { getTaskObjectIndex, updateTaskStorage } from "../helpers";
 
 const addNewTask = (board, list) => {
@@ -46,6 +46,17 @@ const updateTaskDesc = (desc, id) => {
   updateTaskStorage(tasks);
 };
 
+const updateTaskOrder = () => {
+  for(let board of boards) {
+    let boardElement = document.querySelector(`ul[data-board=${board}]`);
+    for(let i=0; i<boardElement.children.length; i++) {
+      let id = boardElement.children[i].dataset.taskID;
+      let index = getTaskObjectIndex(id);
+      tasks[index].setOrder = i;
+    }
+  }
+}
+
 export {
   addNewTask,
   removeTask,
@@ -53,5 +64,6 @@ export {
   updateTaskBoard,
   updateTaskDesc,
   setTaskRemove,
+  updateTaskOrder,
   unsetTaskRemove
 };

@@ -17,10 +17,17 @@ const clearTasks = () => {
 
 const renderTasks = () => {
   clearTasks();
-  for (let task in tasks) {
-    if (tasks[task].getProjectID === currentProject.getID) {
-      let index = boards.indexOf(tasks[task].getBoard);
-      TaskListsElements[index].appendChild(tasks[task].renderTask());
+  for (let board of boards) {
+    let taskList = [];
+    for (let task of tasks) {
+      if (task.getProjectID === currentProject.getID && task.getBoard === board) {
+        taskList.push(task);
+      }
+    }
+    taskList.sort((a,b) => (a.order > b.order) ? 1 : -1);
+    for(let task of taskList) {
+      let index = boards.indexOf(task.getBoard);
+      TaskListsElements[index].appendChild(task.renderTask());
     }
   }
 };

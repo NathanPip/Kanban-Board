@@ -5,6 +5,7 @@ export {
   updateTaskBoard,
   updateTaskDesc,
   setTaskRemove,
+  updateTaskOrder,
   unsetTaskRemove
 } from "./task-data-handler";
 

@@ -2,10 +2,11 @@ import { v4 as uuidv4 } from "uuid";
 import { appendChildren, createElement } from "../helpers";
 
 export class Task {
-  constructor(desc, board, projectID, id) {
+  constructor(desc, board, projectID, order, id) {
     this.desc = desc;
     this.board = board;
     this.projectID = projectID;
+    this.order = order;
     this.taskID = id || uuidv4();
     this.removeStandby = false;
   }
@@ -29,9 +30,17 @@ export class Task {
   get getRemoveStandby() {
     return this.removeStandby;
   }
-
+  
   set setRemoveStandby(newState) {
     this.removeStandby = newState;
+  }
+
+  get getOrder() {
+    return this.order;
+  }
+
+  set setOrder(newOrder) {
+    this.order = newOrder; 
   }
 
   get getTaskID() {
