@@ -10,14 +10,13 @@
   grid-template-areas: "desc desc" ". btn";
   align-items: center;
   cursor: grab;
-  background-color: $task-color;
   &.dragging {
     opacity: 0.5;
   }
   &.remove__ready {
     background-color: $task-remove-color;
   }
-
+  
   &__title {
     margin-bottom: 0.75em;
     grid-area: title;
@@ -46,6 +45,12 @@
     &[contenteditable="true"] {
       cursor: text
     }
+  }
+
+  &__color__btn{
+    margin-inline: .15em;
+    height: .75em;
+    width: .75em;
   }
 
   &__btn {

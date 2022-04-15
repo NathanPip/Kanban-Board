@@ -16,7 +16,8 @@ export {
   deleteTask,
   editTaskDescEvent,
   editBtnClickEvent,
-  exitTaskEditingEvent
+  exitTaskEditingEvent,
+  changeColor
 } from "./task-event-handler";
 
 export {

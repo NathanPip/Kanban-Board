@@ -71,6 +71,19 @@ button:hover {
   display: none;
 }
 
+.color-1 {
+  background-color: $task-color-1;
+}
+.color-2 {
+  background-color: $task-color-2;
+}
+.color-3 {
+  background-color: $task-color-3;
+}
+.color-4 {
+  background-color: $task-color-4;
+}
+
 @media (min-width: $small) {
   body {
     font-size: 1.1em;

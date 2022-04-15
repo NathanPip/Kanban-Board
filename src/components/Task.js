@@ -2,11 +2,12 @@ import { v4 as uuidv4 } from "uuid";
 import { appendChildren, createElement } from "../helpers";
 
 export class Task {
-  constructor(desc, board, projectID, order, id) {
+  constructor(desc, board, projectID, order, color, id) {
     this.desc = desc;
     this.board = board;
     this.projectID = projectID;
     this.order = order;
+    this.color = color || 'color-1';
     this.taskID = id || uuidv4();
     this.removeStandby = false;
   }
@@ -43,6 +44,14 @@ export class Task {
     this.order = newOrder; 
   }
 
+  get getColor() {
+    return this.color;
+  }
+
+  set setColor(newColor) {
+    this.color = newColor;
+  }
+
   get getTaskID() {
     return this.taskID;
   }
@@ -52,7 +61,7 @@ export class Task {
   }
 
   renderTask() {
-    const task = createElement("li", ["list__item", `${this.board}__item`], {
+    const task = createElement("li", ["list__item", `${this.board}__item`, `${this.color}`], {
       draggable: "true"
     });
     const taskDesc = createElement(
@@ -71,12 +80,45 @@ export class Task {
       "list__item__edit",
       `${this.board}__edit`
     ]);
+    const colorButtonContainer = createElement(
+      "div",
+      ["list__item__color__container",
+      "hide"]
+    );
+    const colorButton1 = createElement("button", [
+      "list__item__color__btn",
+      "color-btn-1",
+      "color-1"
+    ]);
+    const colorButton2 = createElement("button", [
+      "list__item__color__btn",
+      "color-btn-2",
+      "color-2"
+    ]);
+    const colorButton3 = createElement("button", [
+      "list__item__color__btn",
+      "color-btn-3",
+      "color-3"
+    ]);
+    const colorButton4 = createElement("button", [
+      "list__item__color__btn",
+      "color-btn-4",
+      "color-4"
+    ]);
+    appendChildren(colorButtonContainer, [
+      colorButton1,
+      colorButton2,
+      colorButton3,
+      colorButton4
+    ]);
+    appendChildren(task, [taskDesc, editBtn, deleteBtn]);
+    task.insertBefore(colorButtonContainer, deleteBtn);
+    
     task.dataset.taskID = this.taskID;
     task.dataset.board = this.board;
     taskDesc.innerText = this.desc;
     deleteBtn.innerText = "Done";
     editBtn.innerText = "Edit";
-    appendChildren(task, [taskDesc, editBtn, deleteBtn]);
     return task;
   }
 }

@@ -1,6 +1,7 @@
-import { boards, tasks } from "../data-state";
+import { boards, colorClasses, tasks } from "../data-state";
 import { TaskListsElements, trashElement } from "../dom-state";
 import {
+  changeTaskColor,
   exitTaskEditing,
   insertTask,
   renderTaskEditing,
@@ -10,6 +11,7 @@ import {
   addNewTask,
   removeTask,
   updateTaskBoard,
+  updateTaskColor,
   updateTaskDesc,
   updateTaskOrder
 } from "../data-handlers";
@@ -76,6 +78,17 @@ function editTaskDescEvent(element) {
   updateTaskDesc(taskDesc, taskID);
 }
 
+function changeColor(element) {
+  const taskElement = element.parentNode.parentNode;
+  const taskObject = getTaskObjectFromElement(taskElement);
+  for (let i = 0; i < colorClasses.length; i++) {
+    if (element.classList.contains(colorClasses[i])) {
+      changeTaskColor(taskElement, colorClasses[i]);
+      updateTaskColor(colorClasses[i], taskObject);
+    }
+  }
+}
+
 export {
   newTaskClick,
   dragStart,
@@ -84,5 +97,6 @@ export {
   deleteTask,
   editTaskDescEvent,
   editBtnClickEvent,
-  exitTaskEditingEvent
+  exitTaskEditingEvent,
+  changeColor
 };

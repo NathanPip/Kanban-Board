@@ -27,6 +27,7 @@ const updateTaskStorage = tasks => {
       board: task.getBoard,
       id: task.getTaskID,
       order: task.getOrder,
+      color: task.getColor,
       projectID: task.getProjectID
     });
   }
@@ -58,6 +59,7 @@ const getTasks = () => {
           taskList[task].board,
           taskList[task].projectID,
           taskList[task].order,
+          taskList[task].color,
           taskList[task].id
         )
       );

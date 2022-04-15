@@ -6,7 +6,8 @@ export {
   updateTaskDesc,
   setTaskRemove,
   updateTaskOrder,
-  unsetTaskRemove
+  unsetTaskRemove,
+  updateTaskColor
 } from "./task-data-handler";
 
 export {

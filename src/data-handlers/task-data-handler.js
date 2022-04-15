@@ -1,9 +1,9 @@
-import {Task} from "../components";
+import { Task } from "../components";
 import { boards, currentProject, setTasks, tasks } from "../data-state";
 import { getTaskObjectIndex, updateTaskStorage } from "../helpers";
 
 const addNewTask = (board, list) => {
-  let newTask = new Task("", board, currentProject.getID);
+  let newTask = new Task("", board, null, null, currentProject.getID);
   tasks.push(newTask);
   updateTaskStorage(tasks);
   list.appendChild(newTask.renderTask());
@@ -21,17 +21,17 @@ const removeTask = task => {
   updateTaskStorage(tasks);
 };
 
-const setTaskRemove = (task) => {
+const setTaskRemove = task => {
   const taskID = task.dataset.taskID;
   const index = getTaskObjectIndex(taskID);
   tasks[index].setRemoveStandby = true;
-}
+};
 
-const unsetTaskRemove = (task) => {
+const unsetTaskRemove = task => {
   const taskID = task.dataset.taskID;
   const index = getTaskObjectIndex(taskID);
   tasks[index].setRemoveStandby = false;
-}
+};
 
 const updateTaskBoard = (board, task) => {
   const taskID = task.dataset.taskID;
@@ -47,15 +47,21 @@ const updateTaskDesc = (desc, id) => {
 };
 
 const updateTaskOrder = () => {
-  for(let board of boards) {
+  for (let board of boards) {
     let boardElement = document.querySelector(`ul[data-board=${board}]`);
-    for(let i=0; i<boardElement.children.length; i++) {
+    for (let i = 0; i < boardElement.children.length; i++) {
       let id = boardElement.children[i].dataset.taskID;
       let index = getTaskObjectIndex(id);
       tasks[index].setOrder = i;
     }
   }
-}
+};
+
+const updateTaskColor = (newColor, task) => {
+  const index = getTaskObjectIndex(task.getTaskID);
+  tasks[index].setColor = newColor;
+  updateTaskStorage(tasks);
+};
 
 export {
   addNewTask,
@@ -65,5 +71,6 @@ export {
   updateTaskDesc,
   setTaskRemove,
   updateTaskOrder,
-  unsetTaskRemove
+  unsetTaskRemove,
+  updateTaskColor
 };

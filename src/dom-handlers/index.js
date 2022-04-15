@@ -4,7 +4,8 @@ export {
   renderTasks,
   insertTask,
   renderTaskEditing,
-  exitTaskEditing
+  exitTaskEditing,
+  changeTaskColor
 } from "./task-dom-handler";
 export {
   setInitialState,

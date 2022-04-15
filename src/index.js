@@ -25,7 +25,8 @@ import {
   dragOverTrash,
   dragLeaveTrash,
   updateCurrentProjectClickEvent,
-  deleteCurrentProjectClickEvent
+  deleteCurrentProjectClickEvent,
+  changeColor
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -66,7 +67,12 @@ const init = () => {
   );
   delegateEvent(rootElement, "click", ".list__new__task__button", newTaskClick);
   delegateEvent(rootElement, "click", ".list__item__delete", exitTaskEditingEvent);
-  delegateEvent(rootElement, 'click', 'list__item__edit', editBtnClickEvent)
+  delegateEvent(rootElement, 'click', '.list__item__edit', editBtnClickEvent)
+  //lazy I know, I'll fix later
+  delegateEvent(rootElement, 'click', '.color-btn-1', changeColor)
+  delegateEvent(rootElement, 'click', '.color-btn-2', changeColor)
+  delegateEvent(rootElement, 'click', '.color-btn-3', changeColor)
+  delegateEvent(rootElement, 'click', '.color-btn-4', changeColor)
   delegateEvent(
     rootElement,
     "click",
