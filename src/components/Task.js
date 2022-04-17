@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { colorClasses } from "../data-state";
 import { appendChildren, createElement } from "../helpers";
 
 export class Task {
@@ -105,12 +106,13 @@ export class Task {
       "color-btn-4",
       "color-4"
     ]);
-    appendChildren(colorButtonContainer, [
+    const colorButtons = [
       colorButton1,
       colorButton2,
       colorButton3,
       colorButton4
-    ]);
+    ]
+    appendChildren(colorButtonContainer, colorButtons);
     appendChildren(task, [taskDesc, editBtn, deleteBtn]);
     task.insertBefore(colorButtonContainer, deleteBtn);
     
@@ -119,6 +121,13 @@ export class Task {
     taskDesc.innerText = this.desc;
     deleteBtn.innerText = "Done";
     editBtn.innerText = "Edit";
+
+    for(let i=0; i<colorClasses.length; i++) {
+      if(task.classList.contains(colorClasses[i]) && colorButtons[i].classList.contains(colorClasses[i])){
+        colorButtons[i].classList.add('current__task__color')
+      }
+    }
+
     return task;
   }
 }

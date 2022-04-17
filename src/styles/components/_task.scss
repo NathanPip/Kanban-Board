@@ -54,9 +54,14 @@
 
   &__color__btn{
     margin-inline: .15em;
-    height: .75em;
-    width: .75em;
+    height: .8em;
+    width: 1em;
+    border-radius: .5em;
+    &.current__task__color {
+      box-shadow: 0 0 .2em #000;
+    }
   }
+
 
   &__btn {
     margin-left: auto;

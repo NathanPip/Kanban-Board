@@ -28,6 +28,8 @@ export function newTaskClick(element) {
   let currentBoard = element.dataset.board;
   let currentList = TaskListsElements[boards.indexOf(currentBoard)];
   addNewTask(currentBoard, currentList);
+  const newChild = currentList.lastChild;
+  setTimeout(()=>{renderTaskEditing(newChild)}, 10);
   updateTaskElements();
   updateTaskOrder();
 }
@@ -82,7 +84,6 @@ export function deleteTask(element) {
 export function editBtnClickEvent(element) {
   const task = element.parentNode;
   renderTaskEditing(task);
-  task.firstChild.focus();
 }
 
 export function exitTaskEditingEvent(element) {
