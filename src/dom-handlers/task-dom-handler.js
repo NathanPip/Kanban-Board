@@ -1,18 +1,17 @@
-import { TaskListsElements, setTaskElements } from "../dom-state";
+import { TaskListsElements, setTaskElements, rootElement } from "../dom-state";
 import { boards, currentProject, tasks } from "../data-state";
 import {
-  appendChildren,
-  createElement,
   getListItemAfterDrag,
-  getTaskObjectFromElement
+  getTaskObjectFromElement,
+  insertAfter,
 } from "../helpers";
 import { clickedOutside } from "../event-handlers";
 
-const updateTaskElements = () => {
+export const updateTaskElements = () => {
   setTaskElements(document.querySelectorAll(".list__item"));
 };
 
-const clearTasks = () => {
+export const clearTasks = () => {
   for (let i = 0; i < TaskListsElements.length; i++) {
     while (TaskListsElements[i].firstChild) {
       TaskListsElements[i].firstChild.remove();
@@ -20,7 +19,7 @@ const clearTasks = () => {
   }
 };
 
-const renderTasks = () => {
+export const renderTasks = () => {
   clearTasks();
   for (let board of boards) {
     let taskList = [];
@@ -40,7 +39,7 @@ const renderTasks = () => {
   }
 };
 
-const insertTask = (element, listItem) => {
+export const insertTask = (element, listItem) => {
   const nextListItem = getListItemAfterDrag(element, event.clientY);
   if (!nextListItem) {
     element.appendChild(listItem);
@@ -49,13 +48,44 @@ const insertTask = (element, listItem) => {
   }
 };
 
-const changeTaskColor = (task, newColor) => {
-  const taskObject = getTaskObjectFromElement(task)
+export const changeTaskColor = (task, newColor) => {
+  const taskObject = getTaskObjectFromElement(task);
   task.classList.remove(taskObject.getColor);
   task.classList.add(newColor);
 };
 
-const exitTaskEditing = task => {
+export const renderTaskDragging = (task, e) => {
+  task.classList.add("dragging");
+  e.dataTransfer.setDragImage(task, window.outerWidth, window.outerHeight);
+};
+
+export const updateTempDraggingTask = (
+  elementStartingPos,
+  startingX,
+  startingY
+) => {
+  const tempElement = document.querySelector(".dragging__temp");
+  if (tempElement) {
+    let e = window.event;
+    let offsetX = e.clientX - startingX;
+    let offsetY = e.clientY - startingY;
+    tempElement.style.left = `${elementStartingPos.left + offsetX}px`;
+    tempElement.style.top = `${elementStartingPos.top + offsetY}px`;
+  }
+};
+
+export const renderTempTask = (task) => {
+  const taskObj = getTaskObjectFromElement(task);
+  const taskBoundingBox = task.getBoundingClientRect();
+  const element = taskObj.renderTask();
+  element.classList.add("dragging__temp");
+  element.style.top = `${taskBoundingBox.top}px`;
+  element.style.left = `${taskBoundingBox.left}px`;
+  element.style.width = `${taskBoundingBox.right - taskBoundingBox.left}px`;
+  insertAfter(element, task);
+};
+
+export const exitTaskEditing = (task) => {
   const editBtn = task.querySelector(".list__item__edit");
   const deleteBtn = task.querySelector(".list__item__delete");
   const taskInput = task.querySelector(".list__item__desc");
@@ -67,7 +97,7 @@ const exitTaskEditing = task => {
   buttonGroup.classList.add("hide");
 };
 
-const renderTaskEditing = task => {
+export const renderTaskEditing = (task) => {
   const editBtn = task.querySelector(".list__item__edit");
   const deleteBtn = task.querySelector(".list__item__delete");
   const taskInput = task.querySelector(".list__item__desc");
@@ -77,21 +107,11 @@ const renderTaskEditing = task => {
   deleteBtn.classList.remove("hide");
   editBtn.classList.add("hide");
   taskButtonGroup.classList.remove("hide");
-  document.addEventListener("click", e =>
+  document.addEventListener("click", (e) =>
     clickedOutside(e, task, exitTaskEditing)
   );
   task.setAttribute("draggable", false);
   taskInput.click();
   taskInput.innerText = "";
   taskInput.innerText = taskInputText;
-};
-
-export {
-  updateTaskElements,
-  clearTasks,
-  renderTasks,
-  insertTask,
-  renderTaskEditing,
-  exitTaskEditing,
-  changeTaskColor
 };

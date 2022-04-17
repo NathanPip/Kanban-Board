@@ -13,6 +13,7 @@ export {
   dragStart,
   dragEnd,
   dragOver,
+  dragging,
   deleteTask,
   editTaskDescEvent,
   editBtnClickEvent,

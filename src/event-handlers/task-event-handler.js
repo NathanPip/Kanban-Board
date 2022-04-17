@@ -5,7 +5,10 @@ import {
   exitTaskEditing,
   insertTask,
   renderTaskEditing,
-  updateTaskElements
+  updateTaskElements,
+  renderTempTask,
+  renderTaskDragging,
+  updateTempDraggingTask
 } from "../dom-handlers";
 import {
   addNewTask,
@@ -17,7 +20,11 @@ import {
 } from "../data-handlers";
 import { getTaskObjectFromElement, updateTaskStorage } from "../helpers";
 
-function newTaskClick(element) {
+let mousePosX = undefined;
+let mousePosY = undefined;
+let startingPos = undefined;
+
+export function newTaskClick(element) {
   let currentBoard = element.dataset.board;
   let currentList = TaskListsElements[boards.indexOf(currentBoard)];
   addNewTask(currentBoard, currentList);
@@ -25,12 +32,23 @@ function newTaskClick(element) {
   updateTaskOrder();
 }
 
-function dragStart(element) {
-  element.classList.add("dragging");
+export function dragStart(element) {
+  const e = window.event;
+  mousePosX = e.clientX;
+  mousePosY = e.clientY;
+  startingPos = element.getBoundingClientRect();
+  renderTaskDragging(element, e);
+  renderTempTask(element);
   trashElement.classList.remove("hide");
 }
 
-function dragEnd(element) {
+export function dragging(element) {
+  updateTempDraggingTask(startingPos, mousePosX, mousePosY);
+}
+
+export function dragEnd(element) {
+  const tempElement = document.querySelector('.dragging__temp');
+  tempElement.remove();
   trashElement.classList.add("hide");
   if (element.classList.contains("dragging")) {
     const taskObject = getTaskObjectFromElement(element);
@@ -45,7 +63,7 @@ function dragEnd(element) {
   }
 }
 
-function dragOver(element) {
+export function dragOver(element) {
   if (element.classList.contains("list")) {
     const listItem = document.querySelector(".dragging");
     const board = element.parentNode.dataset.board;
@@ -54,31 +72,31 @@ function dragOver(element) {
   }
 }
 
-function deleteTask(element) {
+export function deleteTask(element) {
   let task = element.parentNode;
   removeTask(task);
   updateTaskElements();
   updateTaskOrder();
 }
 
-function editBtnClickEvent(element) {
+export function editBtnClickEvent(element) {
   const task = element.parentNode;
   renderTaskEditing(task);
   task.firstChild.focus();
 }
 
-function exitTaskEditingEvent(element) {
+export function exitTaskEditingEvent(element) {
   const task = element.parentNode;
   exitTaskEditing(task);
 }
 
-function editTaskDescEvent(element) {
+export function editTaskDescEvent(element) {
   const taskDesc = element.innerText;
   const taskID = element.parentNode.dataset.taskID;
   updateTaskDesc(taskDesc, taskID);
 }
 
-function changeColor(element) {
+export function changeColor(element) {
   const taskElement = element.parentNode.parentNode;
   const taskObject = getTaskObjectFromElement(taskElement);
   for (let i = 0; i < colorClasses.length; i++) {
@@ -88,15 +106,3 @@ function changeColor(element) {
     }
   }
 }
-
-export {
-  newTaskClick,
-  dragStart,
-  dragEnd,
-  dragOver,
-  deleteTask,
-  editTaskDescEvent,
-  editBtnClickEvent,
-  exitTaskEditingEvent,
-  changeColor
-};

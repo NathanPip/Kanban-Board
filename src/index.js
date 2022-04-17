@@ -26,7 +26,8 @@ import {
   dragLeaveTrash,
   updateCurrentProjectClickEvent,
   deleteCurrentProjectClickEvent,
-  changeColor
+  changeColor,
+  dragging
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -126,6 +127,7 @@ const init = () => {
   delegateEvent(rootElement, "dragleave", ".task__trash", dragLeaveTrash);
   
   delegateEvent(rootElement, "dragstart", ".list__item", dragStart);
+  delegateEvent(rootElement, "drag", ".list__item", dragging);
   delegateEvent(rootElement, "dragend", ".list__item", dragEnd);
   delegateEvent(
     rootElement,

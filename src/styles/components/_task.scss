@@ -13,6 +13,11 @@
   &.dragging {
     opacity: 0.5;
   }
+  &.dragging__temp {
+    position: absolute;
+    margin: 0;
+    pointer-events: none;
+  }
   &.remove__ready {
     background-color: $task-remove-color;
   }
@@ -34,7 +39,7 @@
     min-width: 100%;
     grid-area: desc;
     word-wrap: break-word;
-    cursor: grab;
+    cursor: text;
     &:focus {
       border-color: rgba(#000, 0.4);
       outline: none;

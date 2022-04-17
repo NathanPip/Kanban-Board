@@ -1,7 +1,6 @@
 export {
   addNewTask,
   removeTask,
-  getTaskObjectIndex,
   updateTaskBoard,
   updateTaskDesc,
   setTaskRemove,

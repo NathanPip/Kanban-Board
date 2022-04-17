@@ -5,7 +5,10 @@ export {
   insertTask,
   renderTaskEditing,
   exitTaskEditing,
-  changeTaskColor
+  changeTaskColor,
+  renderTempTask,
+  renderTaskDragging,
+  updateTempDraggingTask
 } from "./task-dom-handler";
 export {
   setInitialState,
