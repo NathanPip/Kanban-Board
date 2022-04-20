@@ -66,15 +66,26 @@
     height: fit-content;
     padding: 1em 3em;
     background: $board-color;
+    min-height: 23em;
+    width: 20em;
     .projects__modal__close__button {
       margin-left: auto;
       margin-right: -1em;
       margin-bottom: 2em;
+      border: 2px solid transparent;
+      border-radius: .25em;
+      padding: 0em .15em;
+      transition: border-color .1s ease-in-out;
+      &:hover {
+        border-color: $main-text-color;
+      }
     }
     .projects__modal__head__text {
-      margin-bottom: 1em;
+      margin-bottom: .5em;
       margin-inline: auto;
+      text-align: center;
       font-size: 1.75em;
+      height: 3em;
     }
     .projects__modal__main__input {
       font-size: 1em;
@@ -104,14 +115,25 @@
       margin-bottom: 3em;
     }
     .project__delete__button {
-      color: $project-remove-color;
       margin-top: 1em;
+      margin-inline: auto;
+      border-radius: .3em;
+      width: fit-content;
+      color: $project-remove-color;
+      transition: background-color .2s ease-in-out;
+      &:hover {
+        background-color: rgba($project-remove-color, 0.2);
+      }
     }
     .projects__main__button {
-      margin-top: 3.75em;
+      margin-top: auto;
       margin-bottom: 1em;
       border-radius: 0.5em;
       background: $add-new-task-color;
+      transition: background-color .15s ease-in-out;
+      &:hover {
+        background-color: $add-new-task-color--hover;
+      }
     }
   }
   &.hide {

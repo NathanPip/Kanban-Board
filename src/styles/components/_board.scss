@@ -34,8 +34,9 @@
     width: 90%;
     display: inline-block;
     background: $add-new-task-color;
+    transition: background-color .15s ease-in-out;
     &:hover {
-      background: $add-new-task-color--hover;
+      background-color: $add-new-task-color--hover;
     }
   }
 }

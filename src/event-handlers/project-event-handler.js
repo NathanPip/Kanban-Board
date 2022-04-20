@@ -23,24 +23,30 @@ import {
   renderProjects,
   renderProjectSettingsModal,
   renderTasks,
-  setInitialState
+  setInitialState,
+  updateTitleText
 } from "../dom-handlers";
 import { getProjectIndex, insertAfter } from "../helpers";
 
-function showProjectsButtonClick() {
+export function showProjectsButtonClick() {
   ProjectsListElement.classList.toggle("hide");
 }
 
-function projectFocusOut() {
+export function projectFocusOut() {
   let timeout = setTimeout(() => ProjectsListElement.classList.add("hide"), 0);
   setProjectMenuTimer(timeout);
 }
 
-function projectFocusIn() {
+export function projectFocusIn() {
   clearTimeout(projectMenuTimer);
 }
 
-function projectClickEvent(element) {
+export function projectModalTitleInputChange(element) {
+  updateTitleText(element);
+  console.log('sdfdsfds')
+}
+
+export function projectClickEvent(element) {
   const index = getProjectIndex(element.dataset.projectId);
   const newCurrent = projects[index];
   renderNewCurrentProject(newCurrent);
@@ -48,7 +54,7 @@ function projectClickEvent(element) {
   renderTasks();
 }
 
-function toggleProjectModalClickEvent(element) {
+export function toggleProjectModalClickEvent(element) {
   let modal = document.querySelector(".projects__modal");
   if (!modal) {
     if (element.classList.contains("projects__container__add__new__button")) {
@@ -66,7 +72,7 @@ function toggleProjectModalClickEvent(element) {
   }
 }
 
-function updateCurrentProjectClickEvent() {
+export function updateCurrentProjectClickEvent() {
   const projectTitle = document.querySelector(".projects__modal__title");
   const ProjectModalTitleInput = document.querySelector(
     ".projects__modal__title__input"
@@ -80,14 +86,14 @@ function updateCurrentProjectClickEvent() {
   }
 }
 
-function deleteCurrentProjectClickEvent() {
+export function deleteCurrentProjectClickEvent() {
   deleteCurrentProject();
   currentProject ? renderNewCurrentProject(currentProject) : setInitialState();
   renderProjects();
   toggleProjectModalClickEvent();
 }
 
-function addProjectClickEvent() {
+export function addProjectClickEvent() {
   const ProjectModalTitleInput = document.querySelector(
     ".projects__modal__title__input"
   );
@@ -105,14 +111,3 @@ function addProjectClickEvent() {
   const alert = renderProjectAlert("must enter a project name");
   insertAfter(alert, ProjectModalTitleInput);
 }
-
-export {
-  showProjectsButtonClick,
-  projectFocusIn,
-  projectFocusOut,
-  projectClickEvent,
-  toggleProjectModalClickEvent,
-  addProjectClickEvent,
-  updateCurrentProjectClickEvent,
-  deleteCurrentProjectClickEvent
-};

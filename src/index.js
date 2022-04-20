@@ -27,7 +27,8 @@ import {
   updateCurrentProjectClickEvent,
   deleteCurrentProjectClickEvent,
   changeColor,
-  dragging
+  dragging,
+  projectModalTitleInputChange
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -134,6 +135,12 @@ const init = () => {
     "DOMCharacterDataModified",
     ".list__item__desc",
     editTaskDescEvent
+  );
+  delegateEvent(
+    rootElement,
+    "input",
+    ".projects__modal__main__input",
+    projectModalTitleInputChange
   );
 };
 

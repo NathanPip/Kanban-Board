@@ -16,7 +16,7 @@ const renderAddProjectModal = () => {
   const modalTitleInput = createElement("input", [
     "projects__modal__main__input",
     "projects__modal__title__input"
-  ]);
+  ], {placeholder: 'enter project name'});
   const modalAddProjectBtn = createElement("button", [
     "projects__main__button",
     "project__add__new__button"

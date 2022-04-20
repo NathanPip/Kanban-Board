@@ -15,6 +15,7 @@ export {
   renderProjects,
   renderNewCurrentProject,
   renderProjectAlert,
-  clearProjectAlert
+  clearProjectAlert,
+  updateTitleText
 } from "./project-dom-handler";
 export { renderAddProjectModal, renderProjectSettingsModal } from "./modal-dom-handler";
