@@ -26,7 +26,7 @@ import {
   setInitialState,
   updateTitleText
 } from "../dom-handlers";
-import { getProjectIndex, insertAfter } from "../helpers";
+import { animateAndDelete, getProjectIndex, insertAfter } from "../helpers";
 
 export function showProjectsButtonClick() {
   ProjectsListElement.classList.toggle("hide");
@@ -68,7 +68,7 @@ export function toggleProjectModalClickEvent(element) {
       clearProjectAlert();
     }
   } else {
-    modal.remove();
+    animateAndDelete(modal, 'fadeout', 250);
   }
 }
 

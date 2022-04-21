@@ -43,6 +43,7 @@ button:hover {
 .wrapper {
   margin: 0 auto;
   width: 95%;
+  @include fadein(1s)
 }
 
 .main__container {

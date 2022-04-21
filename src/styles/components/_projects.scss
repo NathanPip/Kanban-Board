@@ -7,20 +7,30 @@
   display: flex;
   align-items: flex-start;
   width: fit-content;
+  height: 4em;
   &__list__container {
-    padding: 0.5em 0.75em;
+    padding: 0.5rem 0.75rem;
     border-radius: 0.5em;
-    background: $board-color;
+    // margin-top: auto;
+    margin-bottom: auto;
+    width: fit-content;
+    text-align: center;
+    background-color: $board-color;
+    flex: 2;
   }
   &__add__new__button {
-    padding-top: .75em;
+    padding-top: .5rem;
+    // margin-top: auto;
+    margin-bottom: auto;
     margin-left: .75em;
   }
   &__settings__button {
-    padding-top: .75em;
+    padding-top: .5rem;
+    // margin-top: auto;
+    margin-bottom: auto;
   }
   &__button {
-    padding-left: 0;
+    padding: 0;
   }
   &__list {
     padding: 0;
@@ -77,7 +87,7 @@
       padding: 0em .15em;
       transition: border-color .1s ease-in-out;
       &:hover {
-        border-color: $main-text-color;
+        border-color: $add-new-task-color;
       }
     }
     .projects__modal__head__text {
@@ -93,8 +103,10 @@
       background: $bg-color;
       border: none;
       border-radius: 1em;
+      outline: 2px solid transparent;
+      transition: outline-color .25s ease-in-out;
       &:focus {
-        outline: none;
+      outline-color: $add-new-task-color;
       }
     }
     .projects__modal__alert {
@@ -139,4 +151,6 @@
   &.hide {
     display: none;
   }
+  @include fadein(300ms);
+  @include fadeout(250ms);
 }

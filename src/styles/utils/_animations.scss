@@ -1,0 +1,23 @@
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@mixin fadeout($duration) {
+  &.fadeout {
+    animation-name: fade;
+    animation-duration: $duration;
+  }
+}
+@mixin fadein($duration) {
+  &.fadein {
+    animation-name: fade;
+    animation-duration: $duration;
+    animation-direction: reverse;
+  }
+}
+

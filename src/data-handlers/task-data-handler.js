@@ -6,7 +6,7 @@ export const addNewTask = (board, list) => {
   let newTask = new Task("", board, currentProject.getID, null, null);
   tasks.push(newTask);
   updateTaskStorage(tasks);
-  list.appendChild(newTask.renderTask());
+  return newTask.renderTask();
 };
 
 //remove task element from board and updates data

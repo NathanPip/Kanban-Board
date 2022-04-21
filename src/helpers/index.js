@@ -6,7 +6,17 @@ export {
   getProjects,
   getCurrentProject,
   updateCurrentProjectStorage,
-  updateProjectStorage
+  updateProjectStorage,
 } from "./storage-helpers";
-export { insertAfter, createElement, appendChildren } from "./dom-helpers";
-export { getProjectIndex, getTaskObjectFromElement, getTaskObjectIndex } from "./data-helpers";
+export {
+  insertAfter,
+  createElement,
+  appendChildren,
+  animateAndDelete,
+  animateElement,
+} from "./dom-helpers";
+export {
+  getProjectIndex,
+  getTaskObjectFromElement,
+  getTaskObjectIndex,
+} from "./data-helpers";

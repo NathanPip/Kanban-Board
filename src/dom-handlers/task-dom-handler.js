@@ -1,6 +1,7 @@
 import { TaskListsElements, setTaskElements, rootElement } from "../dom-state";
 import { boards, currentProject, tasks } from "../data-state";
 import {
+  animateElement,
   getListItemAfterDrag,
   getTaskObjectFromElement,
   insertAfter,
@@ -10,6 +11,7 @@ import { clickedOutside } from "../event-handlers";
 export const updateTaskElements = () => {
   setTaskElements(document.querySelectorAll(".list__item"));
 };
+
 
 export const clearTasks = () => {
   for (let i = 0; i < TaskListsElements.length; i++) {
@@ -34,7 +36,9 @@ export const renderTasks = () => {
     taskList.sort((a, b) => (a.order > b.order ? 1 : -1));
     for (let task of taskList) {
       let index = boards.indexOf(task.getBoard);
-      TaskListsElements[index].appendChild(task.renderTask());
+      let taskElement = task.renderTask()
+      TaskListsElements[index].appendChild(taskElement);
+      animateElement(taskElement, 'fadein', 500)
     }
   }
 };

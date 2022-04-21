@@ -1,6 +1,6 @@
 import { currentProject } from "../data-state";
 import { headerElement } from "../dom-state";
-import { appendChildren, createElement } from "../helpers";
+import { animateElement, appendChildren, createElement } from "../helpers";
 
 const renderAddProjectModal = () => {
   const modal = createElement("div", "projects__modal");
@@ -35,6 +35,7 @@ const renderAddProjectModal = () => {
 
   modalTitleInput.type = "text";
   headerElement.appendChild(modal);
+  animateElement(modal, 'fadein', 300);
 };
 
 const renderProjectSettingsModal = () => {
@@ -76,6 +77,7 @@ const renderProjectSettingsModal = () => {
   modalFinishChangesBtn.innerText = "Done";
 
   headerElement.appendChild(modal);
+  animateElement(modal, 'fadein', 300);
 };
 
 export { renderAddProjectModal, renderProjectSettingsModal };

@@ -2,6 +2,8 @@ import {Project, Task} from "../components";
 //receives local storage and parses json data
 //if no item with key exists, create item with key and inital value
 //if no initial value set value to empty string
+const demoProj = new Project('Demo');
+
 export const getLocalStorage = (key, initial) => {
   let item = localStorage.getItem(key);
   if (item) {
@@ -70,7 +72,7 @@ export const getTasks = () => {
 };
 
 export const getProjects = () => {
-  const projectList = getLocalStorage("projects", []);
+  const projectList = getLocalStorage("projects", [demoProj]);
   const projects = [];
   if (projectList.length) {
     for (let project in projectList) {
@@ -84,7 +86,7 @@ export const getProjects = () => {
 };
 
 export const getCurrentProject = () => {
-  const currentProjectStorage = getLocalStorage("currentProject", null);
+  const currentProjectStorage = getLocalStorage("currentProject", demoProj);
   if (currentProjectStorage)
     return new Project(currentProjectStorage.name, currentProjectStorage.id);
   return null;

@@ -1,7 +1,5 @@
 import { currentProject } from "./data-state";
 import {
-  mainContainerElement,
-  ProjectTitleElement,
   rootElement,
   setProjectElements,
   setTaskElements
@@ -35,14 +33,13 @@ import { delegateEvent } from "./helpers";
 
 //inital function calls on page load
 const init = () => {
+  setInitialState();
   renderTasks();
   renderProjects();
   setTaskElements(document.querySelectorAll(".list__item"));
   setProjectElements(
     document.querySelectorAll(".projects__container__list__item")
   );
-  setInitialState();
-
   delegateEvent(
     rootElement,
     "focusin",

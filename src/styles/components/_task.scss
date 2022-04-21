@@ -71,6 +71,8 @@
     grid-area: btn;
   }
 
+  @include fadein(500ms)
+
   // &__edit {
   //   grid-area: btn;
   // }

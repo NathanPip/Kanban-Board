@@ -18,7 +18,7 @@ import {
   updateTaskDesc,
   updateTaskOrder
 } from "../data-handlers";
-import { getTaskObjectFromElement, updateTaskStorage } from "../helpers";
+import { animateElement, getTaskObjectFromElement, updateTaskStorage } from "../helpers";
 
 let mousePosX = undefined;
 let mousePosY = undefined;
@@ -27,7 +27,9 @@ let startingPos = undefined;
 export function newTaskClick(element) {
   let currentBoard = element.dataset.board;
   let currentList = TaskListsElements[boards.indexOf(currentBoard)];
-  addNewTask(currentBoard, currentList);
+  let taskElement = addNewTask(currentBoard, currentList);
+  currentList.appendChild(taskElement);
+  animateElement(taskElement, 'fadein', 500);
   const newChild = currentList.lastChild;
   setTimeout(()=>{renderTaskEditing(newChild)}, 10);
   updateTaskElements();
