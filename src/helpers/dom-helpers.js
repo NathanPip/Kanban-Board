@@ -27,11 +27,18 @@ export const appendChildren = (element, children) => {
   }
 };
 
-export const animateAndDelete = (element, className, duration) => {
-  element.classList.add(className);
-  setTimeout(() => {
-    element.remove();
-  }, duration);
+export const animateAndDelete = (element, className, duration, delay) => {
+  function animation() {
+    element.classList.add(className);
+    setTimeout(() => {
+      element.remove();
+    }, duration);
+  }
+  if(delay) {
+    setTimeout(animation, delay);
+  } else {
+    animation();
+  }
 };
 
 export const animateElement = (element, className, duration) => {
@@ -40,4 +47,3 @@ export const animateElement = (element, className, duration) => {
     element.classList.remove(className);
   }, duration);
 };
-

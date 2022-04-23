@@ -22,4 +22,4 @@ export {
   renderAddProjectModal,
   renderProjectSettingsModal,
 } from "./modal-dom-handler";
-export { createProjectDeleteAlert, removeAlert } from "./alert-dom-handler";
+export { createProjectDeleteAlert, renderTempAlert, removeAlert } from "./alert-dom-handler";

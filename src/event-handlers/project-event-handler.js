@@ -1,20 +1,20 @@
 import {
   mainContainerElement,
   ProjectsListElement,
-  rootElement
+  rootElement,
 } from "../dom-state";
 import {
   currentProject,
   projectMenuTimer,
   projects,
-  setProjectMenuTimer
+  setProjectMenuTimer,
 } from "../data-state";
 
 import {
   addProject,
   deleteCurrentProject,
   updateCurrentProject,
-  updateExistingCurrentProject
+  updateExistingCurrentProject,
 } from "../data-handlers";
 import {
   clearProjectAlert,
@@ -26,10 +26,11 @@ import {
   renderProjects,
   renderProjectSettingsModal,
   renderTasks,
+  renderTempAlert,
   setInitialState,
-  updateTitleText
+  updateTitleText,
 } from "../dom-handlers";
-import { animateAndDelete, getProjectIndex, insertAfter } from "../helpers";
+import { animateAndDelete, animateElement, getProjectIndex, insertAfter } from "../helpers";
 
 export function showProjectsButtonClick() {
   ProjectsListElement.classList.toggle("hide");
@@ -46,7 +47,7 @@ export function projectFocusIn() {
 
 export function projectModalTitleInputChange(element) {
   updateTitleText(element);
-  console.log('sdfdsfds')
+  console.log("sdfdsfds");
 }
 
 export function projectClickEvent(element) {
@@ -64,14 +65,17 @@ export function toggleProjectModalClickEvent(element) {
       renderAddProjectModal();
       clearProjectAlert();
     } else if (
-      element.classList.contains("projects__container__settings__button") &&
-      currentProject
+      element.classList.contains("projects__container__settings__button")
     ) {
+      if (currentProject){
       renderProjectSettingsModal();
       clearProjectAlert();
+      } else {
+        renderTempAlert("Choose or add a project to edit settings");
+      }
     }
   } else {
-    animateAndDelete(modal, 'fadeout', 250);
+    animateAndDelete(modal, 250);
   }
 }
 
@@ -98,8 +102,11 @@ export function deleteCurrentProjectClickEvent() {
 }
 
 export function showDeleteProjectAlert() {
-  const alert = createProjectDeleteAlert('Are you sure you want to delete the project?')
+  const alert = createProjectDeleteAlert(
+    "Are you sure you want to delete the project?"
+  );
   rootElement.appendChild(alert);
+  animateElement(alert, 'fadein', 250);
 }
 
 export function addProjectClickEvent() {
