@@ -56,14 +56,14 @@ export const getTasks = () => {
   if (taskList.length) {
     for (let task in taskList) {
       tasks.push(
-        new Task(
-          taskList[task].desc,
-          taskList[task].board,
-          taskList[task].projectID,
-          taskList[task].order,
-          taskList[task].color,
-          taskList[task].id
-        )
+        new Task({
+          desc: taskList[task].desc,
+          board: taskList[task].board,
+          projectID: taskList[task].projectID,
+          order: taskList[task].order,
+          color: taskList[task].color,
+          id: taskList[task].id
+        })
       );
     }
     return tasks;

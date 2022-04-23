@@ -3,11 +3,11 @@ import { colorClasses } from "../data-state";
 import { appendChildren, createElement } from "../helpers";
 
 export class Task {
-  constructor(desc, board, projectID, order, color, id) {
+  constructor({desc, board, projectID, order, color, id}) {
     this.desc = desc;
     this.board = board;
     this.projectID = projectID;
-    this.order = order;
+    this.order = order || null;
     this.color = color || 'color-1';
     this.taskID = id || uuidv4();
     this.removeStandby = false;

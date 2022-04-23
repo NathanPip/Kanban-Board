@@ -3,7 +3,7 @@ import { boards, currentProject, setTasks, tasks } from "../data-state";
 import { getTaskObjectIndex, updateTaskStorage } from "../helpers";
 
 export const addNewTask = (board, list) => {
-  let newTask = new Task("", board, currentProject.getID, null, null);
+  let newTask = new Task({desc: "", board, projectID: currentProject.getID});
   tasks.push(newTask);
   updateTaskStorage(tasks);
   return newTask.renderTask();
