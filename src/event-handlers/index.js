@@ -7,7 +7,8 @@ export {
   addProjectClickEvent,
   updateCurrentProjectClickEvent,
   deleteCurrentProjectClickEvent,
-  projectModalTitleInputChange
+  projectModalTitleInputChange,
+  showDeleteProjectAlert
 } from "./project-event-handler";
 export {
   newTaskClick,

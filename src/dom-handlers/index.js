@@ -8,7 +8,7 @@ export {
   changeTaskColor,
   renderTempTask,
   renderTaskDragging,
-  updateTempDraggingTask
+  updateTempDraggingTask,
 } from "./task-dom-handler";
 export {
   setInitialState,
@@ -16,6 +16,10 @@ export {
   renderNewCurrentProject,
   renderProjectAlert,
   clearProjectAlert,
-  updateTitleText
+  updateTitleText,
 } from "./project-dom-handler";
-export { renderAddProjectModal, renderProjectSettingsModal } from "./modal-dom-handler";
+export {
+  renderAddProjectModal,
+  renderProjectSettingsModal,
+} from "./modal-dom-handler";
+export { createProjectDeleteAlert, removeAlert } from "./alert-dom-handler";

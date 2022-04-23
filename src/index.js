@@ -5,7 +5,7 @@ import {
   setTaskElements
 } from "./dom-state";
 
-import { renderTasks, renderProjects, setInitialState } from "./dom-handlers";
+import { renderTasks, renderProjects, setInitialState, removeAlert } from "./dom-handlers";
 import {
   projectClickEvent,
   projectFocusIn,
@@ -26,7 +26,8 @@ import {
   deleteCurrentProjectClickEvent,
   changeColor,
   dragging,
-  projectModalTitleInputChange
+  projectModalTitleInputChange,
+  showDeleteProjectAlert
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -118,7 +119,19 @@ const init = () => {
     rootElement,
     "click",
     ".project__delete__button",
+    showDeleteProjectAlert
+  );
+  delegateEvent(
+    rootElement,
+    "click",
+    ".alert__button__delete",
     deleteCurrentProjectClickEvent
+  );
+  delegateEvent(
+    rootElement,
+    "click",
+    ".alert__button__cancel",
+    removeAlert
   );
   delegateEvent(rootElement, "dragover", ".list", dragOver);
   delegateEvent(rootElement, "dragover", ".task__trash", dragOverTrash);

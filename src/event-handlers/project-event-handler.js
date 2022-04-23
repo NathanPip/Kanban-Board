@@ -1,6 +1,7 @@
 import {
   mainContainerElement,
-  ProjectsListElement
+  ProjectsListElement,
+  rootElement
 } from "../dom-state";
 import {
   currentProject,
@@ -17,6 +18,8 @@ import {
 } from "../data-handlers";
 import {
   clearProjectAlert,
+  createProjectDeleteAlert,
+  removeAlert,
   renderAddProjectModal,
   renderNewCurrentProject,
   renderProjectAlert,
@@ -91,6 +94,12 @@ export function deleteCurrentProjectClickEvent() {
   currentProject ? renderNewCurrentProject(currentProject) : setInitialState();
   renderProjects();
   toggleProjectModalClickEvent();
+  removeAlert();
+}
+
+export function showDeleteProjectAlert() {
+  const alert = createProjectDeleteAlert('Are you sure you want to delete the project?')
+  rootElement.appendChild(alert);
 }
 
 export function addProjectClickEvent() {

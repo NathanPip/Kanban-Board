@@ -27,6 +27,7 @@ export const renderTasks = () => {
     let taskList = [];
     for (let task of tasks) {
       if (
+        currentProject && 
         task.getProjectID === currentProject.getID &&
         task.getBoard === board
       ) {

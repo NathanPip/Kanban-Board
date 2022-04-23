@@ -1,0 +1,50 @@
+@use "../utils/" as *;
+
+.alert__container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .alert__body {
+    padding-top: 1rem;
+    padding-inline: 0.75rem;
+    padding-bottom: 1rem;
+    width: 30rem;
+    max-width: 95%;
+    font-size: 1.25em;
+    border-radius: 0.25rem;
+    background-color: $board-color;
+    .alert__text {
+      margin-bottom: 0.75em;
+    }
+    .alert__button {
+      font-size: 1em;
+      border-radius: 0.25em;
+      transition: background-color 0.3s ease-in-out;
+      &__submit {
+        background-color: rgba($task-color-3, 0.4);
+        &:hover {
+          background-color: rgba($task-color-3, 0.8);
+        }
+      }
+      &__delete {
+        background-color: rgba($project-remove-color, 0.4);
+        &:hover {
+          background-color: rgba($project-remove-color, 0.8);
+        }
+      }
+      &__cancel {
+          margin-left: .5em;
+        &:hover {
+          background-color: $add-new-task-color;
+        }
+      }
+    }
+  }
+  @include fadein(300ms);
+  @include fadeout(250ms);
+}
