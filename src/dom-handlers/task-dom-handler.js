@@ -79,8 +79,8 @@ export const updateTempDraggingTask = (
     let e = window.event;
     let offsetX = e.clientX - startingX;
     let offsetY = e.clientY - startingY;
+    tempElement.style.top = `${elementStartingPos.top + offsetY + scrollY}px`;
     tempElement.style.left = `${elementStartingPos.left + offsetX}px`;
-    tempElement.style.top = `${elementStartingPos.top + offsetY}px`;
   }
 };
 
