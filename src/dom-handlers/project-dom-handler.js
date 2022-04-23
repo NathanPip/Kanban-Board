@@ -1,6 +1,6 @@
 import { currentProject, projects } from "../data-state";
 import { mainContainerElement, ProjectsListElement, ProjectTitleElement, rootElement } from "../dom-state";
-import { animateElement } from "../helpers";
+import { animateElement, insertAfter } from "../helpers";
 
 export const clearProjects = () => {
   while (ProjectsListElement.firstChild) {
@@ -40,10 +40,13 @@ export const updateTitleText = (input) => {
 }
 
 export const renderProjectAlert = message => {
+  const ProjectModalTitleInput = document.querySelector(
+    ".projects__modal__title__input"
+  );
   const alert = document.createElement("p");
   alert.classList.add("projects__modal__alert");
   alert.innerText = message;
-  return alert;
+  insertAfter(alert, ProjectModalTitleInput);
 };
 
 export const clearProjectAlert = () => {

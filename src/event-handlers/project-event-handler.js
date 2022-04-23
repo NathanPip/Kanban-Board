@@ -30,7 +30,12 @@ import {
   setInitialState,
   updateTitleText,
 } from "../dom-handlers";
-import { animateAndDelete, animateElement, getProjectIndex, insertAfter } from "../helpers";
+import {
+  animateAndDelete,
+  animateElement,
+  getArrayOfProjNames,
+  getProjectIndex,
+} from "../helpers";
 
 export function showProjectsButtonClick() {
   ProjectsListElement.classList.toggle("hide");
@@ -47,7 +52,6 @@ export function projectFocusIn() {
 
 export function projectModalTitleInputChange(element) {
   updateTitleText(element);
-  console.log("sdfdsfds");
 }
 
 export function projectClickEvent(element) {
@@ -67,9 +71,9 @@ export function toggleProjectModalClickEvent(element) {
     } else if (
       element.classList.contains("projects__container__settings__button")
     ) {
-      if (currentProject){
-      renderProjectSettingsModal();
-      clearProjectAlert();
+      if (currentProject) {
+        renderProjectSettingsModal();
+        clearProjectAlert();
       } else {
         renderTempAlert("Choose or add a project to edit settings");
       }
@@ -106,7 +110,7 @@ export function showDeleteProjectAlert() {
     "Are you sure you want to delete the project?"
   );
   rootElement.appendChild(alert);
-  animateElement(alert, 'fadein', 250);
+  animateElement(alert, "fadein", 250);
 }
 
 export function addProjectClickEvent() {
@@ -114,7 +118,9 @@ export function addProjectClickEvent() {
     ".projects__modal__title__input"
   );
   const projName = ProjectModalTitleInput.value;
-  if (projName.length) {
+  const allProjNames = getArrayOfProjNames(projects);
+  clearProjectAlert();
+  if (projName.length && !allProjNames.includes(projName)) {
     const newProj = addProject(projName);
     renderNewCurrentProject(newProj);
     updateCurrentProject(newProj);
@@ -124,6 +130,12 @@ export function addProjectClickEvent() {
     mainContainerElement.classList.remove("hide");
     return;
   }
-  const alert = renderProjectAlert("must enter a project name");
-  insertAfter(alert, ProjectModalTitleInput);
+  if (projName.length <= 0) {
+    renderProjectAlert("must enter a project name");
+    return
+  }
+  if(allProjNames.includes(projName)) {
+    renderProjectAlert("You already have a project with that name");
+    return
+  }
 }
