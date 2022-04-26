@@ -62,6 +62,8 @@ export function dragEnd(element) {
       updateTaskElements();
       return;
     }
+    console.log(element);
+    changeTaskColor(element, element.dataset.color);
     updateTaskOrder();
     updateTaskStorage(tasks);
     element.classList.remove("dragging");
@@ -105,9 +107,9 @@ export function setUrgency(element) {
   const taskElement = element.parentNode.parentNode;
   const taskObject = getTaskObjectFromElement(taskElement);
   for (let i = 0; i < colorClasses.length; i++) {
-    if (element.classList.contains(colorClasses[i])) {
-      changeTaskColor(taskElement, colorClasses[i]);
+    if (taskElement.classList.contains(colorClasses[i])) {
       updateTaskUrgency(newUrgency, taskObject);
+      changeTaskColor(taskElement, colorClasses[i]);
     }
   }
 }

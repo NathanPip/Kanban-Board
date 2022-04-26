@@ -53,14 +53,15 @@ export const insertTask = (element, listItem) => {
   }
 };
 
-export const changeTaskColor = (task, newColor) => {
+export const changeTaskColor = (task, oldColor) => {
   const taskObject = getTaskObjectFromElement(task);
-  const currentColorButton = task.querySelector(`.list__item__color__btn.${taskObject.getColor}`);
-  const newCurrentColorButton = task.querySelector(`.list__item__color__btn.${newColor}`);
-  currentColorButton.classList.remove('current__task__color');
-  newCurrentColorButton.classList.add('current__task__color');
-  task.classList.remove(taskObject.getColor);
-  task.classList.add(newColor);
+  const currentColorButton = task.querySelector(`.list__item__color__btn.${oldColor}`);
+  const newCurrentColorButton = task.querySelector(`.list__item__color__btn.${taskObject.getColor}`);
+  currentColorButton ? currentColorButton.classList.remove('current__task__color') : null;
+  newCurrentColorButton ? newCurrentColorButton.classList.add('current__task__color') : null;
+  task.classList.remove(oldColor);
+  task.classList.add(taskObject.getColor);
+  task.dataset.color = taskObject.getColor;
 };
 
 export const renderTaskDragging = (task, e) => {

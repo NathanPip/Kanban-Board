@@ -55,6 +55,9 @@ export class Task {
     } else if (this.urgency === "high") {
       this.color = "color-3";
     }
+    if (this.board === 'completed'){
+      this.color = "color-4"
+    }
     return this.color;
   }
 
@@ -137,6 +140,7 @@ export class Task {
 
     task.dataset.taskID = this.taskID;
     task.dataset.board = this.board;
+    task.dataset.color = this.getColor;
     taskDesc.innerText = this.desc;
     deleteBtn.innerText = "Done";
     editBtn.innerText = "Edit";
@@ -147,7 +151,7 @@ export class Task {
     colorButton2.dataset.urgency = "med";
     colorButton3.dataset.urgency = "high";
 
-    for (let i = 0; i < colorClasses.length; i++) {
+    for (let i = 0; i < colorButtons.length; i++) {
       if (
         task.classList.contains(colorClasses[i]) &&
         colorButtons[i].classList.contains(colorClasses[i])
