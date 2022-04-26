@@ -29,6 +29,7 @@ export const updateTaskStorage = tasks => {
       board: task.getBoard,
       id: task.getTaskID,
       order: task.getOrder,
+      urgency: task.getUrgency,
       color: task.getColor,
       projectID: task.getProjectID
     });
@@ -62,6 +63,7 @@ export const getTasks = () => {
           projectID: taskList[task].projectID,
           order: taskList[task].order,
           color: taskList[task].color,
+          urgency: taskList[task].urgency,
           id: taskList[task].id
         })
       );

@@ -16,7 +16,8 @@ import {
   updateTaskBoard,
   updateTaskColor,
   updateTaskDesc,
-  updateTaskOrder
+  updateTaskOrder,
+  updateTaskUrgency
 } from "../data-handlers";
 import { animateElement, getTaskObjectFromElement, updateTaskStorage } from "../helpers";
 
@@ -99,13 +100,14 @@ export function editTaskDescEvent(element) {
   updateTaskDesc(taskDesc, taskID);
 }
 
-export function changeColor(element) {
+export function setUrgency(element) {
+  const newUrgency = element.dataset.urgency;
   const taskElement = element.parentNode.parentNode;
   const taskObject = getTaskObjectFromElement(taskElement);
   for (let i = 0; i < colorClasses.length; i++) {
     if (element.classList.contains(colorClasses[i])) {
       changeTaskColor(taskElement, colorClasses[i]);
-      updateTaskColor(colorClasses[i], taskObject);
+      updateTaskUrgency(newUrgency, taskObject);
     }
   }
 }

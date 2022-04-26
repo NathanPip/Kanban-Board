@@ -57,8 +57,6 @@ export const changeTaskColor = (task, newColor) => {
   const taskObject = getTaskObjectFromElement(task);
   const currentColorButton = task.querySelector(`.list__item__color__btn.${taskObject.getColor}`);
   const newCurrentColorButton = task.querySelector(`.list__item__color__btn.${newColor}`);
-  console.log(document.querySelector(`.list__item__color__btn.${taskObject.getColor}`))
-  console.log(newCurrentColorButton)
   currentColorButton.classList.remove('current__task__color');
   newCurrentColorButton.classList.add('current__task__color');
   task.classList.remove(taskObject.getColor);

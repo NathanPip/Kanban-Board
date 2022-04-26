@@ -1,11 +1,11 @@
-import { currentProject } from "./data-state";
-import {
-  rootElement,
-  setProjectElements,
-  setTaskElements
-} from "./dom-state";
+import { rootElement, setProjectElements, setTaskElements } from "./dom-state";
 
-import { renderTasks, renderProjects, setInitialState, removeAlert } from "./dom-handlers";
+import {
+  renderTasks,
+  renderProjects,
+  setInitialState,
+  removeAlert,
+} from "./dom-handlers";
 import {
   projectClickEvent,
   projectFocusIn,
@@ -24,14 +24,13 @@ import {
   dragLeaveTrash,
   updateCurrentProjectClickEvent,
   deleteCurrentProjectClickEvent,
-  changeColor,
   dragging,
   projectModalTitleInputChange,
-  showDeleteProjectAlert
+  showDeleteProjectAlert,
+  setUrgency,
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
-
 //inital function calls on page load
 const init = () => {
   setInitialState();
@@ -66,13 +65,18 @@ const init = () => {
     projectFocusOut
   );
   delegateEvent(rootElement, "click", ".list__new__task__button", newTaskClick);
-  delegateEvent(rootElement, "click", ".list__item__delete", exitTaskEditingEvent);
-  delegateEvent(rootElement, 'click', '.list__item__edit', editBtnClickEvent)
+  delegateEvent(
+    rootElement,
+    "click",
+    ".list__item__delete",
+    exitTaskEditingEvent
+  );
+  delegateEvent(rootElement, "click", ".list__item__edit", editBtnClickEvent);
   //lazy I know, I'll fix later
-  delegateEvent(rootElement, 'click', '.color-btn-1', changeColor)
-  delegateEvent(rootElement, 'click', '.color-btn-2', changeColor)
-  delegateEvent(rootElement, 'click', '.color-btn-3', changeColor)
-  delegateEvent(rootElement, 'click', '.color-btn-4', changeColor)
+  delegateEvent(rootElement, "click", ".color-btn-1", setUrgency);
+  delegateEvent(rootElement, "click", ".color-btn-2", setUrgency);
+  delegateEvent(rootElement, "click", ".color-btn-3", setUrgency);
+  delegateEvent(rootElement, "click", ".color-btn-4", setUrgency);
   delegateEvent(
     rootElement,
     "click",
@@ -127,16 +131,11 @@ const init = () => {
     ".alert__button__delete",
     deleteCurrentProjectClickEvent
   );
-  delegateEvent(
-    rootElement,
-    "click",
-    ".alert__button__cancel",
-    removeAlert
-  );
+  delegateEvent(rootElement, "click", ".alert__button__cancel", removeAlert);
   delegateEvent(rootElement, "dragover", ".list", dragOver);
   delegateEvent(rootElement, "dragover", ".task__trash", dragOverTrash);
   delegateEvent(rootElement, "dragleave", ".task__trash", dragLeaveTrash);
-  
+
   delegateEvent(rootElement, "dragstart", ".list__item", dragStart);
   delegateEvent(rootElement, "drag", ".list__item", dragging);
   delegateEvent(rootElement, "dragend", ".list__item", dragEnd);

@@ -20,7 +20,7 @@ export {
   editTaskDescEvent,
   editBtnClickEvent,
   exitTaskEditingEvent,
-  changeColor
+  setUrgency
 } from "./task-event-handler";
 
 export {

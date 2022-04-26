@@ -63,3 +63,8 @@ export const updateTaskColor = (newColor, task) => {
   updateTaskStorage(tasks);
 };
 
+export const updateTaskUrgency = (newUrgency, task) => {
+  const index = getTaskObjectIndex(task.getTaskID);
+  tasks[index].setUrgency = newUrgency;
+  updateTaskStorage(tasks);
+}
