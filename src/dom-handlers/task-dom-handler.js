@@ -148,9 +148,6 @@ export const renderTaskEditing = (task) => {
     sel.removeAllRanges();
     sel.addRange(range);
   }
-  task.addEventListener("keydown", (e) => {
-    e.code === "Enter" ? exitTaskEditing(task) : console.log(e.code);
-  });
   task.firstChild.focus();
 };
 
