@@ -7,7 +7,8 @@ export {
   updateTaskOrder,
   unsetTaskRemove,
   updateTaskColor,
-   updateTaskUrgency
+  updateTaskUrgency,
+  updateTaskDetails,
 } from "./task-data-handler";
 
 export {
@@ -15,5 +16,5 @@ export {
   updateCurrentProject,
   updateExistingCurrentProject,
   deleteProject,
-  deleteCurrentProject
+  deleteCurrentProject,
 } from "./project-data-handler";

@@ -28,6 +28,8 @@ import {
   projectModalTitleInputChange,
   showDeleteProjectAlert,
   setUrgency,
+  detailsBtnClickEvent,
+  editTaskDetailsEvent,
 } from "./event-handlers";
 
 import { delegateEvent } from "./helpers";
@@ -72,6 +74,12 @@ const init = () => {
     exitTaskEditingEvent
   );
   delegateEvent(rootElement, "click", ".list__item__edit", editBtnClickEvent);
+  delegateEvent(
+    rootElement,
+    "click",
+    ".list__item__btn__details",
+    detailsBtnClickEvent
+  );
   //lazy I know, I'll fix later
   delegateEvent(rootElement, "click", ".color-btn-1", setUrgency);
   delegateEvent(rootElement, "click", ".color-btn-2", setUrgency);
@@ -144,6 +152,12 @@ const init = () => {
     "DOMCharacterDataModified",
     ".list__item__desc",
     editTaskDescEvent
+  );
+  delegateEvent(
+    rootElement,
+    "DOMCharacterDataModified",
+    ".list__item__details",
+    editTaskDetailsEvent
   );
   delegateEvent(
     rootElement,

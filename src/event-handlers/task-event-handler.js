@@ -8,7 +8,8 @@ import {
   updateTaskElements,
   renderTempTask,
   renderTaskDragging,
-  updateTempDraggingTask
+  updateTempDraggingTask,
+  toggleDetails
 } from "../dom-handlers";
 import {
   addNewTask,
@@ -16,6 +17,7 @@ import {
   updateTaskBoard,
   updateTaskColor,
   updateTaskDesc,
+  updateTaskDetails,
   updateTaskOrder,
   updateTaskUrgency
 } from "../data-handlers";
@@ -91,6 +93,11 @@ export function editBtnClickEvent(element) {
   renderTaskEditing(task);
 }
 
+export function detailsBtnClickEvent(element) {
+  const task = element.parentNode;
+  toggleDetails(task);
+}
+
 export function exitTaskEditingEvent(element) {
   const task = element.parentNode;
   exitTaskEditing(task);
@@ -100,6 +107,12 @@ export function editTaskDescEvent(element) {
   const taskDesc = element.innerText;
   const taskID = element.parentNode.dataset.taskID;
   updateTaskDesc(taskDesc, taskID);
+}
+
+export function editTaskDetailsEvent(element) {
+  const taskDetails = element.innerText;
+  const taskID = element.parentNode.dataset.taskID;
+  updateTaskDetails(taskDetails, taskID);
 }
 
 export function setUrgency(element) {

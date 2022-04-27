@@ -3,7 +3,7 @@ import { boards, currentProject, setTasks, tasks } from "../data-state";
 import { getTaskObjectIndex, updateTaskStorage } from "../helpers";
 
 export const addNewTask = (board, list) => {
-  let newTask = new Task({desc: "", board, projectID: currentProject.getID});
+  let newTask = new Task({desc: "", details: "", board, projectID: currentProject.getID});
   tasks.push(newTask);
   updateTaskStorage(tasks);
   return newTask.renderTask();
@@ -45,6 +45,12 @@ export const updateTaskDesc = (desc, id) => {
   tasks[index].setDesc = desc;
   updateTaskStorage(tasks);
 };
+
+export const updateTaskDetails = (details, id) => {
+  const index = getTaskObjectIndex(id);
+  tasks[index].setDetails = details;
+  updateTaskStorage(tasks);
+}
 
 export const updateTaskOrder = () => {
   for (let board of boards) {

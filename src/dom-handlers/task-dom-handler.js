@@ -12,7 +12,6 @@ export const updateTaskElements = () => {
   setTaskElements(document.querySelectorAll(".list__item"));
 };
 
-
 export const clearTasks = () => {
   for (let i = 0; i < TaskListsElements.length; i++) {
     while (TaskListsElements[i].firstChild) {
@@ -27,7 +26,7 @@ export const renderTasks = () => {
     let taskList = [];
     for (let task of tasks) {
       if (
-        currentProject && 
+        currentProject &&
         task.getProjectID === currentProject.getID &&
         task.getBoard === board
       ) {
@@ -37,9 +36,9 @@ export const renderTasks = () => {
     taskList.sort((a, b) => (a.order > b.order ? 1 : -1));
     for (let task of taskList) {
       let index = boards.indexOf(task.getBoard);
-      let taskElement = task.renderTask()
+      let taskElement = task.renderTask();
       TaskListsElements[index].appendChild(taskElement);
-      animateElement(taskElement, 'fadein', 500)
+      animateElement(taskElement, "fadein", 500);
     }
   }
 };
@@ -55,10 +54,18 @@ export const insertTask = (element, listItem) => {
 
 export const changeTaskColor = (task, oldColor) => {
   const taskObject = getTaskObjectFromElement(task);
-  const currentColorButton = task.querySelector(`.list__item__color__btn.${oldColor}`);
-  const newCurrentColorButton = task.querySelector(`.list__item__color__btn.${taskObject.getColor}`);
-  currentColorButton ? currentColorButton.classList.remove('current__task__color') : null;
-  newCurrentColorButton ? newCurrentColorButton.classList.add('current__task__color') : null;
+  const currentColorButton = task.querySelector(
+    `.list__item__color__btn.${oldColor}`
+  );
+  const newCurrentColorButton = task.querySelector(
+    `.list__item__color__btn.${taskObject.getColor}`
+  );
+  currentColorButton
+    ? currentColorButton.classList.remove("current__task__color")
+    : null;
+  newCurrentColorButton
+    ? newCurrentColorButton.classList.add("current__task__color")
+    : null;
   task.classList.remove(oldColor);
   task.classList.add(taskObject.getColor);
   task.dataset.color = taskObject.getColor;
@@ -99,26 +106,37 @@ export const exitTaskEditing = (task) => {
   const editBtn = task.querySelector(".list__item__edit");
   const deleteBtn = task.querySelector(".list__item__delete");
   const taskInput = task.querySelector(".list__item__desc");
+  const taskDetails = task.querySelector(".list__item__details");
+  const taskDetailsButton = task.querySelector(".list__item__btn__details");
   const buttonGroup = task.querySelector(".list__item__color__container");
   task.setAttribute("draggable", true);
   taskInput.contentEditable = false;
+  taskDetails.contentEditable = false;
+  taskDetailsButton.innerText = "Details";
   deleteBtn.classList.add("hide");
-  editBtn.classList.remove("hide");
   buttonGroup.classList.add("hide");
+  taskDetails.classList.add("hide");
+  taskDetailsButton.classList.remove("hide");
+  editBtn.classList.remove("hide");
 };
 
 export const renderTaskEditing = (task) => {
   const editBtn = task.querySelector(".list__item__edit");
   const deleteBtn = task.querySelector(".list__item__delete");
   const taskInput = task.querySelector(".list__item__desc");
+  const taskDetails = task.querySelector(".list__item__details");
+  const taskDetailsButton = task.querySelector(".list__item__btn__details");
   const taskButtonGroup = task.querySelector(".list__item__color__container");
   const taskInputText = taskInput.innerText;
   let range = document.createRange();
   let sel = window.getSelection();
   taskInput.contentEditable = true;
+  taskDetails.contentEditable = true;
   deleteBtn.classList.remove("hide");
-  editBtn.classList.add("hide");
   taskButtonGroup.classList.remove("hide");
+  taskDetails.classList.remove("hide");
+  editBtn.classList.add("hide");
+  taskDetailsButton.classList.add("hide");
   document.addEventListener("click", (e) =>
     clickedOutside(e, task, exitTaskEditing)
   );
@@ -134,4 +152,16 @@ export const renderTaskEditing = (task) => {
     e.code === "Enter" ? exitTaskEditing(task) : console.log(e.code);
   });
   task.firstChild.focus();
+};
+
+export const toggleDetails = (task) => {
+  const details = task.querySelector(".list__item__details");
+  const detailsButton = task.querySelector(".list__item__btn__details");
+  if (details.classList.contains("hide")) {
+    details.classList.remove("hide");
+    detailsButton.innerText = "Collapse";
+  } else {
+    details.classList.add("hide");
+    detailsButton.innerText = "Details";
+  }
 };

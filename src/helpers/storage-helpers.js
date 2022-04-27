@@ -26,6 +26,7 @@ export const updateTaskStorage = tasks => {
   for (let task of tasks) {
     storedTasks.push({
       desc: task.getDesc,
+      details: task.getDetails,
       board: task.getBoard,
       id: task.getTaskID,
       order: task.getOrder,
@@ -59,6 +60,7 @@ export const getTasks = () => {
       tasks.push(
         new Task({
           desc: taskList[task].desc,
+          details: taskList[task].details,
           board: taskList[task].board,
           projectID: taskList[task].projectID,
           order: taskList[task].order,

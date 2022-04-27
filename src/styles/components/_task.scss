@@ -6,9 +6,12 @@
   border-radius: 0.5em;
   padding: 0.35em;
   width: 100%;
+  max-width: 100%;
   display: grid;
-  grid-template-areas: "desc desc" ". btn";
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "desc desc" "details details" "details-btn btn";
+  justify-content: center;
+  transition: background-color .25s ease-in-out;
   cursor: grab;
   &.dragging {
     opacity: 0.5;
@@ -52,10 +55,30 @@
     }
   }
 
+  &__details {
+    margin-bottom: .5em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(#000, 0.2);
+    border-radius: 0.25em;
+    padding: 0.35em;
+    grid-area: details;
+    word-wrap: break-word;
+    font-size: .8em;
+    &:hover {
+      cursor: text;
+    }
+    &:focus {
+      border-color: rgba(#000, 0.4);
+      outline: none;
+    }
+    &:empty:not(:focus)::before {
+      content: "no details";
+    }
+  }
+
   &__color__btn{
     margin-inline: .15em;
-    // height: .8em;
-    // width: 1em;
     font-size: .75em;
     border-radius: .5em;
     &.current__task__color {
@@ -66,10 +89,13 @@
 
   &__btn {
     margin-left: auto;
-    margin-right: 1em;
-    width: 2em;
     font-size: 1em;
     grid-area: btn;
+    &__details {
+      margin-left: 0;
+      margin-right: auto;
+      grid-area: details-btn;
+    }
   }
 
   @include fadein(500ms)

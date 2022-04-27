@@ -3,8 +3,19 @@ import { colorClasses } from "../data-state";
 import { appendChildren, createElement } from "../helpers";
 
 export class Task {
-  constructor({ desc, board, projectID, order, color, urgency, tags, id }) {
+  constructor({
+    desc,
+    board,
+    projectID,
+    order,
+    color,
+    urgency,
+    tags,
+    details,
+    id,
+  }) {
     this.desc = desc;
+    this.details = details;
     this.board = board;
     this.projectID = projectID;
     this.order = order || null;
@@ -31,6 +42,14 @@ export class Task {
     this.desc = newDesc;
   }
 
+  get getDetails() {
+    return this.details;
+  }
+
+  set setDetails(newDetails) {
+    this.details = newDetails;
+  }
+
   get getRemoveStandby() {
     return this.removeStandby;
   }
@@ -55,8 +74,8 @@ export class Task {
     } else if (this.urgency === "high") {
       this.color = "color-3";
     }
-    if (this.board === 'completed'){
-      this.color = "color-4"
+    if (this.board === "completed") {
+      this.color = "color-4";
     }
     return this.color;
   }
@@ -64,7 +83,7 @@ export class Task {
   set setColor(newColor) {
     this.color = newColor;
   }
-  
+
   get getUrgency() {
     return this.urgency;
   }
@@ -94,6 +113,9 @@ export class Task {
       ["list__item__desc", `${this.board}__item__desc`],
       { placeholder: "enter task" }
     );
+    const taskDetails = createElement("p", ["list__item__details", "hide"], {
+      contenteditable: "false",
+    });
     const deleteBtn = createElement("button", [
       "list__item__btn",
       "list__item__delete",
@@ -104,6 +126,10 @@ export class Task {
       "list__item__btn",
       "list__item__edit",
       `${this.board}__edit`,
+    ]);
+    const detailsButton = createElement("button", [
+      "list__item__btn",
+      "list__item__btn__details",
     ]);
     const colorButtonContainer = createElement("div", [
       "list__item__color__container",
@@ -129,19 +155,23 @@ export class Task {
     //   "color-btn-4",
     //   "color-4",
     // ]);
-    const colorButtons = [
-      colorButton1,
-      colorButton2,
-      colorButton3,
-    ];
+    const colorButtons = [colorButton1, colorButton2, colorButton3];
     appendChildren(colorButtonContainer, colorButtons);
-    appendChildren(task, [taskDesc, editBtn, deleteBtn]);
+    appendChildren(task, [
+      taskDesc,
+      taskDetails,
+      detailsButton,
+      editBtn,
+      deleteBtn,
+    ]);
     task.insertBefore(colorButtonContainer, deleteBtn);
 
     task.dataset.taskID = this.taskID;
     task.dataset.board = this.board;
     task.dataset.color = this.getColor;
     taskDesc.innerText = this.desc;
+    taskDetails.innerText = this.details;
+    detailsButton.innerText = "Details";
     deleteBtn.innerText = "Done";
     editBtn.innerText = "Edit";
     colorButton1.innerText = "low";

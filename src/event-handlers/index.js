@@ -8,7 +8,7 @@ export {
   updateCurrentProjectClickEvent,
   deleteCurrentProjectClickEvent,
   projectModalTitleInputChange,
-  showDeleteProjectAlert
+  showDeleteProjectAlert,
 } from "./project-event-handler";
 export {
   newTaskClick,
@@ -20,11 +20,13 @@ export {
   editTaskDescEvent,
   editBtnClickEvent,
   exitTaskEditingEvent,
-  setUrgency
+  setUrgency,
+  detailsBtnClickEvent,
+  editTaskDetailsEvent,
 } from "./task-event-handler";
 
 export {
   clickedOutside,
   dragOverTrash,
-  dragLeaveTrash
+  dragLeaveTrash,
 } from "./general-event-handler";
