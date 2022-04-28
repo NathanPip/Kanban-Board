@@ -13,6 +13,9 @@
     .projects__modal__body {
       margin-top: 3em;
       border-radius: 1em;
+      border-width: 2px;
+      border-style: solid;
+      border-color: $main-text-color;
       display: flex;
       flex-direction: column;
       height: fit-content;

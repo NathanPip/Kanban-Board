@@ -57,6 +57,18 @@ const init = () => {
   delegateEvent(
     rootElement,
     "focusin",
+    ".projects__container__add__new__button",
+    projectFocusIn
+  );
+  delegateEvent(
+    rootElement,
+    "focusout",
+    ".projects__container__add__new__button",
+    projectFocusOut
+  );
+  delegateEvent(
+    rootElement,
+    "focusin",
     ".projects__container__list",
     projectFocusIn
   );

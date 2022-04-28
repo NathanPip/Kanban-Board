@@ -38,11 +38,25 @@ import {
 } from "../helpers";
 
 export function showProjectsButtonClick() {
+  const addProjectButton = document.querySelector(
+    ".projects__container__add__new__button"
+  );
   ProjectsListElement.classList.toggle("hide");
+  if (addProjectButton.classList.contains("hide")) {
+    addProjectButton.classList.remove("hide");
+  } else {
+    addProjectButton.classList.add("hide");
+  }
 }
 
 export function projectFocusOut() {
-  let timeout = setTimeout(() => ProjectsListElement.classList.add("hide"), 0);
+  const addProjectButton = document.querySelector(
+    ".projects__container__add__new__button"
+  );
+  let timeout = setTimeout(() => {
+    ProjectsListElement.classList.add("hide");
+    addProjectButton.classList.add("hide");
+  }, 0);
   setProjectMenuTimer(timeout);
 }
 

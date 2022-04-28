@@ -1,5 +1,10 @@
 import { currentProject, projects } from "../data-state";
-import { mainContainerElement, ProjectsListElement, ProjectTitleElement, rootElement } from "../dom-state";
+import {
+  mainContainerElement,
+  ProjectsListElement,
+  ProjectTitleElement,
+  rootElement,
+} from "../dom-state";
 import { animateElement, insertAfter } from "../helpers";
 
 export const clearProjects = () => {
@@ -15,31 +20,30 @@ export const renderProjects = () => {
   }
 };
 
-export const renderNewCurrentProject = newProj => {
+export const renderNewCurrentProject = (newProj) => {
   ProjectTitleElement.innerText = newProj.getName;
 };
 
 export const setInitialState = () => {
-  if(currentProject) {
+  if (currentProject) {
     ProjectTitleElement.innerText = currentProject.getName;
-    mainContainerElement.classList.remove('hide');
-    return
+    mainContainerElement.classList.remove("hide");
+    return;
   }
-  ProjectTitleElement.innerText = 'Add a Project';
+  ProjectTitleElement.innerText = "Add a Project";
   mainContainerElement.classList.add("hide");
 };
 
 export const updateTitleText = (input) => {
-  const title = document.querySelector('.projects__modal__head__text');
-  if(input.value) {
-    title.innerText = input.value
+  const title = document.querySelector(".projects__modal__head__text");
+  if (input.value) {
+    title.innerText = input.value;
   } else {
-    title.innerText = 'Ener Project Name'
+    title.innerText = "Ener Project Name";
   }
+};
 
-}
-
-export const renderProjectAlert = message => {
+export const renderProjectAlert = (message) => {
   const ProjectModalTitleInput = document.querySelector(
     ".projects__modal__title__input"
   );

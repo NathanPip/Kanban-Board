@@ -11,51 +11,81 @@
   &__list__container {
     padding: 0.5rem 0.75rem;
     border-radius: 0.5em;
-    // margin-top: auto;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $main-text-color;
     margin-bottom: auto;
-    width: fit-content;
+    width: 10rem;
     text-align: center;
     background-color: $board-color;
+    display: flex;
+    flex-direction: column;
     flex: 2;
   }
   &__add__new__button {
-    padding-top: .5rem;
-    // margin-top: auto;
-    margin-bottom: auto;
-    margin-left: .75em;
+    margin-top: 0.5em;
+    margin-right: auto;
+    border-radius: 0.25em;
+    padding: 0.25em;
+    width: 100%;
+    font-size: 1.15em;
+    background-color: $add-new-task-color;
+    transition: background-color 0.25s ease-in-out;
+    &:hover {
+      background-color: $add-new-task-color--hover;
+    }
   }
   &__settings__button {
-    padding-top: .5rem;
-    // margin-top: auto;
+    margin-top: 2px;
+    margin-left: 1em;
     margin-bottom: auto;
+    border-radius: 0.25em;
+    padding-top: 0.5rem;
+    padding-inline: 0.75rem;
+    padding-bottom: 0.5rem;
+    background-color: $board-color;
+    transition: background-color 0.25s ease-in-out;
+    &:hover {
+      background-color: $add-new-task-color;
+    }
   }
   &__button {
     padding: 0;
   }
   &__list {
-    padding: 0;
     margin: 0;
+    margin-top: 0.5em;
+    border-top: 2px solid $main-text-color;
+    // border-bottom: 2px solid $main-text-color;
+    padding: 0;
+    padding-top: 0.5em;
+    // padding-bottom: 0.5em;
+    max-width: 10rem;
     list-style: none;
     background: $board-color;
     &__item {
       margin: 0;
+      display: block;
       padding: 0;
+      max-width: 9rem;
       font-size: 0.85em;
       button {
         text-align: left;
         border-bottom-color: transparent;
         border-bottom-style: solid;
         border-bottom-width: 2px;
-        padding-top: 0.75em;
-        padding-left: 0;
-        padding-right: 0;
+        padding-top: 0.25em;
+        padding-inline: 0;
+        padding-bottom: 0.25em;
         width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: transform 0.25s ease-in-out;
         &:hover {
-          border-bottom-color: $main-text-color;
+          transform: translateX(0.5em);
         }
       }
     }
   }
 }
-
-
