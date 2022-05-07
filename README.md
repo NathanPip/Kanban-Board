@@ -21,7 +21,8 @@ $ npm install
 
 # Run the app
 $ npm start
-
+``` 
+ 
 ## Technologies
 - Javascript
 - HTML
