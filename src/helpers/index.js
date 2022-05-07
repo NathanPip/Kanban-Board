@@ -7,6 +7,7 @@ export {
   getCurrentProject,
   updateCurrentProjectStorage,
   updateProjectStorage,
+  getCurrentUser
 } from "./storage-helpers";
 export {
   insertAfter,

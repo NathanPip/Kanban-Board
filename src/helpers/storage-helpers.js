@@ -1,8 +1,7 @@
-import {Project, Task} from "../components";
+import {Project, Task, User} from "../components";
 //receives local storage and parses json data
 //if no item with key exists, create item with key and inital value
 //if no initial value set value to empty string
-const demoProj = new Project('Demo');
 
 export const getLocalStorage = (key, initial) => {
   let item = localStorage.getItem(key);
@@ -51,6 +50,11 @@ export const updateCurrentProjectStorage = proj => {
   return proj;
 };
 
+export const getCurrentUser = () => {
+  const currentUser = getLocalStorage("user", null);
+  return currentUser;
+}
+
 //gets tasks from local storage and creates and returns an array of Task objects from local storage data
 export const getTasks = () => {
   const taskList = getLocalStorage("tasks", []);
@@ -75,13 +79,14 @@ export const getTasks = () => {
   return tasks;
 };
 
+const demoProj = new Project({name: 'Demo', createdBy:getCurrentUser()});
 export const getProjects = () => {
   const projectList = getLocalStorage("projects", [demoProj]);
   const projects = [];
   if (projectList.length) {
     for (let project in projectList) {
       projects.push(
-        new Project(projectList[project].name, projectList[project].id)
+        new Project({name: projectList[project].name, id: projectList[project].id})
       );
     }
     return projects;
@@ -92,6 +97,6 @@ export const getProjects = () => {
 export const getCurrentProject = () => {
   const currentProjectStorage = getLocalStorage("currentProject", demoProj);
   if (currentProjectStorage)
-    return new Project(currentProjectStorage.name, currentProjectStorage.id);
+    return new Project({name: currentProjectStorage.name, id: currentProjectStorage.id});
   return null;
 };

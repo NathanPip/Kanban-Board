@@ -12,12 +12,16 @@ export class Task {
     urgency,
     tags,
     details,
+    createdBy,
+    assignedTo,
     id,
   }) {
     this.desc = desc;
     this.details = details;
     this.board = board;
     this.projectID = projectID;
+    this.createdBy = createdBy;
+    this.assignedTo = assignedTo || createdBy;
     this.order = order || null;
     this.color = color || "color-1";
     this.urgency = urgency || null;
