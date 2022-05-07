@@ -21,7 +21,7 @@ const createBaseModal = () => {
   return { modal, modalBody, modalTitle };
 };
 
-const renderAddProjectModal = () => {
+export const renderAddProjectModal = () => {
   const { modal, modalBody, modalTitle } = createBaseModal();
   const modalTitleInput = createElement(
     "input",
@@ -42,7 +42,7 @@ const renderAddProjectModal = () => {
   animateElement(modal, "fadein", 300);
 };
 
-const renderProjectSettingsModal = () => {
+export const renderProjectSettingsModal = () => {
   const { modal, modalBody, modalTitle } = createBaseModal();
   const modalTitleInput = createElement(
     "input",
@@ -140,4 +140,14 @@ export const renderAccountModal = (type) => {
   animateElement(modal, "fadein", 300);
 };
 
-export { renderAddProjectModal, renderProjectSettingsModal };
+export const renderModalAlert = (message) => {
+  const ProjectModalButton = document.querySelector(
+    ".projects__main__button"
+  );
+  const parent = ProjectModalButton.parentNode;
+  const alert = document.createElement("p");
+  alert.classList.add("projects__modal__alert");
+  alert.innerText = message;
+  parent.insertBefore(alert, ProjectModalButton);
+};
+

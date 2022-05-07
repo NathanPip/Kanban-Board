@@ -22,8 +22,8 @@ import {
   removeAlert,
   renderAccountModal,
   renderAddProjectModal,
+  renderModalAlert,
   renderNewCurrentProject,
-  renderProjectAlert,
   renderProjects,
   renderProjectSettingsModal,
   renderTasks,
@@ -151,11 +151,11 @@ export function addProjectClickEvent() {
     return;
   }
   if (projName.length <= 0) {
-    renderProjectAlert("must enter a project name");
+    renderModalAlert("must enter a project name");
     return
   }
   if(allProjNames.includes(projName)) {
-    renderProjectAlert("You already have a project with that name");
+    renderModalAlert("You already have a project with that name");
     return
   }
 }

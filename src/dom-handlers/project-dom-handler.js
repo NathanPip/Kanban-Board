@@ -43,16 +43,6 @@ export const updateTitleText = (input) => {
   }
 };
 
-export const renderProjectAlert = (message) => {
-  const ProjectModalTitleInput = document.querySelector(
-    ".projects__modal__title__input"
-  );
-  const alert = document.createElement("p");
-  alert.classList.add("projects__modal__alert");
-  alert.innerText = message;
-  insertAfter(alert, ProjectModalTitleInput);
-};
-
 export const clearProjectAlert = () => {
   const alert = document.querySelector(".projects__modal__alert");
   if (alert) alert.remove();

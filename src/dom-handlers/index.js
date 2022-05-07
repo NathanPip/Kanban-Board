@@ -15,14 +15,14 @@ export {
   setInitialState,
   renderProjects,
   renderNewCurrentProject,
-  renderProjectAlert,
   clearProjectAlert,
   updateTitleText,
 } from "./project-dom-handler";
 export {
   renderAddProjectModal,
   renderProjectSettingsModal,
-  renderAccountModal
+  renderAccountModal,
+  renderModalAlert
 } from "./modal-dom-handler";
 export {
   createProjectDeleteAlert,
