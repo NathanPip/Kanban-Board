@@ -124,6 +124,12 @@ const init = () => {
   delegateEvent(
     rootElement,
     "click",
+    ".account__button__login",
+    toggleProjectModalClickEvent
+  );
+  delegateEvent(
+    rootElement,
+    "click",
     ".projects__modal__close__button",
     toggleProjectModalClickEvent
   );

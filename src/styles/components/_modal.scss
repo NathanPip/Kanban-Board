@@ -43,6 +43,8 @@
         height: 3em;
       }
       .projects__modal__main__input {
+        margin-bottom: .5em;
+        margin-top: .5em;
         font-size: 1em;
         padding: 0.2em 0.5em;
         background: $bg-color;
@@ -88,9 +90,20 @@
         border-radius: 0.5em;
         background: $add-new-task-color;
         transition: background-color .15s ease-in-out;
+        &.account__submit__button {
+          margin-top: 2em;
+        }
         &:hover {
           background-color: $add-new-task-color--hover;
         }
+      }
+      .account__login__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .account__login__form__label {
+        margin-right: auto;
       }
     }
     &.hide {

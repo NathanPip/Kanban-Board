@@ -22,6 +22,7 @@ export {
 export {
   renderAddProjectModal,
   renderProjectSettingsModal,
+  renderAccountModal
 } from "./modal-dom-handler";
 export {
   createProjectDeleteAlert,

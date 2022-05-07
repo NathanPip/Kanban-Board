@@ -20,6 +20,7 @@ import {
   clearProjectAlert,
   createProjectDeleteAlert,
   removeAlert,
+  renderAccountModal,
   renderAddProjectModal,
   renderNewCurrentProject,
   renderProjectAlert,
@@ -91,6 +92,11 @@ export function toggleProjectModalClickEvent(element) {
       } else {
         renderTempAlert("Choose or add a project to edit settings");
       }
+    }
+    else if (
+      element.classList.contains("account__button__login")
+    ) {
+      renderAccountModal("signup");
     }
   } else {
     animateAndDelete(modal, 250);
