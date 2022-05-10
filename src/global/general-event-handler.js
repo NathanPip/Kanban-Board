@@ -1,4 +1,4 @@
-import { setTaskRemove, unsetTaskRemove } from "../data-handlers";
+import { setTaskRemove, unsetTaskRemove } from "../components/Task"; 
 
 function clickedOutside(event, targetElement, func) {
   let clicked = event.target;

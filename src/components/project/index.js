@@ -13,6 +13,7 @@ export {
   setCurrentProject,
   setProjects,
   setProjectMenuTimer,
+  getProjectIndex,
 } from "./project-data-state";
 
 export {
@@ -29,17 +30,17 @@ export {
   AddProjectButtonElement,
   ProjectElements,
   setProjectElements,
-} from "../components/project/project-dom-state";
+} from "./project-dom-state";
 
 export {
-    showProjectsButtonClick,
-    projectFocusIn,
-    projectFocusOut,
-    projectClickEvent,
-    toggleProjectModalClickEvent,
-    addProjectClickEvent,
-    updateCurrentProjectClickEvent,
-    deleteCurrentProjectClickEvent,
-    projectModalTitleInputChange,
-    showDeleteProjectAlert,
-  } from "./project-event-handler";
+  showProjectsButtonClick,
+  projectFocusIn,
+  projectFocusOut,
+  projectClickEvent,
+  toggleProjectModalClickEvent,
+  addProjectClickEvent,
+  updateCurrentProjectClickEvent,
+  deleteCurrentProjectClickEvent,
+  projectModalTitleInputChange,
+  showDeleteProjectAlert,
+} from "./project-event-handler";

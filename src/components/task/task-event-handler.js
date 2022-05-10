@@ -1,27 +1,29 @@
-import { boards, colorClasses, tasks } from "../data-state";
-import { TaskListsElements, trashElement } from "../dom-state";
 import {
+  animateElement,
+  updateTaskStorage,
+} from "../../helpers";
+import { boards, colorClasses, trashElement } from "../../global";
+import { getTaskObjectFromElement, tasks } from "./task-data-state";
+import {
+  addNewTask,
   changeTaskColor,
   exitTaskEditing,
   insertTask,
-  renderTaskEditing,
-  updateTaskElements,
-  renderTempTask,
-  renderTaskDragging,
-  updateTempDraggingTask,
-  toggleDetails
-} from "../dom-handlers";
-import {
-  addNewTask,
   removeTask,
+  renderTaskDragging,
+  renderTaskEditing,
+  renderTempTask,
+  TaskListsElements,
+  toggleDetails,
   updateTaskBoard,
   updateTaskColor,
   updateTaskDesc,
   updateTaskDetails,
+  updateTaskElements,
   updateTaskOrder,
-  updateTaskUrgency
-} from "../data-handlers";
-import { animateElement, getTaskObjectFromElement, updateTaskStorage } from "../helpers";
+  updateTaskUrgency,
+  updateTempDraggingTask,
+} from ".";
 
 let mousePosX = undefined;
 let mousePosY = undefined;
@@ -32,9 +34,11 @@ export function newTaskClick(element) {
   let currentList = TaskListsElements[boards.indexOf(currentBoard)];
   let taskElement = addNewTask(currentBoard, currentList);
   currentList.appendChild(taskElement);
-  animateElement(taskElement, 'fadein', 500);
+  animateElement(taskElement, "fadein", 500);
   const newChild = currentList.lastChild;
-  setTimeout(()=>{renderTaskEditing(newChild)}, 10);
+  setTimeout(() => {
+    renderTaskEditing(newChild);
+  }, 10);
   updateTaskElements();
   updateTaskOrder();
 }
@@ -54,7 +58,7 @@ export function dragging(element) {
 }
 
 export function dragEnd(element) {
-  const tempElement = document.querySelector('.dragging__temp');
+  const tempElement = document.querySelector(".dragging__temp");
   tempElement.remove();
   trashElement.classList.add("hide");
   if (element.classList.contains("dragging")) {

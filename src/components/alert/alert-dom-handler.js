@@ -1,4 +1,4 @@
-import { rootElement } from "../../dom-state";
+import { rootElement } from "../../global";
 import { animateAndDelete, animateElement, appendChildren, createElement } from "../../helpers"
 
 const createAlertBase = (message, animationClass) => {

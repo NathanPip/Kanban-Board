@@ -1,42 +1,38 @@
 import {
-  mainContainerElement,
-  ProjectsListElement,
-  rootElement,
-} from "../dom-state";
-import {
-  currentProject,
-  projectMenuTimer,
-  projects,
-  setProjectMenuTimer,
-} from "../data-state";
-
-import {
-  addProject,
-  deleteCurrentProject,
-  updateCurrentProject,
-  updateExistingCurrentProject,
-} from "../data-handlers";
-import {
-  clearProjectAlert,
-  createProjectDeleteAlert,
-  removeAlert,
-  renderAccountModal,
-  renderAddProjectModal,
-  renderModalAlert,
-  renderNewCurrentProject,
-  renderProjects,
-  renderProjectSettingsModal,
-  renderTasks,
-  renderTempAlert,
-  setInitialState,
-  updateTitleText,
-} from "../dom-handlers";
-import {
   animateAndDelete,
   animateElement,
   getArrayOfProjNames,
+} from "../../helpers";
+import { mainContainerElement, rootElement } from "../../global";
+import {
+  addProject,
+  clearProjectAlert,
+  currentProject,
+  deleteCurrentProject,
+  projectMenuTimer,
+  projects,
+  ProjectsListElement,
+  renderNewCurrentProject,
+  renderProjects,
+  setInitialState,
+  setProjectMenuTimer,
+  updateCurrentProject,
+  updateExistingCurrentProject,
+  updateTitleText,
   getProjectIndex,
-} from "../helpers";
+} from ".";
+import {
+  createProjectDeleteAlert,
+  removeAlert,
+  renderTempAlert,
+} from "../alert";
+import {
+  renderAccountModal,
+  renderAddProjectModal,
+  renderModalAlert,
+  renderProjectSettingsModal,
+} from "../modal";
+import { renderTasks } from "../Task";
 
 export function showProjectsButtonClick() {
   const addProjectButton = document.querySelector(
@@ -92,10 +88,7 @@ export function toggleProjectModalClickEvent(element) {
       } else {
         renderTempAlert("Choose or add a project to edit settings");
       }
-    }
-    else if (
-      element.classList.contains("account__button__login")
-    ) {
+    } else if (element.classList.contains("account__button__login")) {
       renderAccountModal("signup");
     }
   } else {
@@ -152,10 +145,10 @@ export function addProjectClickEvent() {
   }
   if (projName.length <= 0) {
     renderModalAlert("must enter a project name");
-    return
+    return;
   }
-  if(allProjNames.includes(projName)) {
+  if (allProjNames.includes(projName)) {
     renderModalAlert("You already have a project with that name");
-    return
+    return;
   }
 }

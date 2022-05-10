@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { colorClasses } from "../data-state";
-import { appendChildren, createElement } from "../helpers";
+import { colorClasses } from "../../global"; 
+import { appendChildren, createElement } from "../../helpers";
 
 export class Task {
   constructor({

@@ -1,6 +1,8 @@
-import { Task } from "..";
-import { boards, currentProject, setTasks, tasks } from "../../data-state";
-import { getTaskObjectIndex, updateTaskStorage } from "../../helpers";
+import { Task } from "./Task";
+import { boards } from "../../global";
+import {  updateTaskStorage } from "../../helpers";
+import { currentProject } from "../Project";
+import { getTaskObjectIndex, setTasks, tasks } from "./task-data-state";
 
 export const addNewTask = (board, list) => {
   let newTask = new Task({desc: "", details: "", board, projectID: currentProject.getID});

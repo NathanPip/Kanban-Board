@@ -1,36 +1,35 @@
-import { rootElement, setProjectElements, setTaskElements } from "./dom-state";
-
+import { removeAlert } from "./components/alert";
 import {
-  renderTasks,
-  renderProjects,
-  setInitialState,
-  removeAlert,
-} from "./dom-handlers";
-import {
+  addProjectClickEvent,
+  deleteCurrentProjectClickEvent,
   projectClickEvent,
   projectFocusIn,
   projectFocusOut,
+  projectModalTitleInputChange,
+  renderProjects,
+  setInitialState,
+  setProjectElements,
+  showDeleteProjectAlert,
   showProjectsButtonClick,
+  toggleProjectModalClickEvent,
+  updateCurrentProjectClickEvent,
+} from "./components/Project";
+import { renderTasks, setTaskElements } from "./components/Task";
+import {
+  detailsBtnClickEvent,
   dragEnd,
+  dragging,
   dragOver,
   dragStart,
-  editTaskDescEvent,
-  newTaskClick,
-  toggleProjectModalClickEvent,
-  addProjectClickEvent,
   editBtnClickEvent,
-  exitTaskEditingEvent,
-  dragOverTrash,
-  dragLeaveTrash,
-  updateCurrentProjectClickEvent,
-  deleteCurrentProjectClickEvent,
-  dragging,
-  projectModalTitleInputChange,
-  showDeleteProjectAlert,
-  setUrgency,
-  detailsBtnClickEvent,
+  editTaskDescEvent,
   editTaskDetailsEvent,
-} from "./event-handlers";
+  exitTaskEditingEvent,
+  newTaskClick,
+  setUrgency,
+} from "./components/task/task-event-handler";
+import { rootElement } from "./global";
+import { dragLeaveTrash, dragOverTrash } from "./global/general-event-handler";
 
 import { delegateEvent } from "./helpers";
 //inital function calls on page load

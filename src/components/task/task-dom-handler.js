@@ -1,12 +1,13 @@
-import { TaskListsElements, setTaskElements, rootElement } from "../../dom-state";
-import { boards, currentProject, tasks } from "../../data-state";
 import {
   animateElement,
   getListItemAfterDrag,
-  getTaskObjectFromElement,
   insertAfter,
 } from "../../helpers";
-import { clickedOutside } from "../../event-handlers";
+import { setTaskElements, TaskListsElements } from ".";
+import { currentProject } from "../Project";
+import { boards } from "../../global";
+import { tasks, getTaskObjectFromElement } from "./task-data-state";
+import { clickedOutside } from "../../global/general-event-handler";
 
 export const updateTaskElements = () => {
   setTaskElements(document.querySelectorAll(".list__item"));

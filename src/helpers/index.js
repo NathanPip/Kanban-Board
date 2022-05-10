@@ -17,8 +17,5 @@ export {
   animateElement,
 } from "./dom-helpers";
 export {
-  getProjectIndex,
-  getTaskObjectFromElement,
-  getTaskObjectIndex,
   getArrayOfProjNames
 } from "./data-helpers";
