@@ -1,6 +1,6 @@
-import { currentProject } from "../data-state";
-import { headerElement } from "../dom-state";
-import { animateElement, appendChildren, createElement } from "../helpers";
+import { currentProject } from "../../data-state";
+import { headerElement } from "../../dom-state";
+import { animateElement, appendChildren, createElement } from "../../helpers";
 
 const createBaseModal = () => {
   const modal = createElement("div", "projects__modal");

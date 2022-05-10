@@ -1,5 +1,5 @@
-import { rootElement } from "../dom-state";
-import { animateAndDelete, animateElement, appendChildren, createElement } from "../helpers"
+import { rootElement } from "../../dom-state";
+import { animateAndDelete, animateElement, appendChildren, createElement } from "../../helpers"
 
 const createAlertBase = (message, animationClass) => {
     const body = createElement('div', ['alert__body']);

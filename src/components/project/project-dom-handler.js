@@ -1,11 +1,11 @@
-import { currentProject, projects } from "../data-state";
+import { currentProject, projects } from "../../data-state";
 import {
   mainContainerElement,
   ProjectsListElement,
   ProjectTitleElement,
   rootElement,
-} from "../dom-state";
-import { animateElement, insertAfter } from "../helpers";
+} from "../../dom-state";
+import { animateElement, insertAfter } from "../../helpers";
 
 export const clearProjects = () => {
   while (ProjectsListElement.firstChild) {

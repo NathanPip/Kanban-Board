@@ -1,6 +1,6 @@
-import { Task } from "../components";
-import { boards, currentProject, setTasks, tasks } from "../data-state";
-import { getTaskObjectIndex, updateTaskStorage } from "../helpers";
+import { Task } from "..";
+import { boards, currentProject, setTasks, tasks } from "../../data-state";
+import { getTaskObjectIndex, updateTaskStorage } from "../../helpers";
 
 export const addNewTask = (board, list) => {
   let newTask = new Task({desc: "", details: "", board, projectID: currentProject.getID});

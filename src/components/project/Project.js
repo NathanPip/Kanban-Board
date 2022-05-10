@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { createElement } from "../helpers";
+import { createElement } from "../../helpers";
 
 export class Project {
   constructor({name, id, tasks, createdBy, canAssign, canEdit}) {

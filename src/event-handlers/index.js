@@ -1,15 +1,4 @@
-export {
-  showProjectsButtonClick,
-  projectFocusIn,
-  projectFocusOut,
-  projectClickEvent,
-  toggleProjectModalClickEvent,
-  addProjectClickEvent,
-  updateCurrentProjectClickEvent,
-  deleteCurrentProjectClickEvent,
-  projectModalTitleInputChange,
-  showDeleteProjectAlert,
-} from "./project-event-handler";
+
 export {
   newTaskClick,
   dragStart,
@@ -29,4 +18,4 @@ export {
   clickedOutside,
   dragOverTrash,
   dragLeaveTrash,
-} from "./general-event-handler";
+} from "../global/general-event-handler";

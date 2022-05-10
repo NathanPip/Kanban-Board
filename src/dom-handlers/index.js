@@ -11,13 +11,7 @@ export {
   updateTempDraggingTask,
   toggleDetails,
 } from "./task-dom-handler";
-export {
-  setInitialState,
-  renderProjects,
-  renderNewCurrentProject,
-  clearProjectAlert,
-  updateTitleText,
-} from "./project-dom-handler";
+
 export {
   renderAddProjectModal,
   renderProjectSettingsModal,

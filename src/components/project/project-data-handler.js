@@ -1,10 +1,10 @@
-import { Project } from "../components";
-import { currentProject, projects, setCurrentProject } from "../data-state";
+import { Project } from "..";
+import { currentProject, projects, setCurrentProject } from "../../data-state";
 import {
   getProjectIndex,
   updateCurrentProjectStorage,
   updateProjectStorage
-} from "../helpers";
+} from "../../helpers";
 
 const addProject = name => {
   const newProj = new Project(name);
