@@ -6,7 +6,7 @@ import {
 import { currentProject, getProjectIndex, projects, setCurrentProject } from "./project-data-state";
 
 const addProject = name => {
-  const newProj = new Project(name);
+  const newProj = new Project({name});
   projects.push(newProj);
   updateProjectStorage(projects);
   return newProj;
