@@ -55,7 +55,7 @@ export const insertTask = (element, listItem) => {
 export const changeTaskColor = (task, oldColor) => {
   const taskObject = getTaskObjectFromElement(task);
   const currentColorButton = task.querySelector(
-    `.list__item__color__btn.${oldColor}`
+    `.current__task__color`
   );
   const newCurrentColorButton = task.querySelector(
     `.list__item__color__btn.${taskObject.getColor}`

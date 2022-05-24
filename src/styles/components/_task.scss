@@ -77,6 +77,13 @@
     }
   }
 
+  &__color__container {
+    display: flex;
+    &.hide {
+      display: none;
+    }
+  }
+
   &__color__btn{
     margin-inline: .15em;
     font-size: .75em;
