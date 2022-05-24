@@ -40,6 +40,7 @@ export const updateTaskStorage = tasks => {
 export const updateProjectStorage = projects => {
   let storedProjects = []
   for (let proj of projects) {
+    console.log(proj)
     storedProjects.push({name: proj.getName, id: proj.getID})
   }
   localStorage.setItem("projects", JSON.stringify(storedProjects));
@@ -97,6 +98,6 @@ export const getProjects = () => {
 export const getCurrentProject = () => {
   const currentProjectStorage = getLocalStorage("currentProject", demoProj);
   if (currentProjectStorage)
-    return new Project({name: currentProjectStorage.name, id: currentProjectStorage.id});
+    return new Project({name: currentProjectStorage._name, id: currentProjectStorage._id});
   return null;
 };

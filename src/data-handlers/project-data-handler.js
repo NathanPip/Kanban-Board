@@ -7,7 +7,8 @@ import {
 } from "../helpers";
 
 const addProject = name => {
-  const newProj = new Project(name);
+  const newProj = new Project({name});
+  console.log(newProj);
   projects.push(newProj);
   updateProjectStorage(projects);
   return newProj;
