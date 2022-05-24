@@ -30,8 +30,5 @@ $ npm start
 - Axios
 - Node JS
 - Express
-- MongoDB
+- PostgreSQL
 - Firebase
-
-## Updates
-Currently migrating the project over to React and Typescript in another repo. This repo is dead as of 05/10/2022
