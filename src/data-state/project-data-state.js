@@ -1,4 +1,4 @@
-import { getCurrentProject, getProjects } from "../helpers";
+import { getCurrentProject, getProjects } from "../storage-helpers";
 
 let projects = getProjects();
 let currentProject = getCurrentProject() || projects[0];

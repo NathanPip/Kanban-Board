@@ -1,3 +1,5 @@
+export { dragOver, newTaskClick } from "./board-event-handlers";
+
 export {
   showProjectsButtonClick,
   projectFocusIn,
@@ -11,10 +13,8 @@ export {
   showDeleteProjectAlert,
 } from "./project-event-handler";
 export {
-  newTaskClick,
   dragStart,
   dragEnd,
-  dragOver,
   dragging,
   deleteTask,
   editTaskDescEvent,

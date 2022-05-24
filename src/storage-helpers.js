@@ -1,4 +1,4 @@
-import {Project, Task, User} from "../components";
+import {Project, Task, User} from "./components";
 //receives local storage and parses json data
 //if no item with key exists, create item with key and inital value
 //if no initial value set value to empty string

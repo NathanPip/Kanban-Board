@@ -3,9 +3,7 @@ import {
   mainContainerElement,
   ProjectsListElement,
   ProjectTitleElement,
-  rootElement,
 } from "../dom-state";
-import { animateElement, insertAfter } from "../helpers";
 
 export const clearProjects = () => {
   while (ProjectsListElement.firstChild) {

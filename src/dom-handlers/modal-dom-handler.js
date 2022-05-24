@@ -63,7 +63,7 @@ export const renderProjectSettingsModal = () => {
     modalFinishChangesBtn,
   ]);
 
-  modalTitle.innerText = currentProject.name;
+  modalTitle.innerText = currentProject.getName;
   modalDeleteProjectBtn.innerText = "Delete Project";
   modalFinishChangesBtn.innerText = "Done";
 

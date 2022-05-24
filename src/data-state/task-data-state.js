@@ -1,4 +1,4 @@
-import { getTasks } from "../helpers";
+import { getTasks } from "../storage-helpers";
 
 let tasks = getTasks();
 let taskEditTimer;

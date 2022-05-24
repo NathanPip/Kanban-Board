@@ -1,7 +1,7 @@
 import { rootElement } from "../dom-state";
 import { animateAndDelete, animateElement, appendChildren, createElement } from "../helpers"
 
-const createAlertBase = (message, animationClass) => {
+const createAlertBase = (message) => {
     const body = createElement('div', ['alert__body']);
     const text = createElement('p', ['alert__text']);
     text.innerText = message;

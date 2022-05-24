@@ -1,8 +1,6 @@
+export { insertTask } from "./board-dom-handler";
+export { updateTaskElements, clearTasks, renderTasks, } from "./task-group-dom-handler";
 export {
-  updateTaskElements,
-  clearTasks,
-  renderTasks,
-  insertTask,
   renderTaskEditing,
   exitTaskEditing,
   changeTaskColor,
