@@ -104,7 +104,7 @@ export class Task {
     return this.projectID;
   }
 
-  renderTask() {
+  instTaskObject() {
     const task = createElement(
       "li",
       ["list__item", `${this.board}__item`, `${this.getColor}`],

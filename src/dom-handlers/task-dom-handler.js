@@ -36,7 +36,7 @@ export const renderTasks = () => {
     taskList.sort((a, b) => (a.order > b.order ? 1 : -1));
     for (let task of taskList) {
       let index = boards.indexOf(task.getBoard);
-      let taskElement = task.renderTask();
+      let taskElement = task.instTaskObject();
       TaskListsElements[index].appendChild(taskElement);
       animateElement(taskElement, "fadein", 500);
     }
@@ -94,7 +94,7 @@ export const updateTempDraggingTask = (
 export const renderTempTask = (task) => {
   const taskObj = getTaskObjectFromElement(task);
   const taskBoundingBox = task.getBoundingClientRect();
-  const element = taskObj.renderTask();
+  const element = taskObj.instTaskObject();
   element.classList.add("dragging__temp");
   element.style.top = `${taskBoundingBox.top}px`;
   element.style.left = `${taskBoundingBox.left}px`;

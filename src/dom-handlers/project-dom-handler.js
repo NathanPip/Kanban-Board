@@ -16,7 +16,7 @@ export const clearProjects = () => {
 export const renderProjects = () => {
   clearProjects();
   for (let project in projects) {
-    ProjectsListElement.appendChild(projects[project].renderProjectButton());
+    ProjectsListElement.appendChild(projects[project].instProjectButton());
   }
 };
 

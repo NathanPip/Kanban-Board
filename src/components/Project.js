@@ -24,7 +24,7 @@ export class Project {
     this._name = name;
   }
 
-  renderProjectButton() {
+  instProjectButton() {
     const listItem = createElement("li", "projects__container__list__item");
     const button = createElement("button");
     listItem.dataset.projectId = this._id;
