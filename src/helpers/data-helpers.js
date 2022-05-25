@@ -2,6 +2,7 @@ import { projects, tasks } from "../data-state";
 
 export const getProjectIndex = (projID) => {
   for (let proj of projects) {
+    console.log(proj)
     if (proj.getID === projID) {
       return projects.indexOf(proj);
     }

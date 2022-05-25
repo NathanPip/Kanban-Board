@@ -41,7 +41,7 @@ export const updateProjectStorage = projects => {
   let storedProjects = []
   for (let proj of projects) {
     console.log(proj)
-    storedProjects.push({name: proj.getName, id: proj.getID})
+    storedProjects.push({_name: proj.getName, _id: proj.getID})
   }
   localStorage.setItem("projects", JSON.stringify(storedProjects));
 }
@@ -87,7 +87,7 @@ export const getProjects = () => {
   if (projectList.length) {
     for (let project in projectList) {
       projects.push(
-        new Project({name: projectList[project].name, id: projectList[project].id})
+        new Project({name: projectList[project]._name, id: projectList[project]._id})
       );
     }
     return projects;

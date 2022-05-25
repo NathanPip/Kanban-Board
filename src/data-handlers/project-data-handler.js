@@ -26,6 +26,7 @@ const deleteCurrentProject = () => {
 };
 
 const updateExistingCurrentProject = (newTitle) => {
+  console.log(currentProject.getID)
   const index = getProjectIndex(currentProject.getID);
   projects[index].setName = newTitle;
   updateProjectStorage(projects);
