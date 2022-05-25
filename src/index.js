@@ -93,10 +93,7 @@ const init = () => {
     detailsBtnClickEvent
   );
   //lazy I know, I'll fix later
-  delegateEvent(rootElement, "click", ".color-btn-1", setUrgency);
-  delegateEvent(rootElement, "click", ".color-btn-2", setUrgency);
-  delegateEvent(rootElement, "click", ".color-btn-3", setUrgency);
-  delegateEvent(rootElement, "click", ".color-btn-4", setUrgency);
+  delegateEvent(rootElement, "click", ".list__item__color__btn", setUrgency);
   delegateEvent(
     rootElement,
     "click",

@@ -1,26 +1,28 @@
-import {
-  getTaskObjectFromElement,
-  insertAfter,
-} from "../helpers";
+import { getTaskObjectFromElement, insertAfter } from "../helpers";
 import { clickedOutside } from "../event-handlers";
 
-export const changeTaskColor = (task, oldColor) => {
-  const taskObject = getTaskObjectFromElement(task);
-  const currentColorButton = task.querySelector(
-    `.current__task__color`
-  );
-  const newCurrentColorButton = task.querySelector(
-    `.list__item__color__btn.${taskObject.getColor}`
-  );
-  currentColorButton
-    ? currentColorButton.classList.remove("current__task__color")
-    : null;
-  newCurrentColorButton
-    ? newCurrentColorButton.classList.add("current__task__color")
-    : null;
-  task.classList.remove(oldColor);
-  task.classList.add(taskObject.getColor);
-  task.dataset.color = taskObject.getColor;
+export const changeTaskColor = (task, newColor) => {
+  // const taskObject = getTaskObjectFromElement(task);
+  // const currentColorButton = task.querySelector(
+  //   `.current__task__color`
+  // );
+  // const newCurrentColorButton = task.querySelector(
+  //   `.list__item__color__btn.${taskObject.getColor}`
+  // );
+  // currentColorButton
+  //   ? currentColorButton.classList.remove("current__task__color")
+  //   : null;
+  // newCurrentColorButton
+  //   ? newCurrentColorButton.classList.add("current__task__color")
+  //   : null;
+  task.style.backgroundColor = newColor;
+};
+
+export const changeTaskUrgency = (task, newUrgency) => {
+  const currentColorButton = task.querySelector(`.current__task__color`);
+  const newColorButton = task.querySelector(`[data-urgency=${newUrgency.name}]`);
+  currentColorButton.classList.remove("current__task__color")
+  newColorButton.classList.add("current__task__color")
 };
 
 export const renderTaskDragging = (task, e) => {

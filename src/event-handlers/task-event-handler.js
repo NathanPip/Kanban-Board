@@ -1,4 +1,4 @@
-import { colorClasses, tasks } from "../data-state";
+import { colorClasses, currentProject, tasks } from "../data-state";
 import { trashElement } from "../dom-state";
 import {
   changeTaskColor,
@@ -8,7 +8,8 @@ import {
   renderTempTask,
   renderTaskDragging,
   updateTempDraggingTask,
-  toggleDetails
+  toggleDetails,
+  changeTaskUrgency
 } from "../dom-handlers";
 import {
   removeTask,
@@ -17,7 +18,7 @@ import {
   updateTaskOrder,
   updateTaskUrgency
 } from "../data-handlers";
-import { getTaskObjectFromElement,  } from "../helpers";
+import { getObjectFromPropertyValue, getTaskObjectFromElement,  } from "../helpers";
 import { updateTaskStorage } from "../storage-helpers";
 let mousePosX = undefined;
 let mousePosY = undefined;
@@ -33,7 +34,7 @@ export function dragStart(element) {
   trashElement.classList.remove("hide");
 }
 
-export function dragging(element) {
+export function dragging() {
   updateTempDraggingTask(startingPos, mousePosX, mousePosY);
 }
 
@@ -48,8 +49,7 @@ export function dragEnd(element) {
       updateTaskElements();
       return;
     }
-    console.log(element);
-    changeTaskColor(element, element.dataset.color);
+    // changeTaskColor(element, element.dataset.color);
     updateTaskOrder();
     updateTaskStorage(tasks);
     element.classList.remove("dragging");
@@ -91,13 +91,12 @@ export function editTaskDetailsEvent(element) {
 }
 
 export function setUrgency(element) {
-  const newUrgency = element.dataset.urgency;
+  const btnUrgency = element.dataset.urgency;
+  const newUrgency = getObjectFromPropertyValue(currentProject.taskUrgencies, btnUrgency);
   const taskElement = element.parentNode.parentNode;
   const taskObject = getTaskObjectFromElement(taskElement);
-  for (let i = 0; i < colorClasses.length; i++) {
-    if (taskElement.classList.contains(colorClasses[i])) {
-      updateTaskUrgency(newUrgency, taskObject);
-      changeTaskColor(taskElement, colorClasses[i]);
-    }
-  }
+  updateTaskUrgency(newUrgency, taskObject);
+  if(currentProject.urgencyDictatesColor)
+    changeTaskColor(taskElement, newUrgency.color);
+  changeTaskUrgency(taskElement, newUrgency)
 }

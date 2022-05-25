@@ -10,5 +10,6 @@ export {
   getProjectIndex,
   getTaskObjectFromElement,
   getTaskObjectIndex,
-  getArrayOfProjNames
+  getArrayOfProjNames,
+  getObjectFromPropertyValue
 } from "./data-helpers";

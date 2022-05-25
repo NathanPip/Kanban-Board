@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { colorClasses } from "../data-state";
+import { colorClasses, currentProject } from "../data-state";
 import { appendChildren, createElement } from "../helpers";
 
 export class Task {
@@ -23,8 +23,8 @@ export class Task {
     this.createdBy = createdBy;
     this.assignedTo = assignedTo || createdBy;
     this.order = order || null;
-    this.color = color || "color-1";
-    this.urgency = urgency || "low";
+    this.urgency = urgency || currentProject.taskUrgencies[0];
+    this.color = color || this.urgency.color;
     this.tags = tags || [];
     this.taskID = id || uuidv4();
     this.removeStandby = false;
@@ -71,16 +71,6 @@ export class Task {
   }
 
   get getColor() {
-    if (this.urgency === "low") {
-      this.color = "color-1";
-    } else if (this.urgency === "med") {
-      this.color = "color-2";
-    } else if (this.urgency === "high") {
-      this.color = "color-3";
-    }
-    if (this.board === "completed") {
-      this.color = "color-4";
-    }
     return this.color;
   }
 
@@ -107,7 +97,7 @@ export class Task {
   instTaskObject() {
     const task = createElement(
       "li",
-      ["list__item", `${this.board}__item`, `${this.getColor}`],
+      ["list__item", `${this.board}__item`],
       {
         draggable: "true",
       }
@@ -115,6 +105,7 @@ export class Task {
     task.dataset.taskID = this.taskID;
     task.dataset.board = this.board;
     task.dataset.color = this.getColor;
+    task.style.backgroundColor = this.color;
 
     // const taskBody = `<p class="list__item__desc ${this.board}__item__desc" placeholder="enter task">${this.desc}</p>
     //   <p class="list__item__details hide" contenteditable="false">${this.details}</p>
@@ -156,27 +147,20 @@ export class Task {
       "list__item__color__container",
       "hide",
     ]);
-    const colorButton1 = createElement("button", [
-      "list__item__color__btn",
-      "color-btn-1",
-      "color-1",
-    ]);
-    const colorButton2 = createElement("button", [
-      "list__item__color__btn",
-      "color-btn-2",
-      "color-2",
-    ]);
-    const colorButton3 = createElement("button", [
-      "list__item__color__btn",
-      "color-btn-3",
-      "color-3",
-    ]);
-    // const colorButton4 = createElement("button", [
-    //   "list__item__color__btn",
-    //   "color-btn-4",
-    //   "color-4",
-    // ]);
-    const colorButtons = [colorButton1, colorButton2, colorButton3];
+
+    const colorButtons = [];
+    for(let i of currentProject.taskUrgencies) {
+      console.log(i)
+      const button = createElement("button", ["list__item__color__btn"])
+      button.dataset.urgency = i.name;
+      button.style.backgroundColor = i.color;
+      button.innerText = i.name;
+      if(this.urgency.name == i.name) {
+        button.classList.add("current__task__color");
+      }
+      colorButtons.push(button)
+    }
+
     appendChildren(colorButtonContainer, colorButtons);
     appendChildren(task, [
       taskDesc,
@@ -192,21 +176,7 @@ export class Task {
     detailsButton.innerText = "Details";
     deleteBtn.innerText = "Done";
     editBtn.innerText = "Edit";
-    colorButton1.innerText = "low";
-    colorButton2.innerText = "medium";
-    colorButton3.innerText = "high";
-    colorButton1.dataset.urgency = "low";
-    colorButton2.dataset.urgency = "med";
-    colorButton3.dataset.urgency = "high";
 
-    for (let i = 0; i < colorButtons.length; i++) {
-      if (
-        task.classList.contains(colorClasses[i]) &&
-        colorButtons[i].classList.contains(colorClasses[i])
-      ) {
-        colorButtons[i].classList.add("current__task__color");
-      }
-    }
 
     return task;
   }

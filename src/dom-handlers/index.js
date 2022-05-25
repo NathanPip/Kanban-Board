@@ -8,6 +8,7 @@ export {
   renderTaskDragging,
   updateTempDraggingTask,
   toggleDetails,
+  changeTaskUrgency,
 } from "./task-dom-handler";
 export {
   setInitialState,

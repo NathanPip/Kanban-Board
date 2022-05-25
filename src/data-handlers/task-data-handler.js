@@ -72,5 +72,7 @@ export const updateTaskColor = (newColor, task) => {
 export const updateTaskUrgency = (newUrgency, task) => {
   const index = getTaskObjectIndex(task.getTaskID);
   tasks[index].setUrgency = newUrgency;
+  if(currentProject.urgencyDictatesColor)
+    tasks[index].setColor = newUrgency.color;
   updateTaskStorage(tasks);
 }
